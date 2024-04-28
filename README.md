@@ -379,9 +379,21 @@ B. 돌아가기
 <br>
 
 ## 🎱 프로그래밍 요구사항
-- 자바 코드 컨벤션을 지키면서 프로그래밍한다.
+
+> 원본 프로젝트가 Java 기반이기에 Java를 사용하는 것을 권장드립니다. <br>
+> 단, 다른 언어 (JS/TS, Kotlin, Python 등) 사용을 원할 경우, 아래의 진행 요구사항을 참고하여 프로젝트를 진행해주시면 됩니다.
+
+### 📌 언어별 요구사항
+- [Java 사용자] 자바 코드 컨벤션을 지키면서 프로그래밍한다.
   - 기본적으로 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)을 원칙으로 한다.
   - 단, 들여쓰기는 '2 spaces'가 아닌 '4 spaces'로 한다.
+ 
+- [Kotlin 사용자] 코틀린 코드 컨벤션을 지키면서 프로그래밍한다.
+ - 기본적으로 [Kotlin 공식 Coding convention](https://kotlinlang.org/docs/coding-conventions.html)을 원칙으로 한다.
+
+JS/TS, Python는 별도의 요구사항이 없습니다. 만약 코드 컨벤션을 지키고 싶다면 자유롭게 추가해주시면 됩니다!
+
+### 🧩 공통 요구사항
 - indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
   - 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
   - 힌트: indent(인덴트, 들여쓰기) depth를 줄이는 좋은 방법은 함수(또는 메소드)를 분리하면 된다.
@@ -393,6 +405,8 @@ B. 돌아가기
   - else를 쓰지 말라고 하니 switch/case로 구현하는 경우가 있는데 switch/case도 허용하지 않는다.
 - 프로그래밍 요구사항에서 별도로 변경 불가 안내가 없는 경우 파일 수정과 패키지 이동을 자유롭게 할 수 있다.
 - 예외 상황 시 에러 문구를 출력해야 한다. 단, 에러 문구는 `[ERROR]` 로 시작해야 한다.
+- 핵심 로직에 단위 테스트를 구현한다. 단, UI(System.out, System.in) 로직은 제외
+ - 힌트 : 핵심 로직을 구현하는 코드와 UI를 담당하는 로직을 구분한다. UI 로직을 InputView, ResultView와 같은 클래스를 추가해 분리한다.
 
 ### 프로그래밍 요구사항 - Application
 - Application 클래스를 활용해 구현해야 한다.
@@ -456,14 +470,22 @@ public class StationRepository {
 <br>
 
 ## 📈 진행 요구사항
-- 미션은 [java-subway-map-precourse 저장소](https://github.com/woowacourse/java-subway-map-precourse) 를 fork/clone해 시작한다.
-- 기능을 구현하기 전에 java-subway-map-precourse/docs/README.md 파일에 구현할 기능 목록을 정리해 추가한다.
+- 미션은 [Infinite_Challenge_BE](https://github.com/techeer-sv/Infinite_Challenge_BE) 를 fork/clone해 시작한다.
+- 기능을 구현하기 전에 Infinite_Challenge_BE 레포지토리 하위에 docs/README.md 파일을 생성해 구현할 기능 목록을 정리해 추가한다.
 - git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가한다.
   - [AngularJS Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 참고해 commit log를 남긴다.
-- [프리코스 과제 제출 문서](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 절차를 따라 미션을 제출한다.
-  - [프리코스 과제 FAQ](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse/faq) 문서를 참고하여 진행할 수 있다.
+- 아래 절차를 따라 미션을 제출한다.
+  - 본 repository를 개인 repository로 fork한다.
+  - fork한 저장소를 자신의 컴퓨터로 clone한다.
+  - 기능 구현을 위한 브랜치를 생성한다. 브랜치 이름은 본인의 github ID를 이용한다.
+  - 생성한 브랜치에서 기능을 구현한다.
+   - Java를 사용할 경우 : src 경로에서 바로 작업 진행
+   - 그 외 언어를 사용할 경우 : image, README.md 를 제외한 모든 파일을 삭제한 후, 사용하는 언어로 새로 프로젝트를 생성해 작업 진행
+  - 기능 구현이 종료되면, [Infinite_Challenge_BE](https://github.com/techeer-sv/Infinite_Challenge_BE)로 Pull Request를 남긴다.
+  
 <br>
 
 ## 📝 License
 
 This project is [MIT](https://github.com/woowacourse/java-subway-map-precourse/blob/master/LICENSE.md) licensed.
+개발 동아리 테커에서 동아리원의 개발 학습을 위해 위 프로젝트의 일부 조건을 수정하여 사용했음을 명시합니다.
