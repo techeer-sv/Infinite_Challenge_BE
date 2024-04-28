@@ -479,8 +479,8 @@ public class StationRepository {
   - fork한 저장소를 자신의 컴퓨터로 clone한다.
   - 기능 구현을 위한 브랜치를 생성한다. 브랜치 이름은 본인의 github ID를 이용한다.
   - 생성한 브랜치에서 기능을 구현한다.
-   - Java를 사용할 경우 : src 경로에서 바로 작업 진행
-   - 그 외 언어를 사용할 경우 : image, README.md 를 제외한 모든 파일을 삭제한 후, 사용하는 언어로 새로 프로젝트를 생성해 작업 진행
+    - Java를 사용할 경우 : src 경로에서 바로 작업 진행
+    - 그 외 언어를 사용할 경우 : image, README.md 를 제외한 모든 파일을 삭제한 후, 사용하는 언어로 새로 프로젝트를 생성해 작업 진행
   - 기능 구현이 종료되면, [Infinite_Challenge_BE](https://github.com/techeer-sv/Infinite_Challenge_BE)로 Pull Request를 남긴다.
   
 <br>
