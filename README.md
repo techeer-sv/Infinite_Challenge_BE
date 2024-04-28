@@ -381,7 +381,7 @@ B. 돌아가기
 ## 🎱 프로그래밍 요구사항
 
 > 원본 프로젝트가 Java 기반이기에 Java를 사용하는 것을 권장드립니다. <br>
-> 단, 다른 언어 (JS/TS, Kotlin, Python 등) 사용을 원할 경우, 아래의 진행 요구사항을 참고하여 프로젝트를 진행해주시면 됩니다.
+> 단, 다른 언어 (JS/TS, Kotlin, Python 등) 사용을 원할 경우, 아래의 [#_진행_요구사항](https://github.com/techeer-sv/Infinite_Challenge_BE?tab=readme-ov-file#-%EC%A7%84%ED%96%89-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD)을 참고하여 프로젝트를 진행해주시면 됩니다.
 
 ### 📌 언어별 요구사항
 - [Java 사용자] 자바 코드 컨벤션을 지키면서 프로그래밍한다.
@@ -487,5 +487,5 @@ public class StationRepository {
 
 ## 📝 License
 
-This project is [MIT](https://github.com/woowacourse/java-subway-map-precourse/blob/master/LICENSE.md) licensed.
+This project is [MIT](https://github.com/woowacourse/java-subway-map-precourse/blob/master/LICENSE.md) licensed. <br>
 개발 동아리 테커에서 동아리원의 개발 학습을 위해 위 프로젝트의 일부 조건을 수정하여 사용했음을 명시합니다.
