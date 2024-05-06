@@ -1,6 +1,6 @@
 package subway.service;
 
-public class SectionManagerImpl extends Managerbale{
+public class SectionManager extends Managerbale{
     @Override
     public void register() {
 
