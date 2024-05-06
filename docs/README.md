@@ -69,7 +69,7 @@ public abstract class Managerable{}
 
 위반 시 **[ERROR]** 를 반드시 앞에 붙인다.
 
-### Exception
+### SubwayException
 Controller 에서 주로 사용되는 예외
 1. 제공되는 서비스 외 문자 입력 및 선택 시 발생
 
