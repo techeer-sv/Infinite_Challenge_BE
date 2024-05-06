@@ -9,18 +9,23 @@ public class MainController {
     Ask ask = new Ask();
     public MainController(){
         ask.Main();
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            String command = br.readLine();
-            if(command.equals("Q")) {
-                System.out.println(" 안녕히 가세요. ");
-                return;
-            }
-            int validCommand = Integer.parseInt(command);
-            CoreController(validCommand);
+        try{
+            headController();
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public void headController() throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String command = br.readLine();
+        if(command.equals("Q")) {
+            System.out.println(" 안녕히 가세요. ");
+            return;
+        }
+        int validCommand = Integer.parseInt(command);
+        CoreController(validCommand);
+        headController();
     }
 
     public void CoreController(int command){
