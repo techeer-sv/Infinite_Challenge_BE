@@ -64,8 +64,9 @@ public abstract class Managerable{}
 
 
 
-# util
-> 에러나 제약 사항 체크
+# config
+> 1. 에러나 제약 사항 체크
+> 2. 상수값 모음
 
 위반 시 **[ERROR]** 를 반드시 앞에 붙인다.
 

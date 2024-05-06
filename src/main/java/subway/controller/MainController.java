@@ -6,9 +6,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class MainController {
-    Ask ask = new Ask();
+    Ask askView = new Ask();
     public MainController(){
-        ask.Main();
+        askView.Main();
         try{
             headController();
         }catch (Exception e){
