@@ -1,4 +1,6 @@
 # 기능정의
+> **지하철 역과 노선을 관리하는 지하철 노선도 기능을 구현한 코드**
+
 ### 사전등록정보 
 - 교대역, 강남역, 역삼역, 남부터미널역, 양재역, 양재시민의 숲역, 매봉역
   - 하행 - 상행
@@ -6,7 +8,12 @@
 - 3호선: 교대역 - 남부터미널역 - 양재역 - 매봉역
 - 신분당선: 강남역 - 양재역 - 양재시민의숲역
 
-## Managerable
+# Controller
+- 사용자 입력과 Service 코드 매칭
+- 유효한 입력인지 확인 ```(Exception 1)```
+
+# Service
+### Managerable
 - 공통 기능 추출 후 추상화
   - 역 관련 기능/지하철 노선 등록/노선 구간 추가 기능 service 코드가 확장
 - 등록/삭제/조회/(메인화면으로)돌아가기
@@ -21,13 +28,16 @@ public abstract class Managerable{}
 > 역 관련 기능
 - 지하철 역 등록
   - 등록 이후 노선에 등록하지 않기
-  - 노선에 등록되어 있으면 중복 등록 불가 ```(util.2)```
+  - 노선에 등록되어 있으면 중복 등록 불가 ```(SubwayConstraintHandler.2)```
 - 지하철 역 삭제
-  - 노선에 등록된 역은 삭제할 수 없다. ```(util.2)```
+  - 노선에 등록된 역은 삭제할 수 없다. ```(SubwayConstraintHandler.2)```
 - 지하철 역의 목록 조회
   - 지하철 역 가나다순 나열하기
   - 역 이름 앞에 **'[INFO]'** 붙이기 ```(view )```
   - 한줄씩 출력
+
+- View 코드에서 출력 포맷 활용하여 구현하고 호출할 때 매개변수로 구문이 다르게 나가도록 
+  - 출력 포맷 적극 활용할 것
 
 ### LineManagerImpl
 > 지하철 노선 등록
@@ -43,7 +53,7 @@ public abstract class Managerable{}
 ### SectionManagerImpl
 > 노선에 구간 추가
 - 구간 등록
-  1. 등록한 노선 입력 ```(util.2 : true-continue, false - retry)```
+  1. 등록한 노선 입력 ```(SubwayConstraintHandler.2 : true-continue, false - retry)```
   2. 등록할 역 이름 입력
   3. 노선에서 차지할 순서 입력
   4. **'[INFO] 지하철 구간이 등록되었습니다.'** ```(view)```
@@ -54,17 +64,19 @@ public abstract class Managerable{}
 
 
 
-### util
+# util
 > 에러나 제약 사항 체크
 
 위반 시 **[ERROR]** 를 반드시 앞에 붙인다.
 
 ### Exception
+Controller 에서 주로 사용되는 예외
 1. 제공되는 서비스 외 문자 입력 및 선택 시 발생
-2. 노선에 등록되어있는지 확인(조회 시)
 
 ### SubwayConstraintHandler
+Service 에서 주로 사용되는 예외
 1. 지하철 역/노선 이름은 2글자 이상인지 확인
-- 아니면 다시 입력 받도록
+   - 아니면 다시 입력 받도록
 2. 노선에 등록되어있는지 확인(수정 및 업데이트 시)
-- 있으면 true 없으면 false
+   - 있으면 true 없으면 false
+3. 노선에 등록되어있는지 확인(조회 시)
