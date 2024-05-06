@@ -21,6 +21,7 @@ public class Ask {
         sb.append("2. "+target + "삭제\n");
         sb.append("3. "+target + "조회\n");
         sb.append("B. 돌아가기\n");
+        sb.flush();
     }
 
     public void Function(){
