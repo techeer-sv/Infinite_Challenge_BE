@@ -1,4 +1,4 @@
-package subway.config;
+package subway.config.handler;
 
 public class SubwayConstraintHandler {
 }
