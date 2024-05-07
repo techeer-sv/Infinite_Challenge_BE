@@ -1,14 +1,8 @@
 package subway.controller;
 
-import subway.view.AskView;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
-public class LineController {
-    AskView ask = new AskView();
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+public class LineController extends ManageController{
     public LineController(){}
+    @Override
     public void work(){
         ask.Function();
         try{
@@ -17,5 +11,20 @@ public class LineController {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void registerControll() {
+
+    }
+
+    @Override
+    public void register(String station) {
+
+    }
+
+    @Override
+    public void delete(String station) {
+
     }
 }

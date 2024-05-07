@@ -12,6 +12,7 @@ public class StationController extends ManageController{
         }
     }
 
+    @Override
     public void registerControll(){
         ask.Name("등록", "역");
         try{
@@ -23,20 +24,17 @@ public class StationController extends ManageController{
         }
     }
 
+    @Override
     public void register(String station){
         // db 접근해서 데이터 삽입하는 서비스와 연결
     }
 
+    @Override
     public void delete(String station){
         // db 접근해서 데이터 삭제하는 서비스와 연결
     }
 
     public void requestStations() throws Exception{
         // 역 목록을 출력하는 서비스 코드
-    }
-
-    // 되돌아가
-    public void goBack(){
-        return;
     }
 }
