@@ -29,8 +29,9 @@ public class MainController {
         headController();
     }
 
+    // 생성자와 함께 출력과 서비스를 제공하려 했는데 무슨 일 할 때마다 클래스 생성하는 것은 비효율적인 것 같다. 메소드로 바꾸자.
     public void CoreController(int command){
-        if(command == 1) new StationController();
+        if(command == 1) stationController.work();
         if(command == 2) new LineController();
         if(command == 3) new SectionController();
     }
