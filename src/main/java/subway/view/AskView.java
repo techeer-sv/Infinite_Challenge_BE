@@ -2,7 +2,7 @@ package subway.view;
 
 import java.io.StringWriter;
 
-public class Ask {
+public class AskView {
     private StringWriter sb = new StringWriter();
 
     public void Main(){

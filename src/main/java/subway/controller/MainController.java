@@ -1,14 +1,15 @@
 package subway.controller;
 
-import subway.view.Ask;
+import subway.view.AskView;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class MainController {
-    Ask askView = new Ask();
+    AskView ask = new AskView();
+    StationController stationController = new StationController();
     public MainController(){
-        askView.Main();
+        ask.Main();
         try{
             headController();
         }catch (Exception e){
