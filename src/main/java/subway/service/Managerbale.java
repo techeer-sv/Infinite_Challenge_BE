@@ -1,8 +1,16 @@
 package subway.service;
 
+import subway.domain.LineRepository;
+import subway.domain.StationRepository;
+
 public abstract class Managerbale {
-    public abstract void register();
-    public abstract void delete();
+    StationRepository stationRepo = new StationRepository();
+    LineRepository lineRepo = new LineRepository();
+    public abstract void register(String command);
+    public abstract void delete(String name);
     public abstract void read();
-    public abstract void goBack();
+
+    public void goBack() {
+        return;
+    }
 }
