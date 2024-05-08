@@ -3,6 +3,7 @@ package subway.controller;
 public class StationController extends ManageController{
     @Override
     public void work(){
+        ask.WhatToManage("역");
         ask.Function();
         try{
             String command = br.readLine();

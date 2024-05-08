@@ -30,7 +30,6 @@ public class Line {
 
     // 추가 기능 구현
     public Station getStationByName(String name){
-        ListIterator iter = stations.listIterator();
         for(Station station : stations){
             if(station.getName().equals(name)){
                 return station;

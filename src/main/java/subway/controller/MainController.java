@@ -12,12 +12,7 @@ public class MainController {
     SectionController sectionController = new SectionController();
 
     public MainController(){
-        ask.Main();
-        try{
-            headController();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        ask.printMain();
     }
 
     public void headController() throws Exception{
@@ -31,7 +26,6 @@ public class MainController {
         // command 가 유효한 명령이 아닐 경우 코드 추가
         int validCommand = Integer.parseInt(command);
         CoreController(validCommand);
-        ask.Main();
         headController();
     }
 

@@ -10,7 +10,7 @@ public abstract class ManageController {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public void work(){
-        ask.Function();
+//        ask.Function();
         // 관련 컨트롤러 호출 부분
     }
 
