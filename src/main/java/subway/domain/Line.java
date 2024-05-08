@@ -1,7 +1,6 @@
 package subway.domain;
 
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 public class Line {
     private String name;

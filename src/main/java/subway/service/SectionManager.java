@@ -1,11 +1,14 @@
 package subway.service;
 
 import subway.domain.Line;
+import subway.domain.LineRepository;
 import subway.domain.Station;
 
 import java.util.List;
 
 public class SectionManager extends Managerbale{
+    static LineRepository lineRepo = new LineRepository();
+
     @Override
     public boolean register(String name) {
         return true;

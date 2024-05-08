@@ -76,4 +76,9 @@ public class StationController extends ManageController{
         StringBuilder list = stationManager.read();
         response.printList(list);
     }
+
+    public void requestStations() throws Exception{
+        // 역 목록을 출력하는 서비스 코드
+        System.out.println("requestStations 메서드 안이다.");
+    }
 }

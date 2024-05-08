@@ -22,7 +22,7 @@ public class StationManager extends Managerbale{
 
     @Override
     public boolean delete(String name) {
-        return stationRepo.deleteStation(name);
+        return stations.deleteStation(name);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class StationManager extends Managerbale{
         return sb;
     }
 
-    public List<Station> readStation(){
-        return stationRepo.stations();
-    }
+//    public List<Station> readStation(){
+//        return stations.stations();
+//    }
 }
