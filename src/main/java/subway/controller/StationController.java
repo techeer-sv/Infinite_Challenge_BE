@@ -55,6 +55,7 @@ public class StationController extends ManageController{
         }
         String message = sb.toString();
         response.printInfo(message);
+        sb.setLength(0);
     }
 
     @Override
@@ -63,8 +64,8 @@ public class StationController extends ManageController{
         ask.Name("삭제", "역");
         try{
             String command = br.readLine();
-            stationManager.delete(command);
-            System.out.println("delete 메서드 안이다.");
+            boolean result = stationManager.delete(command);
+            infoMessage("삭제", result);
         }catch (Exception e){
             e.printStackTrace();
         }
