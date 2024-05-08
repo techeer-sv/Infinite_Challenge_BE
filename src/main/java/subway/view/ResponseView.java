@@ -10,6 +10,8 @@ public class ResponseView {
 
     public void printTitle(String title){
         sb.append("### ").append(title);
+        System.out.println(sb);
+        sb.setLength(0);
     }
     public void printList(StringBuilder message){
         System.out.println(message);

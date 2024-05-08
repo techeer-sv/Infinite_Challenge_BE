@@ -20,7 +20,7 @@ public class StationController extends ManageController{
                 return;
             }
             if(command.equals("3")){
-                stationManager.read();
+                read();
                 return;
             }
             if(command.equals("B")){
@@ -71,8 +71,9 @@ public class StationController extends ManageController{
         }
     }
 
-    public void requestStations() throws Exception{
-        // 역 목록을 출력하는 서비스 코드
-        System.out.println("requestStations 메서드 안이다.");
+    public void read(){
+        response.printTitle("역 목록");
+        StringBuilder list = stationManager.read();
+        response.printList(list);
     }
 }
