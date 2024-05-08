@@ -4,7 +4,6 @@ import subway.service.StationManager;
 
 // 역을 관리하는 컨트롤러
 public class StationController extends ManageController{
-    private static MainController mainController = new MainController();
     private static StationManager stationManager = new StationManager();
     @Override
     public void work(){
@@ -12,14 +11,11 @@ public class StationController extends ManageController{
         ask.Function();
         try{
             String command = br.readLine();
-            // command 내용 확인하고 맞는 처리와 연결
             if(command.equals("1")){
                 register();
                 return;
             }
             if(command.equals("2")){
-                // 관련한 뷰 (삭제, 역)
-                // input 받기
                 delete();
                 return;
             }
@@ -30,7 +26,7 @@ public class StationController extends ManageController{
             if(command.equals("B")){
                 return;
             }
-            // 에러 발생시키기
+            // 에러 발생시키
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -41,8 +37,9 @@ public class StationController extends ManageController{
         ask.Name("등록", "역");
         try{
             String station = br.readLine();
-            stationManager.register(station);
+            boolean result = stationManager.register(station);
             // "지하철 역이 등록되었습니다." 출력
+            infoMessage("등록", result);
         }catch (Exception e){
             e.printStackTrace();
         }
