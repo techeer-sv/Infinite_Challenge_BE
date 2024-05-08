@@ -23,7 +23,7 @@ public class SectionController extends ManageController{
     }
 
     @Override
-    public void delete(String station) {
+    public void delete() {
 
     }
 }

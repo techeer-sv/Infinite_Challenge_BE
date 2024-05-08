@@ -24,7 +24,7 @@ public class LineController extends ManageController{
     }
 
     @Override
-    public void delete(String station) {
+    public void delete() {
         // 노선 db 에서 삭제
     }
 }

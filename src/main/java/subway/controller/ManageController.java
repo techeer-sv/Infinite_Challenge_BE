@@ -20,7 +20,7 @@ public abstract class ManageController {
     public abstract void register(String station);
         // db 접근해서 데이터 삽입하는 서비스와 연결
 
-    public abstract void delete(String station);
+    public abstract void delete();
         // db 접근해서 데이터 삭제하는 서비스와 연결
 
     // 되돌아가기

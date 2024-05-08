@@ -11,11 +11,8 @@ public class MainController {
     LineController lineController  = new LineController();
     SectionController sectionController = new SectionController();
 
-    public MainController(){
-        ask.printMain();
-    }
-
     public void headController() throws Exception{
+        ask.printMain();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String command = br.readLine();
         if(command.equals("Q")) {
