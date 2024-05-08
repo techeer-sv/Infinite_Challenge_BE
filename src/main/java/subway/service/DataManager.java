@@ -41,8 +41,8 @@ public class DataManager extends Managerbale{
     }
 
     @Override // 삭제
-    public void delete(String name) {
-
+    public boolean delete(String name) {
+        return true;
     }
 
     @Override // 조회

@@ -21,8 +21,8 @@ public class StationManager extends Managerbale{
     }
 
     @Override
-    public void delete(String name) {
-        stationRepo.deleteStation(name);
+    public boolean delete(String name) {
+        return stationRepo.deleteStation(name);
     }
 
     @Override

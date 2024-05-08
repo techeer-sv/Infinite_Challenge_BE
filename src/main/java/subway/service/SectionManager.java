@@ -20,8 +20,8 @@ public class SectionManager extends Managerbale{
     }
 
     @Override
-    public void delete(String name) {
-
+    public boolean delete(String name) {
+        return true;
     }
 
     @Override

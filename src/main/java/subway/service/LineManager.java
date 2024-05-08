@@ -22,8 +22,8 @@ public class LineManager extends Managerbale{
     }
 
     @Override
-    public void delete(String name) {
-        lineRepo.deleteLineByName(name);
+    public boolean delete(String name) {
+        return lineRepo.deleteLineByName(name);
     }
 
     @Override

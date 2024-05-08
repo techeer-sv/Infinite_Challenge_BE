@@ -7,7 +7,7 @@ public abstract class Managerbale {
     StationRepository stationRepo = new StationRepository();
     LineRepository lineRepo = new LineRepository();
     public abstract boolean register(String command);
-    public abstract void delete(String name);
+    public abstract boolean delete(String name);
     public abstract StringBuilder read();
 
     public void goBack() {
