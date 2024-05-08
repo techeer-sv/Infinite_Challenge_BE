@@ -8,9 +8,10 @@ import java.util.List;
 
 public class LineManager extends Managerbale{
     @Override
-    public void register(String name) {
+    public boolean register(String name) {
         Line created = new Line(name);
         lineRepo.addLine(created);
+        return true;
     }
 
     public void setStations(String name, String upperStation, String bottomStation){
@@ -26,8 +27,11 @@ public class LineManager extends Managerbale{
     }
 
     @Override
-    public void read() {
+    public StringBuilder read() {
+        StringBuilder sb = new StringBuilder();
 
+        sb.append("");
+        return sb;
     }
 
     public List<Line> readLines(){

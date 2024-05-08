@@ -13,12 +13,7 @@ public class SectionController extends ManageController{
     }
 
     @Override
-    public void registerControll() {
-
-    }
-
-    @Override
-    public void register(String station) {
+    public void register() {
 
     }
 

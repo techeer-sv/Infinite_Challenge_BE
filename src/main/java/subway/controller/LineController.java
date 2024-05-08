@@ -13,13 +13,7 @@ public class LineController extends ManageController{
     }
 
     @Override
-    public void registerControll() {
-        // 노선 등록하기
-        //상행성 종점과 하행성 종점 입력
-    }
-
-    @Override
-    public void register(String station) {
+    public void register() {
         // 새로운 노선 db 와 연동하여 생성하기
     }
 

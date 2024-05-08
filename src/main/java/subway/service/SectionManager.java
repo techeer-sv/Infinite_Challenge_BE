@@ -7,7 +7,8 @@ import java.util.List;
 
 public class SectionManager extends Managerbale{
     @Override
-    public void register(String name) {
+    public boolean register(String name) {
+        return true;
     }
 
     public void insertSection(String name, int index){
@@ -24,8 +25,11 @@ public class SectionManager extends Managerbale{
     }
 
     @Override
-    public void read() {
+    public StringBuilder read() {
+        StringBuilder sb = new StringBuilder();
 
+        sb.append("");
+        return sb;
     }
 
     @Override

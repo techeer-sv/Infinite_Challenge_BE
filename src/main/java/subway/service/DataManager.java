@@ -12,10 +12,11 @@ public class DataManager extends Managerbale{
         // 초기값 삽입
     }
     @Override // 삽입
-    public void register(String command) {
+    public boolean register(String command) {
 // if command.equals("station") 역만 삽입하는 모듈 연결
 // if command.equals("line") 노선 삽입하는 모듈 연결
 // if command.equals("Section") 구간 삽입하는 모듈 연결
+        return true;
     }
 
     public void insertStation(String node){
@@ -45,7 +46,10 @@ public class DataManager extends Managerbale{
     }
 
     @Override // 조회
-    public void read() {
+    public StringBuilder read() {
+        StringBuilder sb = new StringBuilder();
 
+        sb.append("");
+        return sb;
     }
 }

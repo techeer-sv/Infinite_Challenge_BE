@@ -1,7 +1,11 @@
 package subway.controller;
 
+import subway.service.StationManager;
+
+// 역을 관리하는 컨트롤러
 public class StationController extends ManageController{
     private static MainController mainController = new MainController();
+    private static StationManager stationManager = new StationManager();
     @Override
     public void work(){
         ask.WhatToManage("역");
@@ -10,44 +14,50 @@ public class StationController extends ManageController{
             String command = br.readLine();
             // command 내용 확인하고 맞는 처리와 연결
             if(command.equals("1")){
-                registerControll();
-                mainController.headController();
+                register();
                 return;
             }
             if(command.equals("2")){
+                // 관련한 뷰 (삭제, 역)
+                // input 받기
                 delete();
-                mainController.headController();
                 return;
             }
             if(command.equals("3")){
-                requestStations();
-                mainController.headController();
+                stationManager.read();
                 return;
             }
             if(command.equals("B")){
-                mainController.headController();
+                return;
             }
+            // 에러 발생시키기
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
     @Override
-    public void registerControll(){
+    public void register(){
         ask.Name("등록", "역");
         try{
             String station = br.readLine();
-            register(station);
+            stationManager.register(station);
             // "지하철 역이 등록되었습니다." 출력
         }catch (Exception e){
             e.printStackTrace();
         }
     }
-
-    @Override
-    public void register(String station){
-        // db 접근해서 데이터 삽입하는 서비스와 연결
-        System.out.println("register 메서드 안이다.");
+    public void infoMessage(String work, boolean result){
+        StringBuilder sb = new StringBuilder();
+        sb.append("지하철 역이 ");
+        if(result == true){
+            sb.append(work).append("되었습니다.");
+        }
+        if(result == false){
+            sb.append(work).append("되지 않았습니다.");
+        }
+        String message = sb.toString();
+        response.printInfo(message);
     }
 
     @Override
@@ -56,6 +66,7 @@ public class StationController extends ManageController{
         ask.Name("삭제", "역");
         try{
             String command = br.readLine();
+            stationManager.delete(command);
             System.out.println("delete 메서드 안이다.");
         }catch (Exception e){
             e.printStackTrace();
