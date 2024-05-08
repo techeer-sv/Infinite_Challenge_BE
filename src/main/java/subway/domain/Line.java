@@ -1,6 +1,7 @@
 package subway.domain;
 
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class Line {
     private String name;
@@ -23,5 +24,18 @@ public class Line {
         stations.add(bottom);
     }
 
+    public void insertStation(Station node, int index){
+        stations.add(index, node);
+    }
+
     // 추가 기능 구현
+    public Station getStationByName(String name){
+        ListIterator iter = stations.listIterator();
+        for(Station station : stations){
+            if(station.getName().equals(name)){
+                return station;
+            }
+        }
+        return null;
+    }
 }
