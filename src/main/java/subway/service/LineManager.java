@@ -3,8 +3,6 @@ package subway.service;
 import subway.domain.Line;
 import subway.domain.LineRepository;
 
-import java.util.List;
-
 public class LineManager extends Managerbale{
     static LineRepository lineRepo = new LineRepository();
     @Override
@@ -15,6 +13,7 @@ public class LineManager extends Managerbale{
         lineRepo.addLine(new Line(name));
         return true;
     }
+// Todo : 상행 종점, 하행 종점 입력 받기
 
 //    public void setStations(String name, String upperStation, String bottomStation){
 //        Line created = new Line(name);
