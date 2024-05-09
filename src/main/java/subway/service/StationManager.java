@@ -12,7 +12,7 @@ public class StationManager extends Managerbale{
     public boolean register(String name) {
 //        해당 역이 존재하는 지 확인
 //        삽입
-        if(isExist(name)){
+        if(stations.getStationByName(name)!=null){
             // 이미 존재하는 역이라고 전달하기
             return false; // 문자열 반환해서 상태 메시지 출력에 활용
         }
@@ -23,10 +23,9 @@ public class StationManager extends Managerbale{
     public boolean isExist(String name){
         if(stations.getStationByName(name)!=null){
             // 이미 존재하는 역이라고 전달하기
-            return false; // 문자열 반환해서 상태 메시지 출력에 활용
+            return true; // 문자열 반환해서 상태 메시지 출력에 활용
         }
-        stations.addStation(new Station(name));
-        return true;
+        return false;
     }
 
     @Override

@@ -36,4 +36,14 @@ public class AskView {
         System.out.println(sb.toString());
         sb.setLength(0);
     }
+
+    public void orderWhat(String name){ // 등록 or 삭제
+        sb.append("## "+ name + "을 입력하세요\n");
+        System.out.println(sb.toString());
+        sb.setLength(0);
+    }
+    public void orderWhere(){ // 등록 or 삭제
+        System.out.println("## 순서를 입력하세요\n");
+    }
+
 }

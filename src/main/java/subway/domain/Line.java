@@ -23,6 +23,10 @@ public class Line {
         stations.addLast(bottom);
     }
 
+    public void addStation(Station station, int index){
+        stations.add(index, station);
+    }
+
     public void insertStation(Station node, int index){
         stations.add(index, node);
     }

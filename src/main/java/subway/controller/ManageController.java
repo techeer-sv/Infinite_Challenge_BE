@@ -1,5 +1,8 @@
 package subway.controller;
 
+import subway.domain.LineRepository;
+import subway.domain.StationRepository;
+import subway.service.StationManager;
 import subway.view.AskView;
 import subway.view.ResponseView;
 
@@ -10,6 +13,9 @@ public abstract class ManageController {
     AskView ask = new AskView();
     ResponseView response = new ResponseView();
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static final StationManager stationManager = new StationManager();
+    static final LineRepository lineRepo = new LineRepository();
+    static final StationRepository stationRepo = new StationRepository();
 
     public void work(){
 //        ask.Function();
