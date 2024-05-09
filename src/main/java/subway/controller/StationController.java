@@ -4,7 +4,7 @@ import subway.service.StationManager;
 
 // 역을 관리하는 컨트롤러
 public class StationController extends ManageController{
-    private static StationManager stationManager = new StationManager();
+    private static final StationManager stationManager = new StationManager();
     @Override
     public void work(){
         ask.WhatToManage("역");

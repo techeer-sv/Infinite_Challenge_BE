@@ -2,7 +2,6 @@ package subway.config.constants.initValues;
 
 import subway.domain.Line;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 

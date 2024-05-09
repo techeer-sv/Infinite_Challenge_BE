@@ -2,9 +2,12 @@ package subway.service;
 
 import subway.domain.Line;
 import subway.domain.LineRepository;
+import subway.domain.Station;
 
 public class LineManager extends Managerbale{
-    static LineRepository lineRepo = new LineRepository();
+    static final LineRepository lineRepo = new LineRepository();
+    static StationManager stationManager = new StationManager();
+
     @Override
     public boolean register(String name) {
         if(lineRepo.getLineByName(name) != null){
@@ -15,12 +18,13 @@ public class LineManager extends Managerbale{
     }
 // Todo : 상행 종점, 하행 종점 입력 받기
 
-//    public void setStations(String name, String upperStation, String bottomStation){
-//        Line created = new Line(name);
-//        lineRepo.addLine(created);
-//        // upper, bottom 을 찾고 아래 매개변수에 대입하는 코드 추가
-//        created.setStations(new Station(upperStation), new Station(bottomStation));
-//    }
+    public void setStations(String name, String upperStation, String bottomStation){
+        Line line = lineRepo.getLineByName(name);
+        Station upper = stationManager.getByName(upperStation);
+        Station bottom = stationManager.getByName(bottomStation);
+
+        line.setStations(upper, bottom);
+    }
 
     @Override
     public boolean delete(String name) {

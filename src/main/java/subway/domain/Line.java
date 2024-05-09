@@ -19,8 +19,8 @@ public class Line {
     public void setStations(Station upper, Station bottom){
         this.upperStation = upper;
         this.bottomStation=bottom;
-        stations.add(upper);
-        stations.add(bottom);
+        stations.addFirst(upper);
+        stations.addLast(bottom);
     }
 
     public void insertStation(Station node, int index){

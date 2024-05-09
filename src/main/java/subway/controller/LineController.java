@@ -38,6 +38,13 @@ public class LineController extends ManageController{
         try{
             String line = br.readLine();
             boolean result = lineManager.register(line);
+
+            ask.Name("등록", "상행 종점역");
+            String upper = br.readLine();
+            ask.Name("등록", "하행 종점역");
+            String bottom = br.readLine();
+
+            lineManager.setStations(line, upper, bottom);
             infoMessage("등록", result);
         }catch (Exception e){
             e.printStackTrace();
