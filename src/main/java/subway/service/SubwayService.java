@@ -14,9 +14,19 @@ import subway.domain.Subway;
 public class SubwayService {
 
     private static final int LIMIT_SUBWAY_STATION_SIZE = 2;
-    private final Subway subway = new Subway();
-    private final LineRepository lineRepository = new LineRepository();
-    private final StationRepository stationRepository = new StationRepository();
+    private final Subway subway;
+    private final LineRepository lineRepository;
+    private final StationRepository stationRepository;
+
+    public SubwayService(
+            final Subway subway,
+            final LineRepository lineRepository,
+            final StationRepository stationRepository
+    ) {
+        this.subway = subway;
+        this.lineRepository = lineRepository;
+        this.stationRepository = stationRepository;
+    }
 
     public void saveStation(final String input) {
         final Station station = new Station(input);

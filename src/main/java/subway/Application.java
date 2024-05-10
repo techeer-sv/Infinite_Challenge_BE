@@ -1,10 +1,10 @@
 package subway;
 
-import subway.controller.SubwayController;
+import subway.common.AppConfig;
 
 public class Application {
     public static void main(String[] args) {
-        final SubwayController subwayController = new SubwayController();
-        subwayController.start();
+
+        AppConfig.getInstance().subwayController().start();
     }
 }

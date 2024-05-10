@@ -13,9 +13,20 @@ import subway.view.OutputView;
 
 public class SubwayController {
 
-    private final OutputView outputView = new OutputView();
-    private final InputView inputView = new InputView();
-    private final SubwayService subwayService = new SubwayService();
+    private final OutputView outputView;
+    private final InputView inputView;
+
+    public SubwayController(
+            final OutputView outputView,
+            final InputView inputView,
+            final SubwayService subwayService
+    ) {
+        this.outputView = outputView;
+        this.inputView = inputView;
+        this.subwayService = subwayService;
+    }
+
+    private final SubwayService subwayService;
 
     public void start() {
         subwayService.initializeSubway();
