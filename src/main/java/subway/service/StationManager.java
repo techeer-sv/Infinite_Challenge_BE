@@ -3,10 +3,8 @@ package subway.service;
 import subway.domain.Station;
 import subway.domain.StationRepository;
 
-import java.util.List;
-
 // 역 관련 기능하는 서비스
-public class StationManager extends Managerbale{
+public class StationManager extends Managerable {
     private static final StationRepository stations = new StationRepository();
     @Override // 삽입
     public boolean register(String name) {

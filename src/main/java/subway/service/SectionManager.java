@@ -5,7 +5,7 @@ import subway.domain.LineRepository;
 import subway.domain.Station;
 import subway.domain.StationRepository;
 
-public class SectionManager extends Managerbale{
+public class SectionManager extends Managerable {
     static LineRepository lineRepo = new LineRepository();
     static StationRepository stationRepo = new StationRepository();
 
