@@ -1,6 +1,6 @@
 package subway.common;
 
-public class ExceptionHander {
+public class ExceptionHandler {
 
     public static void retryOnException(final Runnable runnable) {
         try {

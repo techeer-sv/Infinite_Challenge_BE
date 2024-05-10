@@ -1,7 +1,7 @@
 package subway.controller;
 
 import java.util.List;
-import subway.common.ExceptionHander;
+import subway.common.ExceptionHandler;
 import subway.constant.LineCommand;
 import subway.constant.MainCommand;
 import subway.constant.SectionCommand;
@@ -30,7 +30,7 @@ public class SubwayController {
 
     public void start() {
         subwayService.initializeSubway();
-        ExceptionHander.retryOnException(this::startSubway);
+        ExceptionHandler.retryOnException(this::startSubway);
     }
 
     private void startSubway() {
