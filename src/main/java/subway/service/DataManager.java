@@ -1,55 +1,57 @@
-//package subway.service;
-//
-//import subway.domain.Line;
-//import subway.domain.LineRepository;
-//import subway.domain.Station;
-//import subway.domain.StationRepository;
-//
-//import java.util.List;
-//
-//public class DataManager extends Managerbale{
-//    public DataManager(){
-//        // 초기값 삽입
-//    }
-//    @Override // 삽입
-//    public boolean register(String command) {
-//// if command.equals("station") 역만 삽입하는 모듈 연결
-//// if command.equals("line") 노선 삽입하는 모듈 연결
-//// if command.equals("Section") 구간 삽입하는 모듈 연결
-//        return true;
-//    }
-//
-//    public void insertStation(String node){
-//        // 이미 해당 역이 존재하는지 아닌지 확인하는 코드 추가 (util 로 만들기)
-//        Station station = new Station(node);
-//        stationRepo.addStation(station);
-//    }
-//
-//    public void insertLine(String upperStation, String bottomStation, String name){
-//        List<Station> stations = stationRepo.stations();
-//        // 이미 해당 역이 존재하는지 아닌지 확인하는 코드 추가
-//        Station upper = new Station(upperStation);
-//        Station bottom = new Station(bottomStation);
-//        stationRepo.addStation(upper);
-//        stationRepo.addStation(bottom);
-//        Line created = new Line(name);
-//        lineRepo.addLine(created);
-//    }
-//
-//    public void insertSection(){
-//
-//    }
-//
-//    @Override // 삭제
-//    public boolean delete(String name) {
-//        return true;
-//    }
-//
-//    @Override // 조회
-//    public StringBuilder read() {
-//        StringBuilder sb = new StringBuilder();
-//
-//        sb.append("");
-//        return sb;
-//    }
-//}
+package subway.service;
+
+import subway.config.constants.initValues.*;
+import subway.domain.Line;
+import subway.domain.LineRepository;
+import subway.domain.Station;
+import subway.domain.StationRepository;
+
+public class DataManager{
+    private final static LineNames lines = new LineNames(); // String[]
+    private final static StationNames stations = new StationNames(); // String[]
+
+    final static LineRepository lineRepo = new LineRepository();
+    final static StationRepository stationRepo = new StationRepository();
+
+    public DataManager(){
+        // 초기값 삽입
+//        2. 모든 노선을 입력한다.
+//        3. 모든 구간을 입력한다.
+        addStations();//        1. 모든 역들을 입력한다.
+        addLines();
+    }
+
+    public void addStations(){
+        String[] names = stations.getNames();
+        for(String station: names){
+            stationRepo.addStation(new Station(station));
+        }
+    }
+
+    public void addLines(){
+        String[] names = lines.getNames();
+        for(String line: names){
+            Line node = new Line(line);
+            lineSet(node);
+            lineRepo.addLine(node);
+        }
+    }
+
+    public void lineSet(Line line){
+        if(line.getName().equals("2호선")){
+            line.setStations(stationRepo.getStationByName("교대역"), stationRepo.getStationByName("역삼역"));
+            line.addStation(stationRepo.getStationByName("강남역"), 1);
+            return;
+        }
+        if(line.getName().equals("3호선")){
+            line.setStations(stationRepo.getStationByName("교대역"), stationRepo.getStationByName("매봉역"));
+            line.addStation(stationRepo.getStationByName("양재역"), 1);
+            line.addStation(stationRepo.getStationByName("남부터미널역"), 1);
+            return;
+        }
+        if(line.getName().equals("수인분당선")){
+            line.setStations(stationRepo.getStationByName("강남역"), stationRepo.getStationByName("양재시민의숲역"));
+            line.addStation(stationRepo.getStationByName("양재역"), 1);
+        }
+    }
+}
