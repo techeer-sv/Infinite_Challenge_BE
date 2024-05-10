@@ -6,11 +6,19 @@ import subway.constant.message.ErrorMessage;
 public class Line {
 
     private static final int MIN_NAME_LENGTH = 2;
-    private String name;
+    private static final String NAME_SUFFIX = "선";
+    private final String name;
 
     public Line(final String name) {
+        validateNameSuffix(name);
         validateNameLenght(name);
         this.name = name;
+    }
+
+    private void validateNameSuffix(final String input) {
+        if (!input.endsWith(NAME_SUFFIX)) {
+            throw new IllegalArgumentException(ErrorMessage.ERROR_PREFIX.toMessage() + "노선은 선으로 끝나야 합니다");
+        }
     }
 
     private void validateNameLenght(final String input) {

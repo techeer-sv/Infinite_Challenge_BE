@@ -7,11 +7,13 @@ import subway.constant.message.ErrorMessage;
 public class Station {
 
     private final Pattern NAME_PATTERN = Pattern.compile("^[가-힣]+$");
+    private static final String NAME_SUFFIX = "역";
     private static final int MIN_NAME_LENGTH = 2;
-    private String name;
+    private final String name;
 
     public Station(final String name) {
-        validateNameLenght(name);
+        validateNameLength(name);
+        validateNameSuffix(name);
         validateNameRegex(name);
         this.name = name;
     }
@@ -20,7 +22,13 @@ public class Station {
         return name;
     }
 
-    private void validateNameLenght(final String input) {
+    private void validateNameSuffix(final String input) {
+        if (!input.endsWith(NAME_SUFFIX)) {
+            throw new IllegalArgumentException(ErrorMessage.ERROR_PREFIX.toMessage() + "지하철역은 역으로 끝나야 합니다");
+        }
+    }
+
+    private void validateNameLength(final String input) {
         if (input.length() < MIN_NAME_LENGTH) {
             throw new IllegalArgumentException(ErrorMessage.ERROR_PREFIX.toMessage() + "이름은 2글자 이상이여야 합니다.");
         }

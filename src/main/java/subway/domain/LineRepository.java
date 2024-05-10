@@ -14,7 +14,7 @@ public class LineRepository {
 
     public void save(final Line line) {
         if (lines.stream()
-                    .anyMatch(element -> element.equals(line))) {
+                 .anyMatch(element -> element.equals(line))) {
             throw new IllegalArgumentException(ErrorMessage.ERROR_PREFIX.toMessage() + "중복된 호선은 입력될 수 없습니다.");
         }
         lines.add(line);
@@ -32,8 +32,8 @@ public class LineRepository {
 
     public Line getByName(final String name) {
         return lines.stream()
-                       .filter(e -> e.isEqualsByName(name))
-                       .findFirst()
-                       .orElseThrow(() -> new IllegalStateException("이름에 해당하는 노선이 없습니다."));
+                    .filter(e -> e.isEqualsByName(name))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalStateException("이름에 해당하는 노선이 없습니다."));
     }
 }
