@@ -59,13 +59,13 @@ public class SubwaySystem {
             switch (command) {
                 case "1":
                     addStation();
-                    break;
+                    return;
                 case "2":
                     removeStation();
-                    break;
+                    return;
                 case "3":
                     showStations();
-                    break;
+                    return;
                 case "B":
                 case "b":
                     return;
@@ -116,13 +116,13 @@ public class SubwaySystem {
             switch (command) {
                 case "1":
                     addLine();
-                    break;
+                    return;
                 case "2":
                     removeLine();
-                    break;
+                    return;
                 case "3":
                     showLines();
-                    break;
+                    return;
                 case "B":
                 case "b":
                     return;
@@ -172,10 +172,10 @@ public class SubwaySystem {
             switch (command) {
                 case "1":
                     addSection();
-                    break;
+                    return;
                 case "2":
                     removeSection();
-                    break;
+                    return;
                 case "B":
                 case "b":
                     return;

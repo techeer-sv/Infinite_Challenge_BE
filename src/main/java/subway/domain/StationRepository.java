@@ -25,6 +25,7 @@ public class StationRepository {
         return stations.stream().anyMatch(station -> Objects.equals(station.getName(), name));
     }
 
+    // getStation 메소드 추가
     public static Station getStation(String name) {
         return stations.stream()
                 .filter(station -> station.getName().equals(name))
