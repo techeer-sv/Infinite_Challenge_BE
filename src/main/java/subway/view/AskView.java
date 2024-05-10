@@ -24,6 +24,14 @@ public class AskView {
         System.out.println(sb.toString());
         sb.setLength(0);
     }
+    public void sectionManage(){
+        sb.append("## 구간 관리 화면\n");
+        sb.append("1. 구간 등록\n");
+        sb.append("2. 구간 삭제\n");
+        sb.append("B. 돌아가기\n");
+        System.out.println(sb.toString());
+        sb.setLength(0);
+    }
 
     public void Function(){
         sb.append("## 원하는 기능을 선택하세요\n");

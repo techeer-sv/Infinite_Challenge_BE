@@ -1,5 +1,6 @@
 package subway.controller;
 
+import subway.service.DataManager;
 import subway.view.AskView;
 
 import java.io.BufferedReader;
@@ -13,9 +14,10 @@ public class MainController {
 
     public MainController() {
         ask = new AskView();
-        stationController = new StationController();
-        lineController = new LineController();
-        sectionController = new SectionController();
+        DataManager manager = new DataManager();
+        stationController = new StationController(manager);
+        lineController = new LineController(manager);
+        sectionController = new SectionController(manager);
     }
 
     public void headController() throws Exception {

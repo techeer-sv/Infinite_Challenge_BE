@@ -5,7 +5,7 @@ public class StationNames {
 //    List<Line> train2 = new LinkedList<>();
 //    List<Line> train3 = new LinkedList<>();
 //    List<Line> trainSuIn = new LinkedList<>();
-    private String[] stations = new String []{"교대역", "강남역", "역삼역", "남부터미널역", "양재역", "양재시민의숲역", "매봉역"};
+    private static final String[] stations = new String []{"교대역", "강남역", "역삼역", "남부터미널역", "양재역", "양재시민의숲역", "매봉역"};
 
     public String[] getNames() {
         return stations;

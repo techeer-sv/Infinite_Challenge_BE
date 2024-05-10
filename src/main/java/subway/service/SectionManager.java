@@ -5,9 +5,10 @@ import subway.domain.LineRepository;
 import subway.domain.Station;
 import subway.domain.StationRepository;
 
+import static subway.service.DataManager.lineRepo;
+import static subway.service.DataManager.stationRepo;
+
 public class SectionManager extends Managerable {
-    static LineRepository lineRepo = new LineRepository();
-    static StationRepository stationRepo = new StationRepository();
     private Line line;
 
     @Override

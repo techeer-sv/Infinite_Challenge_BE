@@ -1,13 +1,20 @@
 package subway.controller;
 
+import subway.service.DataManager;
 import subway.service.SectionManager;
+import subway.view.ResponseView;
 
 public class SectionController extends ManageController {
-    private static SectionManager sectionManager = new SectionManager();
+    private static SectionManager sectionManager;
+    private static ResponseView response = new ResponseView();
+
+    public SectionController(DataManager manager){
+        sectionManager = manager.getSectionManager();
+    }
 
     @Override
     public void work() {
-        ask.WhatToManage("구간");
+        ask.sectionManage();
         ask.Function();
         try {
             String command = br.readLine();
@@ -40,6 +47,7 @@ public class SectionController extends ManageController {
         int index = getIndex();
 
         sectionManager.insertSection(station, index);
+        response.printInfo("구간이 등록되었습니다.");
     }
 
     public String getLine() {
@@ -85,6 +93,7 @@ public class SectionController extends ManageController {
             // 알고리즘 빡 분리해야 할 듯함
             sectionManager.register(line);
             sectionManager.delete(station);
+            response.printInfo("구간이 삭제되었습니다.");
         } catch (Exception e){
             e.printStackTrace();
         }

@@ -13,10 +13,24 @@ public class DataManager{
     final static LineRepository lineRepo = new LineRepository();
     final static StationRepository stationRepo = new StationRepository();
 
+    final static StationManager stationManager = new StationManager();
+    final static SectionManager sectionManager = new SectionManager();
+    final static LineManager lineManager = new LineManager();
+
+    public LineManager getLineManager(){
+        return lineManager;
+    }
+
+    public static StationManager getStationManager() {
+        return stationManager;
+    }
+
+    public static SectionManager getSectionManager(){
+        return sectionManager;
+    }
+
     public DataManager(){
         // 초기값 삽입
-//        2. 모든 노선을 입력한다.
-//        3. 모든 구간을 입력한다.
         addStations();//        1. 모든 역들을 입력한다.
         addLines();
     }

@@ -1,9 +1,15 @@
 package subway.controller;
 
+import subway.service.DataManager;
 import subway.service.StationManager;
 
 // 역을 관리하는 컨트롤러
 public class StationController extends ManageController{
+    static StationManager stationManager;
+
+    StationController(DataManager manager){
+        stationManager = manager.getStationManager();
+    }
     @Override
     public void work(){
         ask.WhatToManage("역");

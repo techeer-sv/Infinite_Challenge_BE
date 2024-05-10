@@ -1,9 +1,13 @@
 package subway.controller;
 
+import subway.service.DataManager;
 import subway.service.LineManager;
 
 public class LineController extends ManageController{
-    static LineManager lineManager = new LineManager();
+    static LineManager lineManager;
+    public LineController(DataManager manager){
+        lineManager = manager.getLineManager();
+    }
     @Override
     public void work(){
         ask.WhatToManage("노선");
