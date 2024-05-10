@@ -8,38 +8,39 @@ import subway.domain.StationRepository;
 public class SectionManager extends Managerable {
     static LineRepository lineRepo = new LineRepository();
     static StationRepository stationRepo = new StationRepository();
+    private Line line;
 
     @Override
     public boolean register(String name) {
-        return true;
-    }
-
-    public void insertSection(String name, String sName,int index){
-        // 이미 해당 역이 등록되어 있는지 확인
-        // 등록되지 않았으면
-        Line line = lineRepo.getLineByName(name);
+        line = lineRepo.getLineByName(name);
         if(line == null){
             System.out.println(" 존재하지 않는 노선입니다.");
         }
+        return true;
+    }
 
+    public void insertSection(String sName,int index){
         Station station = stationRepo.getStationByName(sName);
         if(station == null){
             System.out.println(" 존재하지 않는 역입니다.");
         }
         lineRepo.addLine(line, station, index);
-
-
     }
 
     @Override
     public boolean delete(String name) {
+        try{
+            line.deleteStation(name);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
         return true;
     }
 
     @Override
     public StringBuilder read() {
         StringBuilder sb = new StringBuilder();
-
         sb.append("");
         return sb;
     }

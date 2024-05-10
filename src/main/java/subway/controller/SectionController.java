@@ -1,40 +1,37 @@
 package subway.controller;
 
-import subway.service.LineManager;
 import subway.service.SectionManager;
-import subway.service.StationManager;
 
-public class SectionController extends ManageController{
-    private static StationManager stationManager = new StationManager();
-    private static LineManager lineManager = new LineManager();
+public class SectionController extends ManageController {
     private static SectionManager sectionManager = new SectionManager();
+
     @Override
     public void work() {
         ask.WhatToManage("구간");
         ask.Function();
-        try{
+        try {
             String command = br.readLine();
-            if(command.equals("1")){ // 등록
+            if (command.equals("1")) { // 등록
                 register();
                 return;
             }
-            if(command.equals("2")){ // 삭제
+            if (command.equals("2")) { // 삭제
                 delete();
                 return;
             }
-            if(command.equals("B")){ // 되돌아가기
+            if (command.equals("B")) { // 되돌아가기
                 return;
             }
-            // 에러 발생시키
-        }catch (Exception e){
+            // 에러 발생시키기
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void register() { // 노선, 역 이름, 순서 입력 받고 등록
-        ask.orderWhat("노선");
         String line = getLine();
+        sectionManager.register(line);
 
         ask.orderWhat("역 이름");
         String station = getStation();
@@ -42,32 +39,35 @@ public class SectionController extends ManageController{
         ask.orderWhere();
         int index = getIndex();
 
-        sectionManager.insertSection(line, station, index);
+        sectionManager.insertSection(station, index);
     }
 
-    public String getLine(){
-        try{
+    public String getLine() {
+        ask.orderWhat("노선");
+        String line = "";
+        try {
+            line = br.readLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return line;
+    }
+
+    public String getStation() {
+        try {
             return br.readLine();
-        }catch (Exception e){
-            System.out.println("존재하지 않는 노선입니다.");
+        } catch (Exception e) {
+            System.out.println("역 이름을 받을 수 없습니다. 다시 시도해주세요.");
             e.printStackTrace();
         }
         return null;
     }
-    public String getStation(){
-        try{
-            return br.readLine();
-        }catch (Exception e){
-            System.out.println("존재하지 않는 역입니다.");
-            e.printStackTrace();
-        }
-        return null;    }
 
-    public int getIndex(){
-        try{
+    public int getIndex() {
+        try {
             int index = Integer.parseInt(br.readLine());
             return index;
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("입력값을 확인해주세요.");
             e.printStackTrace();
         }
@@ -76,6 +76,17 @@ public class SectionController extends ManageController{
 
     @Override
     public void delete() {
-
+        try{
+            ask.Name("삭제", "구간의 노선");
+            String line = br.readLine();
+            ask.Name("삭제", "구간의 역");
+            String station = br.readLine();
+            // manager에서 line 세팅. 함수 이름 고민중...
+            // 알고리즘 빡 분리해야 할 듯함
+            sectionManager.register(line);
+            sectionManager.delete(station);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

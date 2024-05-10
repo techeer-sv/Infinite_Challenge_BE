@@ -27,6 +27,15 @@ public class Line {
         stations.add(index, station);
     }
 
+    public void deleteStation(String station){
+        int index=0;
+        for(index =0 ;index < stations.size();index++){
+            Station s = stations.get(index);
+            if(s.getName().equals(station)) break;
+        }
+        stations.remove(index);
+    }
+
     public void insertStation(Station node, int index){
         stations.add(index, node);
     }
