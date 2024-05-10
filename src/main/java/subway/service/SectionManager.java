@@ -1,5 +1,6 @@
 package subway.service;
 
+import subway.config.handler.SubwayException;
 import subway.domain.Line;
 import subway.domain.LineRepository;
 import subway.domain.Station;
@@ -10,33 +11,25 @@ import static subway.service.DataManager.stationRepo;
 
 public class SectionManager extends Managerable {
     private Line line;
-
+    private SubwayException subwayException;
     @Override
     public boolean register(String name) {
         line = lineRepo.getLineByName(name);
-        if(line == null){
-            System.out.println(" 존재하지 않는 노선입니다.");
-        }
+        if(line == null) subwayException.noLine();
         return true;
     }
 
     public void insertSection(String sName,int index){
         Station station = stationRepo.getStationByName(sName);
-        if(station == null){
-            System.out.println(" 존재하지 않는 역입니다.");
-        }
+        if(station == null) subwayException.noStation();
         lineRepo.addLine(line, station, index);
     }
 
     @Override
     public boolean delete(String name) {
-        try{
-            line.deleteStation(name);
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+        if(line.deleteStation(name)) return true;
+        subwayException.checkCommand();
+        return false;
     }
 
     @Override

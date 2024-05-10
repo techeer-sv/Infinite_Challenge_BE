@@ -16,34 +16,33 @@ public class Line {
         return name;
     }
 
-    public void setStations(Station upper, Station bottom){
+    public void setStations(Station upper, Station bottom) {
         this.upperStation = upper;
-        this.bottomStation=bottom;
+        this.bottomStation = bottom;
         stations.addFirst(upper);
         stations.addLast(bottom);
     }
 
-    public void addStation(Station station, int index){
+    public void addStation(Station station, int index) {
         stations.add(index, station);
     }
 
-    public void deleteStation(String station){
-        int index=0;
-        for(index =0 ;index < stations.size();index++){
+    public boolean deleteStation(String station) {
+        int index = 0;
+        for (index = 0; index < stations.size(); index++) {
             Station s = stations.get(index);
-            if(s.getName().equals(station)) break;
+            if (s.getName().equals(station)) {
+                stations.remove(index);
+                return true;
+            }
         }
-        stations.remove(index);
-    }
-
-    public void insertStation(Station node, int index){
-        stations.add(index, node);
+        return false;
     }
 
     // 추가 기능 구현
-    public Station getStationByName(String name){
-        for(Station station : stations){
-            if(station.getName().equals(name)){
+    public Station getStationByName(String name) {
+        for (Station station : stations) {
+            if (station.getName().equals(name)) {
                 return station;
             }
         }

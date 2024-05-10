@@ -1,14 +1,17 @@
 package subway.controller;
 
+import subway.config.handler.SubwayException;
 import subway.service.DataManager;
 import subway.service.StationManager;
 
 // 역을 관리하는 컨트롤러
 public class StationController extends ManageController{
     static StationManager stationManager;
+    static SubwayException subwayException;
 
     StationController(DataManager manager){
         stationManager = manager.getStationManager();
+        subwayException = manager.getSubwayException();
     }
     @Override
     public void work(){
@@ -32,6 +35,7 @@ public class StationController extends ManageController{
                 return;
             }
             // 에러 발생시키
+            subwayException.notValidCommand();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -42,6 +46,7 @@ public class StationController extends ManageController{
         ask.Name("등록", "역");
         try{
             String station = br.readLine();
+            subwayException.isValidLength(station);
             boolean result = stationManager.register(station);
             // "지하철 역이 등록되었습니다." 출력
             infoMessage("등록", result);

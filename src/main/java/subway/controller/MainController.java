@@ -1,5 +1,6 @@
 package subway.controller;
 
+import subway.config.handler.SubwayException;
 import subway.service.DataManager;
 import subway.view.AskView;
 
@@ -11,6 +12,7 @@ public class MainController {
     private StationController stationController;
     private LineController lineController;
     private SectionController sectionController;
+    private static SubwayException subwayException;
 
     public MainController() {
         ask = new AskView();
@@ -18,6 +20,7 @@ public class MainController {
         stationController = new StationController(manager);
         lineController = new LineController(manager);
         sectionController = new SectionController(manager);
+        subwayException = manager.getSubwayException();
     }
 
     public void headController() throws Exception {
@@ -28,17 +31,30 @@ public class MainController {
             System.out.println(" 안녕히 가세요. ");
             return;
         }
-
+        try{
+            int validCommand = Integer.parseInt(command);
+            CoreController(validCommand);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         // command 가 유효한 명령이 아닐 경우 코드 추가
-        int validCommand = Integer.parseInt(command);
-        CoreController(validCommand);
         headController();
     }
 
     // 생성자와 함께 출력과 서비스를 제공하려 했는데 무슨 일 할 때마다 클래스 생성하는 것은 비효율적인 것 같다. 메소드로 바꾸자.
     public void CoreController(int command) {
-        if (command == 1) stationController.work();
-        if (command == 2) lineController.work();
-        if (command == 3) sectionController.work();
+        if (command == 1) {
+            stationController.work();
+            return;
+        }
+        if (command == 2) {
+            lineController.work();
+            return;
+        }
+        if (command == 3) {
+            sectionController.work();
+            return;
+        }
+        subwayException.notValidCommand();
     }
 }

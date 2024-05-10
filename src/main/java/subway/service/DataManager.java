@@ -1,6 +1,7 @@
 package subway.service;
 
 import subway.config.constants.initValues.*;
+import subway.config.handler.SubwayException;
 import subway.domain.Line;
 import subway.domain.LineRepository;
 import subway.domain.Station;
@@ -17,6 +18,8 @@ public class DataManager{
     final static SectionManager sectionManager = new SectionManager();
     final static LineManager lineManager = new LineManager();
 
+    final static SubwayException subwayException = new SubwayException();
+
     public LineManager getLineManager(){
         return lineManager;
     }
@@ -28,6 +31,7 @@ public class DataManager{
     public static SectionManager getSectionManager(){
         return sectionManager;
     }
+    public static SubwayException getSubwayException(){return subwayException;}
 
     public DataManager(){
         // 초기값 삽입

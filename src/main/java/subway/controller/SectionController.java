@@ -1,5 +1,6 @@
 package subway.controller;
 
+import subway.config.handler.SubwayException;
 import subway.service.DataManager;
 import subway.service.SectionManager;
 import subway.view.ResponseView;
@@ -7,9 +8,12 @@ import subway.view.ResponseView;
 public class SectionController extends ManageController {
     private static SectionManager sectionManager;
     private static ResponseView response = new ResponseView();
+    static SubwayException subwayException;
+
 
     public SectionController(DataManager manager){
         sectionManager = manager.getSectionManager();
+        subwayException = manager.getSubwayException();
     }
 
     @Override
@@ -30,6 +34,7 @@ public class SectionController extends ManageController {
                 return;
             }
             // 에러 발생시키기
+            subwayException.notValidCommand();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,12 +1,15 @@
 package subway.controller;
 
+import subway.config.handler.SubwayException;
 import subway.service.DataManager;
 import subway.service.LineManager;
 
 public class LineController extends ManageController{
     static LineManager lineManager;
+    private static SubwayException subwayException;
     public LineController(DataManager manager){
         lineManager = manager.getLineManager();
+        subwayException = manager.getSubwayException();
     }
     @Override
     public void work(){
@@ -29,7 +32,8 @@ public class LineController extends ManageController{
             if(command.equals("B")){
                 return;
             }
-            // 에러 발생시키
+            // 에러 발생시키기
+            subwayException.notValidCommand();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -41,6 +45,7 @@ public class LineController extends ManageController{
         ask.Name("등록", "노선");
         try{
             String line = br.readLine();
+            subwayException.isValidLength(line);
             boolean result = lineManager.register(line);
 
             ask.Name("등록", "상행 종점역");
