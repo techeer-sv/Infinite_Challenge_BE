@@ -137,11 +137,32 @@ public class SubwaySystem {
         String lineName = scanner.nextLine().trim();
         if (LineRepository.exists(lineName)) {
             System.out.println("[ERROR] 이미 등록된 노선 이름입니다.");
-        } else {
-            LineRepository.addLine(new Line(lineName));
-            System.out.println("[INFO] 지하철 노선이 등록되었습니다.");
+            return;
         }
+
+        System.out.print("## 등록할 노선의 상행 종점역 이름을 입력하세요: ");
+        String startStationName = scanner.nextLine().trim();
+        Station startStation = StationRepository.getStation(startStationName);
+        if (startStation == null) {
+            System.out.println("[ERROR] 상행 종점역이 존재하지 않습니다.");
+            return;
+        }
+
+        System.out.print("## 등록할 노선의 하행 종점역 이름을 입력하세요: ");
+        String endStationName = scanner.nextLine().trim();
+        Station endStation = StationRepository.getStation(endStationName);
+        if (endStation == null) {
+            System.out.println("[ERROR] 하행 종점역이 존재하지 않습니다.");
+            return;
+        }
+
+        Line newLine = new Line(lineName);
+        newLine.addStation(startStation);
+        newLine.addStation(endStation);
+        LineRepository.addLine(newLine);
+        System.out.println("[INFO] 지하철 노선이 등록되었습니다.");
     }
+
 
     private void removeLine() {
         System.out.print("## 삭제할 노선 이름을 입력하세요: ");
