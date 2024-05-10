@@ -37,7 +37,7 @@ public class StationController extends ManageController{
             // 에러 발생시키
             subwayException.notValidCommand();
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
         }
     }
 
@@ -51,7 +51,7 @@ public class StationController extends ManageController{
             // "지하철 역이 등록되었습니다." 출력
             infoMessage("등록", result);
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
         }
     }
     public void infoMessage(String work, boolean result){
@@ -77,7 +77,7 @@ public class StationController extends ManageController{
             boolean result = stationManager.delete(command);
             infoMessage("삭제", result);
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
         }
     }
 

@@ -37,7 +37,7 @@ public class MainController {
             int validCommand = Integer.parseInt(command);
             CoreController(validCommand);
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
         }
         // command 가 유효한 명령이 아닐 경우 코드 추가
         headController();

@@ -35,7 +35,7 @@ public class LineController extends ManageController{
             // 에러 발생시키기
             subwayException.notValidCommand();
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
         }
     }
 
@@ -56,7 +56,7 @@ public class LineController extends ManageController{
             lineManager.setStations(line, upper, bottom);
             infoMessage("등록", result);
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
         }
     }
 
@@ -83,7 +83,7 @@ public class LineController extends ManageController{
             boolean result = lineManager.delete(command);
             infoMessage("삭제", result);
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
         }
     }
 

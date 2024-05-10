@@ -36,7 +36,7 @@ public class SectionController extends ManageController {
             // 에러 발생시키기
             subwayException.notValidCommand();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
         }
     }
 
@@ -61,7 +61,7 @@ public class SectionController extends ManageController {
         try {
             line = br.readLine();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
         }
         return line;
     }
@@ -71,7 +71,6 @@ public class SectionController extends ManageController {
             return br.readLine();
         } catch (Exception e) {
             System.out.println("역 이름을 받을 수 없습니다. 다시 시도해주세요.");
-            e.printStackTrace();
         }
         return null;
     }
@@ -82,7 +81,6 @@ public class SectionController extends ManageController {
             return index;
         } catch (Exception e) {
             System.out.println("입력값을 확인해주세요.");
-            e.printStackTrace();
         }
         return -1;
     }
@@ -100,7 +98,7 @@ public class SectionController extends ManageController {
             sectionManager.delete(station);
             response.printInfo("구간이 삭제되었습니다.");
         } catch (Exception e){
-            e.printStackTrace();
+            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
         }
     }
 }
