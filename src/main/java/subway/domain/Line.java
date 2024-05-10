@@ -15,6 +15,13 @@ public class Line {
     public String getName() {
         return name;
     }
+    public StringBuilder stationList(){
+        StringBuilder sb = new StringBuilder();
+        for(Station station:stations){
+            sb.append("[INFO] "+station.getName()).append("\n");
+        }
+        return sb;
+    }
 
     public void setStations(Station upper, Station bottom) {
         this.upperStation = upper;

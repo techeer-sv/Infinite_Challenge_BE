@@ -12,6 +12,7 @@ public class MainController {
     private StationController stationController;
     private LineController lineController;
     private SectionController sectionController;
+    private MapController mapController;
     private static SubwayException subwayException;
 
     public MainController() {
@@ -20,6 +21,7 @@ public class MainController {
         stationController = new StationController(manager);
         lineController = new LineController(manager);
         sectionController = new SectionController(manager);
+        mapController = new MapController(manager);
         subwayException = manager.getSubwayException();
     }
 
@@ -53,6 +55,10 @@ public class MainController {
         }
         if (command == 3) {
             sectionController.work();
+            return;
+        }
+        if(command==4){
+            mapController.work();
             return;
         }
         subwayException.notValidCommand();

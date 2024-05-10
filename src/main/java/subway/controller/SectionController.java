@@ -51,7 +51,7 @@ public class SectionController extends ManageController {
         ask.orderWhere();
         int index = getIndex();
 
-        sectionManager.insertSection(station, index);
+        sectionManager.insertSection(station, index-1);
         response.printInfo("구간이 등록되었습니다.");
     }
 

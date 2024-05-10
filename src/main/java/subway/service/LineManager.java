@@ -1,11 +1,11 @@
 package subway.service;
 
 import subway.domain.Line;
-import subway.domain.LineRepository;
 import subway.domain.Station;
 
-import static subway.service.DataManager.lineRepo;
-import static subway.service.DataManager.stationManager;
+import java.util.List;
+
+import static subway.service.DataManager.*;
 
 public class LineManager extends Managerable {
     @Override
@@ -16,7 +16,6 @@ public class LineManager extends Managerable {
         lineRepo.addLine(new Line(name));
         return true;
     }
-// Todo : 상행 종점, 하행 종점 입력 받기
 
     public void setStations(String name, String upperStation, String bottomStation){
         Line line = lineRepo.getLineByName(name);
@@ -39,6 +38,18 @@ public class LineManager extends Managerable {
         }
         return sb;
     }
+
+    public StringBuilder getStationLines(){
+        StringBuilder sb = new StringBuilder();
+        List<Line> lineList = lineRepo.lines();
+        for(Line line:lineList){
+            sb.append("[INFO] "+line.getName()).append("\n");
+            sb.append("[INFO] ---").append("\n");
+            sb.append(line.stationList()).append("\n");
+        }
+        return sb;
+    }
+
 
 //    public List<Line> readLines(){
 //        return lineRepo.lines();
