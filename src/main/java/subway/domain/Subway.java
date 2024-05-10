@@ -31,6 +31,10 @@ public class Subway {
             throw new IllegalArgumentException("중복된 값을 저장할 수 없습니다.");
         }
         stations.add(stationIndex + INDEX_ADDER, station);
+    }
 
+    public int getStationSize(final Line line) {
+        List<Station> stations = subway.get(line);
+        return stations.size();
     }
 }

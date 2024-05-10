@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import subway.constant.message.ErrorMessage;
 import subway.domain.Line;
 import subway.domain.LineRepository;
 import subway.domain.Station;
@@ -12,7 +13,7 @@ import subway.domain.Subway;
 
 public class SubwayService {
 
-
+    private static final int LIMIT_SUBWAY_STATION_SIZE = 2;
     private final Subway subway = new Subway();
     private final LineRepository lineRepository = new LineRepository();
     private final StationRepository stationRepository = new StationRepository();
@@ -95,6 +96,9 @@ public class SubwayService {
 
     public void deleteSubwayLine(final String inputLine) {
         final Line line = lineRepository.getByName(inputLine);
+        if (subway.getStationSize(line) <= LIMIT_SUBWAY_STATION_SIZE) {
+            throw new IllegalStateException(ErrorMessage.ERROR_PREFIX.toMessage() + "역이 2개 이하면 삭제할 수 없습니다.");
+        }
         subway.deleteSubwayByLine(line);
     }
 

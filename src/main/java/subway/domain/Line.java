@@ -1,12 +1,22 @@
 package subway.domain;
 
 import java.util.Objects;
+import subway.constant.message.ErrorMessage;
 
 public class Line {
+
+    private static final int MIN_NAME_LENGTH = 2;
     private String name;
 
-    public Line(String name) {
+    public Line(final String name) {
+        validateNameLenght(name);
         this.name = name;
+    }
+
+    private void validateNameLenght(final String input) {
+        if (input.length() < MIN_NAME_LENGTH) {
+            throw new IllegalArgumentException(ErrorMessage.ERROR_PREFIX.toMessage() + "이름은 2글자 이상이여야 합니다.");
+        }
     }
 
     public String getName() {
