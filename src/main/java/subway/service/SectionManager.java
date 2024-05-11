@@ -33,7 +33,6 @@ public class SectionManager extends Managerable {
     @Override
     public StringBuilder read() {
         StringBuilder sb = new StringBuilder();
-        sb.append("");
         return sb;
     }
 }

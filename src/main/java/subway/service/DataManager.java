@@ -35,7 +35,7 @@ public class DataManager{
 
     public DataManager(){
         // 초기값 삽입
-        addStations();//        1. 모든 역들을 입력한다.
+        addStations();
         addLines();
     }
 

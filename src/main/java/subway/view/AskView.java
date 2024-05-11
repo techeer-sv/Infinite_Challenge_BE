@@ -2,7 +2,7 @@ package subway.view;
 
 import subway.config.constants.views.*;
 
-public class AskView {
+public class AskView { // view 가 너무 중구난방인 거 같은데 controller, service 처럼 분할할까.
     private static StringBuilder sb = new StringBuilder();
     static final String SHARP = Prefixes.SHARP.getPrefix();
     static final Methods REGISTER = Methods.등록;
