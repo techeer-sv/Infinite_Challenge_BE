@@ -1,5 +1,7 @@
 package subway.controller;
 
+import subway.config.constants.views.Methods;
+import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
 import subway.service.DataManager;
 import subway.service.LineManager;
@@ -41,20 +43,21 @@ public class LineController extends ManageController{
 
     @Override
     public void register() {
+        String command = Methods.등록.toString();
         // 새로운 노선 db 와 연동하여 생성하기
-        ask.Name("등록", "노선");
+        ask.Name(command, "노선");
         try{
             String line = br.readLine();
             subwayException.isValidLength(line);
             boolean result = lineManager.register(line);
 
-            ask.Name("등록", "상행 종점역");
+            ask.Name(command, Targets.UPPER.getTarget());
             String upper = br.readLine();
-            ask.Name("등록", "하행 종점역");
+            ask.Name(command, "하행 종점역");
             String bottom = br.readLine();
 
             lineManager.setStations(line, upper, bottom);
-            infoMessage("등록", result);
+            infoMessage(command, result);
         }catch (Exception e){
             System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
         }

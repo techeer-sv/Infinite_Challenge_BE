@@ -1,12 +1,12 @@
 package subway.config.constants.views;
 
 public enum Methods {
-    REGISTER("등록"),
-    DELETE("삭제"),
-    READ("조회"),
-    PRINT("출력"),
-    END("종료"),
-    BACK("돌아가기");
+    등록("1"),
+    삭제("2"),
+    조회("3"),
+    출력("4"),
+    종료("Q"),
+    돌아가기("B");
     private final String command;
     Methods(String command){
         this.command = command;

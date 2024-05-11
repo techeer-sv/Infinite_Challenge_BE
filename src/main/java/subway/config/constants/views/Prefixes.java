@@ -8,4 +8,7 @@ public enum Prefixes {
     Prefixes(String prefix){
         this.prefix=prefix;
     }
+    public String getPrefix(){
+        return this.prefix;
+    }
 }

@@ -12,4 +12,8 @@ public enum Targets {
     Targets(String target){
         this.target = target;
     }
+
+    public String getTarget(){
+        return this.target;
+    }
 }
