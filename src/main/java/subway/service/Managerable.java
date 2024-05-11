@@ -4,8 +4,4 @@ public abstract class Managerable {
     public abstract boolean register(String command);
     public abstract boolean delete(String name);
     public abstract StringBuilder read();
-
-    public void goBack() {
-        return;
-    }
 }

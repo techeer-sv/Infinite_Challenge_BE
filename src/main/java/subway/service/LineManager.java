@@ -49,9 +49,4 @@ public class LineManager extends Managerable {
         }
         return sb;
     }
-
-
-//    public List<Line> readLines(){
-//        return lineRepo.lines();
-//    }
 }

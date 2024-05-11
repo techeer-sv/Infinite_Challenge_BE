@@ -2,9 +2,7 @@ package subway.service;
 
 import subway.config.handler.SubwayException;
 import subway.domain.Line;
-import subway.domain.LineRepository;
 import subway.domain.Station;
-import subway.domain.StationRepository;
 
 import static subway.service.DataManager.lineRepo;
 import static subway.service.DataManager.stationRepo;
@@ -37,10 +35,5 @@ public class SectionManager extends Managerable {
         StringBuilder sb = new StringBuilder();
         sb.append("");
         return sb;
-    }
-
-    @Override
-    public void goBack() {
-
     }
 }
