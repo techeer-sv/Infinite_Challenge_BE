@@ -40,7 +40,7 @@ public class MainController {
                 continue;
             }
             if(input.equals("4")){
-                listALl();
+                lineService.listALl();
                 continue;
             }
             if(input.equals("Q")) return;
@@ -49,17 +49,5 @@ public class MainController {
         }
     }
 
-    private void listALl(){
-        for (Map.Entry<Line, List<Station>> entry : Subway.lines.entrySet()) {
-            Line line = entry.getKey();
-            List<Station> stations = entry.getValue();
 
-            System.out.println("[INFO] " + line.getName());
-            for (Station station : stations) {
-                System.out.println("[INFO}" + station.getName());
-            }
-
-            System.out.println();
-        }
-    }
 }

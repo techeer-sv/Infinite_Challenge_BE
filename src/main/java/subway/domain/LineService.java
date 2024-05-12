@@ -5,6 +5,7 @@ import subway.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LineService {
     private final OutputView outputView;
@@ -84,4 +85,17 @@ public class LineService {
                 .forEach(name -> System.out.println("[INFO} " + name));
     }
 
+    public void listALl(){
+        for (Map.Entry<Line, List<Station>> entry : Subway.lines.entrySet()) {
+            Line line = entry.getKey();
+            List<Station> stations = entry.getValue();
+
+            System.out.println("[INFO] " + line.getName());
+            for (Station station : stations) {
+                System.out.println("[INFO}" + station.getName());
+            }
+
+            System.out.println();
+        }
+    }
 }

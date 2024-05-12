@@ -35,17 +35,17 @@ public class SectionService {
         int order = Integer.parseInt(inputView.inputOrder());
 
         if(!LineRepository.isExist(line)){
-            System.out.println("존재하지 않는 노선");
+            System.out.println("[ERROR] 존재하지 않는 노선입니다.");
             return;
         }
         if(!StationRepository.isExist(station)){
-            System.out.println("존재하지 않는 역");
+            System.out.println("[ERROR] 존재하지 않는 역입니다.");
             return;
         }
 
         List<Station> stations = Subway.lines.get(line);
         if(stations.contains(new Station(station))){
-            System.out.println("이미 존재하는 역");
+            System.out.println("[ERROR] 이미 존재하는 역입니다.");
         }
 
         stations.add(order, new Station(station));
@@ -57,16 +57,16 @@ public class SectionService {
         String station = inputView.inputDeleteStationOfSection();
 
         if(!LineRepository.isExist(line)){
-            System.out.println("존재하지 않는 노선");
+            System.out.println("[ERROR] 존재하지 않는 노선입니다.");
             return;
         }
         if(!StationRepository.isExist(station)){
-            System.out.println("존재하지 않는 역");
+            System.out.println("[ERROR] 존재하지 않는 역입니다.");
             return;
         }
 
         List<Station> stations = Subway.lines.get(line);
         stations.remove(new Station(station));
-
+        outputView.deletedStation();
     }
 }
