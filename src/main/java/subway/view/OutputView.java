@@ -35,10 +35,25 @@ public class OutputView {
     }
 
     public void registeredLine(){
-        System.out.println("[INFO] 지하철 노선이 등록되었습니다.");
+        System.out.println("[INFO] 지하철 노선이 등록되었습니다.\n");
     }
 
     public void deletedLine(){
-        System.out.println("[INFO] 지하철 노선이 삭제되었습니다.");
+        System.out.println("[INFO] 지하철 노선이 삭제되었습니다.\n");
+    }
+
+    public void sectionManagementPage(){
+        System.out.println("## 구간 관리 화면\n" +
+                "1. 구간 등록\n" +
+                "2. 구간 삭제\n" +
+                "B. 돌아가기\n");
+    }
+
+    public void registeredSection(){
+        System.out.println("[INFO] 구간이 등록되었습니다.\n");
+    }
+
+    public void deletedSection(){
+        System.out.println("[INFO] 구간이 삭제되었습니다.\n");
     }
 }

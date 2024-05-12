@@ -3,11 +3,11 @@ package subway.domain;
 import subway.view.InputView;
 import subway.view.OutputView;
 
-public class StationController {
+public class StationService {
     private final OutputView outputView;
     private final InputView inputView;
 
-    public StationController(OutputView outputView, InputView inputView) {
+    public StationService(OutputView outputView, InputView inputView) {
         this.outputView = outputView;
         this.inputView = inputView;
     }

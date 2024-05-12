@@ -6,11 +6,11 @@ import subway.view.OutputView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineController {
+public class LineService {
     private final OutputView outputView;
     private final InputView inputView;
 
-    public LineController(OutputView outputView, InputView inputView) {
+    public LineService(OutputView outputView, InputView inputView) {
         this.outputView = outputView;
         this.inputView = inputView;
     }

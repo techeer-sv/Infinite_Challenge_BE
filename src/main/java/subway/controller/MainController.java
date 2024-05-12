@@ -1,23 +1,21 @@
 package subway.controller;
 
-import subway.domain.LineController;
-import subway.domain.StationController;
+import subway.domain.LineService;
+import subway.domain.StationService;
 import subway.view.InputView;
 import subway.view.OutputView;
-
-import java.util.Scanner;
 
 public class MainController {
     private final OutputView outputView;
     private final InputView inputView;
-    private final StationController stationController;
-    private final LineController lineController;
+    private final StationService stationService;
+    private final LineService lineService;
 
     public MainController() {
         outputView = new OutputView();
         inputView = new InputView();
-        stationController = new StationController(outputView, inputView);
-        lineController = new LineController(outputView, inputView);
+        stationService = new StationService(outputView, inputView);
+        lineService = new LineService(outputView, inputView);
     }
 
     public void run(){
@@ -26,11 +24,11 @@ public class MainController {
             String input = inputView.selectFunction();
 
             if(input.equals("1")){
-                stationController.manage();
+                stationService.manage();
                 continue;
             }
             if(input.equals("2")){
-                lineController.manage();
+                lineService.manage();
                 continue;
             }
 
