@@ -58,6 +58,6 @@ public class StationController {
     private void listStation(){
         StationRepository.stations().stream()
                 .map(Station::getName)
-                .forEach(System.out::println);
+                .forEach(name -> System.out.println("[INFO] " + name));
     }
 }

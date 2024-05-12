@@ -25,4 +25,20 @@ public class OutputView {
     public void deletedStation(){
         System.out.println("[INFO] 지하철 역이 삭제되었습니다.\n");
     }
+
+    public void lineManagementPage(){
+        System.out.println("## 노선 관리 화면\n" +
+                "1. 노선 등록\n" +
+                "2. 노선 삭제\n" +
+                "3. 노선 조회\n" +
+                "B. 돌아가기\n");
+    }
+
+    public void registeredLine(){
+        System.out.println("[INFO] 지하철 노선이 등록되었습니다.");
+    }
+
+    public void deletedLine(){
+        System.out.println("[INFO] 지하철 노선이 삭제되었습니다.");
+    }
 }
