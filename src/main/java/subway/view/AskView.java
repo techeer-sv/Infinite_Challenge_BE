@@ -13,8 +13,6 @@ public class AskView { // view 가 너무 중구난방인 거 같은데 controll
     static final Methods BACK = Methods.돌아가기;
     public void printMain() {
         sb.append(SHARP).append(Titles.MAIN.getTitle());
-
-        sb.append(SHARP).append(Titles.MAIN.getTitle());
         sb.append("1. ").append(Titles.STATION.getTitle());
         sb.append("2. ").append(Titles.LINE.getTitle());
         sb.append("3. ").append(Titles.SECTION.getTitle());
