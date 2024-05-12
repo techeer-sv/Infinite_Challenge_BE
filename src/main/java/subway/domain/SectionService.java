@@ -23,6 +23,10 @@ public class SectionService {
             registerSection();
             return;
         }
+        if(input.equals("2")){
+            deleteSection();
+        }
+        if(input.equals("B")) return;
     }
 
     private void registerSection(){
