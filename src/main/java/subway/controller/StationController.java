@@ -1,7 +1,6 @@
 package subway.controller;
 
 import subway.config.constants.views.Methods;
-import subway.config.constants.views.Prefixes;
 import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
 import subway.service.DataManager;
@@ -13,38 +12,29 @@ public class StationController extends ManageController{
     static StationManager stationManager;
     static SubwayException subwayException;
     static MakeString makeString;
-    String prefix = Prefixes.ERROR.getPrefix(); // 모든 변수의 인스턴스가 저장하는 클래스를 만들어?
 
     StationController(final DataManager manager){
         stationManager = manager.getStationManager();
         subwayException = manager.getSubwayException();
     }
     @Override
-    public void work(){ // 이 부분을 모듈로 빼버릴까. work 의 매개변수에 따라서 역, 노선, 구간 나눠서 서비스 제공하기?
-        ask.WhatToManage(Targets.STATION.getTarget());
-        ask.Function();
-        try{
-            String command = br.readLine();
-            if(command.equals(Methods.등록.getCommand())){
-                register();
-                return;
-            }
-            if(command.equals(Methods.삭제.getCommand())){
-                delete();
-                return;
-            }
-            if(command.equals(Methods.조회.getCommand())){
-                read();
-                return;
-            }
-            if(command.equals("B")){
-                return;
-            }
-            // 에러 발생시키
-            subwayException.notValidCommand();
-        }catch (Exception e){
-            subwayException.unexpected();
+    public void sendRequest(String command){
+        if(command.equals(Methods.등록.getCommand())){
+            register();
+            return;
         }
+        if(command.equals(Methods.삭제.getCommand())){
+            delete();
+            return;
+        }
+        if(command.equals(Methods.조회.getCommand())){
+            read();
+            return;
+        }
+        if(command.equals("B")){
+            return;
+        }
+        subwayException.notValidCommand();
     }
 
     @Override

@@ -10,6 +10,7 @@ public class SectionController extends ManageController {
     private static SectionManager sectionManager;
     private static ResponseView response = new ResponseView();
     static SubwayException subwayException;
+    private Targets SECTION= Targets.SECTION;
 
 
     public SectionController(final DataManager manager){
@@ -18,27 +19,19 @@ public class SectionController extends ManageController {
     }
 
     @Override
-    public void work() {
-        ask.WhatToManage("구간");
-        ask.Function();
-        try {
-            String command = br.readLine();
-            if (command.equals("1")) { // 등록
-                register();
-                return;
-            }
-            if (command.equals("2")) { // 삭제
-                delete();
-                return;
-            }
-            if (command.equals("B")) { // 되돌아가기
-                return;
-            }
-            // 에러 발생시키기
-            subwayException.notValidCommand();
-        } catch (Exception e) {
-            subwayException.unexpected();
+    public void sendRequest(String command){
+        if (command.equals("1")) { // 등록
+            register();
+            return;
         }
+        if (command.equals("2")) { // 삭제
+            delete();
+            return;
+        }
+        if (command.equals("B")) { // 되돌아가기
+            return;
+        }
+        subwayException.notValidCommand();
     }
 
     @Override

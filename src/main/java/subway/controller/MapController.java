@@ -1,6 +1,5 @@
 package subway.controller;
 
-import subway.domain.LineRepository;
 import subway.service.DataManager;
 import subway.service.LineManager;
 

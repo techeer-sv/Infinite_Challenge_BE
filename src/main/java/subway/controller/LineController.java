@@ -9,37 +9,30 @@ import subway.service.LineManager;
 public class LineController extends ManageController{
     static LineManager lineManager;
     private static SubwayException subwayException;
+    Targets LINE = Targets.LINE;
     public LineController(final DataManager manager){
         lineManager = manager.getLineManager();
         subwayException = manager.getSubwayException();
     }
+
     @Override
-    public void work(){
-        ask.WhatToManage("노선");
-        ask.Function();
-        try{
-            String command = br.readLine();
-            if(command.equals("1")){
-                register();
-                return;
-            }
-            if(command.equals("2")){
-                delete();
-                return;
-            }
-            if(command.equals("3")){
-                read();
-                return;
-            }
-            if(command.equals("B")){
-                return;
-            }
-            // 에러 발생시키기
-            subwayException.notValidCommand();
-            subwayException.notValidCommand();
-        }catch (Exception e){
-            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
+    public void sendRequest(String command){
+        if(command.equals("1")){
+            register();
+            return;
         }
+        if(command.equals("2")){
+            delete();
+            return;
+        }
+        if(command.equals("3")){
+            read();
+            return;
+        }
+        if(command.equals("B")){
+            return;
+        }
+        subwayException.notValidCommand();
     }
 
     @Override

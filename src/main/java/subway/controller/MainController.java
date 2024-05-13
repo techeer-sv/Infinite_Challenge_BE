@@ -1,5 +1,6 @@
 package subway.controller;
 
+import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
 import subway.service.DataManager;
 import subway.view.AskView;
@@ -14,6 +15,10 @@ public class MainController {
     private SectionController sectionController;
     private MapController mapController;
     private static SubwayException subwayException;
+    private static Targets LINE = Targets.LINE;
+    private static Targets STATION = Targets.STATION;
+    private static Targets SECTION = Targets.SECTION;
+
 
     public MainController() {
         ask = new AskView();
@@ -46,15 +51,15 @@ public class MainController {
     // 생성자와 함께 출력과 서비스를 제공하려 했는데 무슨 일 할 때마다 클래스 생성하는 것은 비효율적인 것 같다. 메소드로 바꾸자. 아니 이게 맞나?
     public void CoreController(final int command) {
         if (command == 1) {
-            stationController.work();
+            stationController.work(STATION.getTarget());
             return;
         }
         if (command == 2) {
-            lineController.work();
+            lineController.work(LINE.getTarget());
             return;
         }
         if (command == 3) {
-            sectionController.work();
+            sectionController.work(SECTION.getTarget());
             return;
         }
         if(command==4){
