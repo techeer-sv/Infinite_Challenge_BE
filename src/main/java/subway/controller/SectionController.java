@@ -10,8 +10,6 @@ public class SectionController extends ManageController {
     private static SectionManager sectionManager;
     private static ResponseView response = new ResponseView();
     static SubwayException subwayException;
-    private Targets SECTION= Targets.SECTION;
-
 
     public SectionController(final DataManager manager){
         sectionManager = manager.getSectionManager();

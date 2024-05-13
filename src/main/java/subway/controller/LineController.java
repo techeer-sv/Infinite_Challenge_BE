@@ -16,26 +16,6 @@ public class LineController extends ManageController{
     }
 
     @Override
-    public void sendRequest(String command){
-        if(command.equals("1")){
-            register();
-            return;
-        }
-        if(command.equals("2")){
-            delete();
-            return;
-        }
-        if(command.equals("3")){
-            read();
-            return;
-        }
-        if(command.equals("B")){
-            return;
-        }
-        subwayException.notValidCommand();
-    }
-
-    @Override
     public void register() {
         String command = Methods.등록.toString();
         // 새로운 노선 db 와 연동하여 생성하기

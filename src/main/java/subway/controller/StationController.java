@@ -1,7 +1,5 @@
 package subway.controller;
 
-import subway.config.constants.views.Methods;
-import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
 import subway.service.DataManager;
 import subway.service.StationManager;
@@ -16,25 +14,6 @@ public class StationController extends ManageController{
     StationController(final DataManager manager){
         stationManager = manager.getStationManager();
         subwayException = manager.getSubwayException();
-    }
-    @Override
-    public void sendRequest(String command){
-        if(command.equals(Methods.등록.getCommand())){
-            register();
-            return;
-        }
-        if(command.equals(Methods.삭제.getCommand())){
-            delete();
-            return;
-        }
-        if(command.equals(Methods.조회.getCommand())){
-            read();
-            return;
-        }
-        if(command.equals("B")){
-            return;
-        }
-        subwayException.notValidCommand();
     }
 
     @Override

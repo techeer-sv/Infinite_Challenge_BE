@@ -18,6 +18,7 @@ public class MainController {
     private static Targets LINE = Targets.LINE;
     private static Targets STATION = Targets.STATION;
     private static Targets SECTION = Targets.SECTION;
+    private static Targets MAP = Targets.MAP;
 
 
     public MainController() {
@@ -39,8 +40,7 @@ public class MainController {
             return;
         }
         try{
-            int validCommand = Integer.parseInt(command);
-            CoreController(validCommand);
+            CoreController(command);
         }catch (Exception e){
             System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
         }
@@ -49,20 +49,21 @@ public class MainController {
     }
 
     // 생성자와 함께 출력과 서비스를 제공하려 했는데 무슨 일 할 때마다 클래스 생성하는 것은 비효율적인 것 같다. 메소드로 바꾸자. 아니 이게 맞나?
-    public void CoreController(final int command) {
-        if (command == 1) {
+    public void CoreController(final String line) {
+        int command = Integer.parseInt(line);
+        if (command == STATION.getCommand()) {
             stationController.work(STATION.getTarget());
             return;
         }
-        if (command == 2) {
+        if (command == LINE.getCommand()) {
             lineController.work(LINE.getTarget());
             return;
         }
-        if (command == 3) {
+        if (command == SECTION.getCommand()) {
             sectionController.work(SECTION.getTarget());
             return;
         }
-        if(command==4){
+        if(command== MAP.getCommand()){
             mapController.work();
             return;
         }
