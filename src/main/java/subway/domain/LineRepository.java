@@ -16,6 +16,11 @@ public class LineRepository {
         lines.add(line);
     }
 
+    public static boolean isExist(String name) {
+        return lines().stream()
+                .anyMatch(station -> station.getName().equals(name));
+    }
+
     public static boolean deleteLineByName(String name) {
         return lines.removeIf(line -> Objects.equals(line.getName(), name));
     }
