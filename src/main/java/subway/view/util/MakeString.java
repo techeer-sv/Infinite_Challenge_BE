@@ -23,11 +23,11 @@ public class MakeString {
         StringBuilder sb = new StringBuilder();
         if(title.equals(role)){
             sb.append(SHARP).append(title);
-            sb.append(" 화면").append("\n");
+            sb.append(" 화면");
             return sb.toString();
         }
         sb.append(SHARP).append(title);
-        sb.append("관리 화면").append("\n");
+        sb.append("관리 화면");
         return sb.toString();
     }
 
