@@ -55,7 +55,7 @@ public class SectionController extends ManageController {
         try {
             line = br.readLine();
         } catch (Exception e) {
-            System.out.println("[ERROR] 노선 이름을 받을 수 없습니다. 다시 시도해주세요.");
+            subwayException.unexpected();
         }
         return line;
     }
@@ -64,7 +64,7 @@ public class SectionController extends ManageController {
         try {
             return br.readLine();
         } catch (Exception e) {
-            System.out.println("[ERROR] 역 이름을 받을 수 없습니다. 다시 시도해주세요.");
+            subwayException.unexpected();
         }
         return null;
     }
@@ -76,7 +76,7 @@ public class SectionController extends ManageController {
             int index = Integer.parseInt(input);
             return index;
         } catch (Exception e) {
-            System.out.println("입력값을 확인해주세요.");
+            subwayException.checkCommand();
         }
         return -1;
     }

@@ -34,7 +34,7 @@ public class LineController extends ManageController{
             lineManager.setStations(line, upper, bottom);
             infoMessage(command, result);
         }catch (Exception e){
-            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
+            subwayException.unexpected();
         }
     }
 
@@ -61,7 +61,7 @@ public class LineController extends ManageController{
             boolean result = lineManager.delete(command);
             infoMessage("삭제", result);
         }catch (Exception e){
-            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
+            subwayException.unexpected();
         }
     }
 

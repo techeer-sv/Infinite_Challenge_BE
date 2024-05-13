@@ -42,7 +42,7 @@ public class MainController {
         try{
             CoreController(command);
         }catch (Exception e){
-            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
+            subwayException.unexpected();
         }
         headController();
     }
