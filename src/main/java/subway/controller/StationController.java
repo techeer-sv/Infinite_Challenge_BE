@@ -6,11 +6,13 @@ import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
 import subway.service.DataManager;
 import subway.service.StationManager;
+import subway.view.util.MakeString;
 
 // 역을 관리하는 컨트롤러
 public class StationController extends ManageController{
     static StationManager stationManager;
     static SubwayException subwayException;
+    static MakeString makeString;
     String prefix = Prefixes.ERROR.getPrefix(); // 모든 변수의 인스턴스가 저장하는 클래스를 만들어?
 
     StationController(final DataManager manager){
@@ -41,7 +43,7 @@ public class StationController extends ManageController{
             // 에러 발생시키
             subwayException.notValidCommand();
         }catch (Exception e){
-            System.out.println(prefix+"예상치 못한 에러가 발생했습니다.");
+            subwayException.unexpected();
         }
     }
 
@@ -50,26 +52,12 @@ public class StationController extends ManageController{
         ask.Name("등록", "역");
         try{
             String station = br.readLine();
-            subwayException.notValidCommand();
-            boolean result = stationManager.register(station);
-            // "지하철 역이 등록되었습니다." 출력
-            infoMessage("등록", result);
+            boolean result = stationManager.isValid(station);
+            String message = makeString.infoMessage("등록", result); // "지하철 역이 등록되었습니다." 출력
+            response.printInfo(message);
         }catch (Exception e){
-            System.out.println(prefix+"예상치 못한 에러가 발생했습니다.");
+            subwayException.unexpected();
         }
-    }
-    public void infoMessage(final String work, final boolean result){
-        StringBuilder sb = new StringBuilder();
-        sb.append("지하철 역이 "); // 쓸데없이 긴 것 같은데 string 다루는 모듈을 따로 만들까. controller 기능이 잘 안보이는 것 같음
-        if(result == true){
-            sb.append(work).append("되었습니다.");
-        }
-        if(result == false){
-            sb.append(work).append("되지 않았습니다.");
-        }
-        String message = sb.toString();
-        response.printInfo(message);
-        sb.setLength(0);
     }
 
     @Override
@@ -79,9 +67,10 @@ public class StationController extends ManageController{
         try{
             String command = br.readLine();
             boolean result = stationManager.delete(command);
-            infoMessage("삭제", result);
+            String message = makeString.infoMessage("삭제", result);
+            response.printInfo(message);
         }catch (Exception e){
-            System.out.println(prefix + "예상치 못한 에러가 발생했습니다.");
+            subwayException.unexpected();
         }
     }
 

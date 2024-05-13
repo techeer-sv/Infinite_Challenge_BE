@@ -6,7 +6,7 @@ import static subway.service.DataManager.stationRepo;
 // 역 관련 기능하는 서비스
 public class StationManager extends Managerable {
     @Override // 삽입
-    public boolean register(final String name) {
+    public boolean isValid(final String name) {
 //        해당 역이 존재하는 지 확인
 //        삽입
         if(stationRepo.getStationByName(name)!=null){
@@ -41,7 +41,7 @@ public class StationManager extends Managerable {
     }
 
     public Station getByName(final String name){
-        register(name);
+        isValid(name);
         return stationRepo.getStationByName(name);
     }
 }

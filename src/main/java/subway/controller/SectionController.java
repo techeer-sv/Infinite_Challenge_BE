@@ -37,14 +37,16 @@ public class SectionController extends ManageController {
             // 에러 발생시키기
             subwayException.notValidCommand();
         } catch (Exception e) {
-            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
+            subwayException.unexpected();
         }
     }
 
     @Override
     public void register() { // 노선, 역 이름, 순서 입력 받고 등록
         String line = getLine();
-        sectionManager.register(line);
+        if(!sectionManager.isValid(line)){
+            return;
+        }
 
         ask.orderWhat("역 이름");
         String station = getStation();
@@ -62,7 +64,7 @@ public class SectionController extends ManageController {
         try {
             line = br.readLine();
         } catch (Exception e) {
-            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
+            System.out.println("[ERROR] 노선 이름을 받을 수 없습니다. 다시 시도해주세요.");
         }
         return line;
     }
@@ -71,7 +73,7 @@ public class SectionController extends ManageController {
         try {
             return br.readLine();
         } catch (Exception e) {
-            System.out.println("역 이름을 받을 수 없습니다. 다시 시도해주세요.");
+            System.out.println("[ERROR] 역 이름을 받을 수 없습니다. 다시 시도해주세요.");
         }
         return null;
     }
@@ -93,17 +95,16 @@ public class SectionController extends ManageController {
         try{
             ask.Name("삭제", "구간의 노선");
             String line = br.readLine();
-            if(line.equals("B")) return;
+
             ask.Name("삭제", "구간의 역");
             String station = br.readLine();
-            if(station.equals("B")) return;
-            // manager에서 line 세팅. 함수 이름 고민중...
-            // 알고리즘 빡 분리해야 할 듯함
-            sectionManager.register(line);
-            sectionManager.delete(station);
-            response.printInfo("구간이 삭제되었습니다.");
+
+            if(sectionManager.isValid(line)){
+                sectionManager.delete(station);
+                response.printInfo("구간이 삭제되었습니다.");
+            }
         } catch (Exception e){
-            System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
+            subwayException.unexpected();
         }
     }
 }

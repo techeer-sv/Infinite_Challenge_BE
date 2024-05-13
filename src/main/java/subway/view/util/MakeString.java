@@ -38,6 +38,17 @@ public class MakeString {
 
         return METHOD.getIndex(target);
     }
+    public String infoMessage(final String work, final boolean result){
+        StringBuilder sb = new StringBuilder();
+        sb.append("지하철 역이 "); // 쓸데없이 긴 것 같은데 string 다루는 모듈을 따로 만들까. controller 기능이 잘 안보이는 것 같음
+        if(result == true){
+            sb.append(work).append("되었습니다.");
+        }
+        if(result == false){
+            sb.append(work).append("되지 않았습니다.");
+        }
+        return sb.toString();
+    }
 
     // 노선/역이름 을 입력하세요.
     public String askName(final String target){

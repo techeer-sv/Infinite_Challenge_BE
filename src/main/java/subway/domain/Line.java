@@ -31,12 +31,19 @@ public class Line {
     }
 
     public void addStation(final Station station, final int index) {
+        if(index==stations.size()){
+            bottomStation = station;
+            return;
+        }
+        if(index==0){
+            upperStation=station;
+            return;
+        }
         stations.add(index, station);
     }
 
     public boolean deleteStation(final String station) {
-        int index = 0;
-        for (index = 0; index < stations.size(); index++) {
+        for (int index = 0; index < stations.size(); index++) {
             Station s = stations.get(index);
             if (s.getName().equals(station)) {
                 stations.remove(index);
@@ -46,13 +53,10 @@ public class Line {
         return false;
     }
 
-    // 추가 기능 구현
-    public Station getStationByName(final String name) {
-        for (Station station : stations) {
-            if (station.getName().equals(name)) {
-                return station;
-            }
-        }
-        return null;
+    public Station getUpperStation(){
+        return this.upperStation;
+    }
+    public Station getBottomStation(){
+        return this.bottomStation;
     }
 }

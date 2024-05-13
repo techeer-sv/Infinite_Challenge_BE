@@ -50,7 +50,8 @@ public class LineController extends ManageController{
         try{
             String line = br.readLine();
             subwayException.notValidCommand();
-            boolean result = lineManager.register(line);
+            boolean result = lineManager.isValid(line);
+            if(result!= true) return ;
 
             ask.Name(command, Targets.UPPER.getTarget());
             String upper = br.readLine();

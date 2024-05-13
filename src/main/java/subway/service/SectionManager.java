@@ -11,10 +11,14 @@ public class SectionManager extends Managerable {
     private Line line;
     private SubwayException subwayException;
     @Override
-    public boolean register(final String name) {
-        if(subwayException.isBack(name) == true) return true;
+    public boolean isValid(final String name) {
+        if(subwayException.isBack(name) == true)
+            return false;
+
         line = lineRepo.getLineByName(name);
-        if(line == null) subwayException.noLine();
+
+        if(line == null)
+            subwayException.noLine();
         return true;
     }
 

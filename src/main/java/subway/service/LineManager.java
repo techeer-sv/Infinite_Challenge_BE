@@ -1,5 +1,6 @@
 package subway.service;
 
+import subway.config.handler.SubwayException;
 import subway.domain.Line;
 import subway.domain.Station;
 import subway.service.util.LineMakeString;
@@ -10,10 +11,14 @@ import static subway.service.DataManager.*;
 
 public class LineManager extends Managerable {
     LineMakeString makeString = new LineMakeString();
+    SubwayException subwayException = new SubwayException();
     @Override
-    public boolean register(final String name) {
-        if(lineRepo.getLineByName(name) != null){
+    public boolean isValid(final String name) {
+        if(subwayException.isBack(name) == true){
             return false;
+        }
+        if(lineRepo.getLineByName(name) != null){
+            subwayException.areadyCreated();
         }
         lineRepo.addLine(new Line(name));
         return true;
