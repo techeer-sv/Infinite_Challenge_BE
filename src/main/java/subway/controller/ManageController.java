@@ -1,6 +1,5 @@
 package subway.controller;
 
-import subway.config.constants.views.Methods;
 import subway.view.AskView;
 import subway.view.ResponseView;
 
@@ -9,38 +8,40 @@ import java.io.InputStreamReader;
 
 import static subway.controller.StationController.subwayException;
 
-public abstract class ManageController implements Controller{
-    AskView ask = new AskView();
-    ResponseView response = new ResponseView();
+public abstract class ManageController implements Controller, Constants {
+    final static AskView ask = new AskView();
+    final static ResponseView response = new ResponseView();
 
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    public void work(Controller controller, String target){
+    protected static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    public void work(Controller controller, String target) {
         ask.WhatToManage(target);
         ask.Function();
-        try{
+        try {
             String command = br.readLine();
             sendRequest(controller, command);
-        }catch (Exception e){
+        } catch (Exception e) {
             subwayException.unexpected();
         }
     }
-     // 등록하기
-     public void sendRequest(Controller controller, String command){
-         if(command.equals(Methods.등록.getCommand())){
-             controller.register();
-             return;
-         }
-         if(command.equals(Methods.삭제.getCommand())){
-             controller.delete();
-             return;
-         }
-         if(command.equals(Methods.조회.getCommand())){
-             controller.read();
-             return;
-         }
-         if(command.equals(Methods.돌아가기.getCommand())){
-             return;
-         }
-         subwayException.notValidCommand();
-     }
+
+    // 등록하기
+    public void sendRequest(final Controller controller, final String command) {
+        if (command.equals(REGISTER_COMMAND)) {
+            controller.register();
+            return;
+        }
+        if (command.equals(DELETE_COMMAND)) {
+            controller.delete();
+            return;
+        }
+        if (command.equals(READ_COMMAND)) {
+            controller.read();
+            return;
+        }
+        if (command.equals(BACK_COMMAND)) {
+            return;
+        }
+        subwayException.notValidCommand();
+    }
 }

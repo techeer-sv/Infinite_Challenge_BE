@@ -1,6 +1,5 @@
 package subway.controller;
 
-import subway.config.constants.views.Methods;
 import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
 import subway.service.DataManager;
@@ -19,15 +18,15 @@ public class SectionController extends ManageController {
 
     @Override
     public void sendRequest(final Controller controller, final String command){
-        if (command.equals(Methods.등록.getCommand())) { // 등록
+        if (command.equals(REGISTER_COMMAND)) { // 등록
             this.register();
             return;
         }
-        if (command.equals(Methods.삭제.getCommand())) { // 삭제
+        if (command.equals(DELETE_COMMAND)) { // 삭제
             this.delete();
             return;
         }
-        if (command.equals(Methods.돌아가기.getCommand())) { // 되돌아가기
+        if (command.equals(BACK_COMMAND)) { // 되돌아가기
             return;
         }
         subwayException.notValidCommand();
@@ -51,7 +50,7 @@ public class SectionController extends ManageController {
     }
 
     public String getLine() {
-        ask.orderWhat(Targets.LINE.getTarget());
+        ask.orderWhat(LINE);
         String line = "";
         try {
             line = br.readLine();
@@ -85,10 +84,10 @@ public class SectionController extends ManageController {
     @Override
     public void delete() {
         try{
-            ask.Name(Methods.삭제.toString(), "구간의 노선");
+            ask.Name(DELETE, "구간의 노선");
             String line = br.readLine();
 
-            ask.Name(Methods.삭제.toString(), "구간의 역");
+            ask.Name(DELETE, "구간의 역");
             String station = br.readLine();
 
             if(sectionManager.isValid(line)){

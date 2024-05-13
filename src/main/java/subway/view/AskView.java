@@ -1,11 +1,11 @@
 package subway.view;
 
-import subway.config.constants.views.Indexes;
+import subway.view.util.Constants;
 import subway.view.util.MakeString;
 
-public class AskView { // view 가 너무 중구난방인 거 같은데 controller, service 처럼 분할할까.
-    static final String MAIN = Indexes.MAIN.getRole();
+public class AskView implements Constants { // view 가 너무 중구난방인 거 같은데 controller, service 처럼 분할할까.
     static final MakeString makeString = new MakeString();
+
     public void printMain() {
         System.out.println(makeString.showTitle(MAIN));
         System.out.println(makeString.showIndex(MAIN));
@@ -28,7 +28,7 @@ public class AskView { // view 가 너무 중구난방인 거 같은데 controll
     }
 
     // 역/노선을 입력하세요
-    public void orderWhat(final  String name) {
+    public void orderWhat(final String name) {
         String sentence = makeString.askName(name);
         System.out.println(sentence);
     }

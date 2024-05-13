@@ -1,22 +1,9 @@
 package subway.view.util;
 
-import subway.config.constants.views.Indexes;
-import subway.config.constants.views.Prefixes;
-import subway.config.constants.views.Questions;
-
-public class MakeString {
-    static final String SHARP = Prefixes.SHARP.getPrefix();
-    static final Indexes MAIN = Indexes.MAIN;
-    static final Indexes METHOD = Indexes.METHOD;
-    static final Questions SEQUENCE = Questions.SEQUENCE;
-    static final Questions TARGET = Questions.NAME;
-    static final Questions FUNC = Questions.FUNC;
-
-
+public class MakeString implements Constants{
     // ## ~~ 화면
     public String showTitle(final String title){
-        String role = MAIN.getRole();
-        return getTitle(role, title);
+        return getTitle(MAIN, title);
     }
 
     public String getTitle(final String role, final String title){
@@ -32,8 +19,8 @@ public class MakeString {
     }
 
     public String showIndex(final String target){
-        if(target.equals(MAIN.getRole())){
-            return MAIN.getIndex();
+        if(target.equals(MAIN)){
+            return MAIN_INDEX;
         }
 
         return METHOD.getIndex(target);

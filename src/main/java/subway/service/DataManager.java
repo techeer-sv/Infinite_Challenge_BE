@@ -7,6 +7,8 @@ import subway.domain.LineRepository;
 import subway.domain.Station;
 import subway.domain.StationRepository;
 
+
+// TODO code 리팩토링
 public class DataManager{
     private final static LineNames lines = new LineNames(); // String[]
     private final static StationNames stations = new StationNames(); // String[]

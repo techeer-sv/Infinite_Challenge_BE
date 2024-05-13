@@ -1,15 +1,18 @@
 package subway.view;
 
-public class ResponseView {
-    static StringBuilder sb = new StringBuilder();
+import subway.view.util.Constants;
+
+public class ResponseView implements Constants {
     public void printInfo(final String message){
-        sb.append("[INFO] ").append(message);
+        StringBuilder sb = new StringBuilder();
+        sb.append(INFO).append(message);
         System.out.println(sb);
         sb.setLength(0);
     }
 
     public void printTitle(final String title){
-        sb.append("### ").append(title);
+        StringBuilder sb = new StringBuilder();
+        sb.append(SHARP).append(title);
         System.out.println(sb);
         sb.setLength(0);
     }

@@ -1,6 +1,5 @@
 package subway.controller;
 
-import subway.config.constants.views.Methods;
 import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
 import subway.service.DataManager;
@@ -9,7 +8,6 @@ import subway.service.LineManager;
 public class LineController extends ManageController{
     static LineManager lineManager;
     private static SubwayException subwayException;
-    Targets LINE = Targets.LINE;
     public LineController(final DataManager manager){
         lineManager = manager.getLineManager();
         subwayException = manager.getSubwayException();
@@ -17,18 +15,18 @@ public class LineController extends ManageController{
 
     @Override
     public void register() {
-        String command = Methods.등록.toString();
+        String command = REGISTER;
         // 새로운 노선 db 와 연동하여 생성하기
-        ask.Name(command, "노선");
+        ask.Name(command, LINE);
         try{
             String line = br.readLine();
             subwayException.notValidCommand();
             boolean result = lineManager.isValid(line);
             if(result!= true) return ;
 
-            ask.Name(command, Targets.UPPER.getTarget());
+            ask.Name(command, UPPER);
             String upper = br.readLine();
-            ask.Name(command, Targets.BOTTOM.getTarget());
+            ask.Name(command, BOTTOM);
             String bottom = br.readLine();
 
             lineManager.setStations(line, upper, bottom);
@@ -55,11 +53,11 @@ public class LineController extends ManageController{
     @Override
     public void delete() {
         // 노선 db 에서 삭제
-        ask.Name("삭제", "노선");
+        ask.Name(DELETE, LINE);
         try{
             String command = br.readLine();
             boolean result = lineManager.delete(command);
-            infoMessage("삭제", result);
+            infoMessage(DELETE, result);
         }catch (Exception e){
             subwayException.unexpected();
         }

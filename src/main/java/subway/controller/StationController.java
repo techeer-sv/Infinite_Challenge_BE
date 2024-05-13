@@ -1,5 +1,6 @@
 package subway.controller;
 
+import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
 import subway.service.DataManager;
 import subway.service.StationManager;
@@ -18,11 +19,11 @@ public class StationController extends ManageController{
 
     @Override
     public void register(){
-        ask.Name("등록", "역");
+        ask.Name(REGISTER, Targets.STATION.getTarget());
         try{
             String station = br.readLine();
             boolean result = stationManager.isValid(station);
-            String message = makeString.infoMessage("등록", result); // "지하철 역이 등록되었습니다." 출력
+            String message = makeString.infoMessage(REGISTER, result); // "지하철 역이 등록되었습니다." 출력
             response.printInfo(message);
         }catch (Exception e){
             subwayException.unexpected();
@@ -32,11 +33,11 @@ public class StationController extends ManageController{
     @Override
     public void delete(){
         // db 접근해서 데이터 삭제하는 서비스와 연결
-        ask.Name("삭제", "역");
+        ask.Name(DELETE,  STATION);
         try{
             String command = br.readLine();
             boolean result = stationManager.delete(command);
-            String message = makeString.infoMessage("삭제", result);
+            String message = makeString.infoMessage(DELETE, result);
             response.printInfo(message);
         }catch (Exception e){
             subwayException.unexpected();
