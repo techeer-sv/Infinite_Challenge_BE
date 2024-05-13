@@ -19,7 +19,7 @@ public class SectionController extends ManageController {
 
     @Override
     public void work() {
-        ask.sectionManage();
+        ask.WhatToManage("구역");
         ask.Function();
         try {
             String command = br.readLine();
