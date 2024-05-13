@@ -3,13 +3,15 @@ package subway.config.handler;
 import subway.config.constants.views.Prefixes;
 
 public class SubwayException extends IllegalArgumentException {
-    public boolean isValidLength(String name) {
-        if (name.length() >= 2) return true;
-        throw new IllegalStateException(Prefixes.ERROR+"2글자 이상으로 입력해주세요.");
-    }
-
     public void notValidCommand() {
         throw new IllegalArgumentException(Prefixes.ERROR+"잘못된 명령입니다.");
+    }
+
+    public boolean isBack(String command){
+        if(command.equals('B')){
+            return true;
+        }
+        return false;
     }
 
     public void checkCommand() {

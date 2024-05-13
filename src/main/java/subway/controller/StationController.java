@@ -50,7 +50,7 @@ public class StationController extends ManageController{
         ask.Name("등록", "역");
         try{
             String station = br.readLine();
-            subwayException.isValidLength(station);
+            subwayException.notValidCommand();
             boolean result = stationManager.register(station);
             // "지하철 역이 등록되었습니다." 출력
             infoMessage("등록", result);

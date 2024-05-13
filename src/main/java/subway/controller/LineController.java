@@ -36,6 +36,7 @@ public class LineController extends ManageController{
             }
             // 에러 발생시키기
             subwayException.notValidCommand();
+            subwayException.notValidCommand();
         }catch (Exception e){
             System.out.println("[ERROR] 예상치 못한 에러가 발생했습니다.");
         }
@@ -48,7 +49,7 @@ public class LineController extends ManageController{
         ask.Name(command, "노선");
         try{
             String line = br.readLine();
-            subwayException.isValidLength(line);
+            subwayException.notValidCommand();
             boolean result = lineManager.register(line);
 
             ask.Name(command, Targets.UPPER.getTarget());
@@ -91,7 +92,7 @@ public class LineController extends ManageController{
     }
 
     public void read(){
-        response.printTitle("노선 목록");
+        response.printTitle("지하철 노선도");
         StringBuilder list = lineManager.read();
         response.printList(list);
     }

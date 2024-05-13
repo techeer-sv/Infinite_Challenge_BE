@@ -19,7 +19,7 @@ public class SectionController extends ManageController {
 
     @Override
     public void work() {
-        ask.WhatToManage("구역");
+        ask.WhatToManage("구간");
         ask.Function();
         try {
             String command = br.readLine();
@@ -78,7 +78,9 @@ public class SectionController extends ManageController {
 
     public int getIndex() {
         try {
-            int index = Integer.parseInt(br.readLine());
+            String input = br.readLine();
+            if(subwayException.isBack(input) == true) return -1;
+            int index = Integer.parseInt(input);
             return index;
         } catch (Exception e) {
             System.out.println("입력값을 확인해주세요.");
@@ -91,8 +93,10 @@ public class SectionController extends ManageController {
         try{
             ask.Name("삭제", "구간의 노선");
             String line = br.readLine();
+            if(line.equals("B")) return;
             ask.Name("삭제", "구간의 역");
             String station = br.readLine();
+            if(station.equals("B")) return;
             // manager에서 line 세팅. 함수 이름 고민중...
             // 알고리즘 빡 분리해야 할 듯함
             sectionManager.register(line);

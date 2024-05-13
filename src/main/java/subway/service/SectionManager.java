@@ -12,6 +12,7 @@ public class SectionManager extends Managerable {
     private SubwayException subwayException;
     @Override
     public boolean register(final String name) {
+        if(subwayException.isBack(name) == true) return true;
         line = lineRepo.getLineByName(name);
         if(line == null) subwayException.noLine();
         return true;
@@ -25,6 +26,7 @@ public class SectionManager extends Managerable {
 
     @Override
     public boolean delete(final String name) {
+        if(subwayException.isBack(name) == true) return true;
         if(line.deleteStation(name)) return true;
         subwayException.checkCommand();
         return false;

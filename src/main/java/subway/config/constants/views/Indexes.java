@@ -14,27 +14,29 @@ public enum Indexes {
         this.role = role;
         this.values = values;
     }
-    public String getRole(){
+
+    public String getRole() {
         return this.role;
     }
 
-    public String getIndex(){
-        StringBuilder sb= new StringBuilder();
-        for(int i = 0;i< values.size();i++){
-            sb.append(i+1).append(". ");
+    public String getIndex() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < values.size(); i++) {
+            sb.append(i + 1).append(". ");
             sb.append(values.get(i)).append("\n");
         }
         sb.append("Q. 종료\n");
         return sb.toString();
     }
-    public String getIndex(String target){
+
+    public String getIndex(String target) {
         int size = values.size();
-        if(target.equals("구간")){
+        if (target.equals("구간")) {
             size = 2;
         }
         StringBuilder sb = new StringBuilder();
-        for(int i = 0;i< size;i++){
-            sb.append(i+1).append(". ");
+        for (int i = 0; i < size; i++) {
+            sb.append(i + 1).append(". ");
             sb.append(target).append(" ");
             sb.append(values.get(i)).append("\n");
         }

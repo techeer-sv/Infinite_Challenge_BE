@@ -35,6 +35,7 @@ public class MakeString {
         if(target.equals(MAIN.getRole())){
             return MAIN.getIndex();
         }
+
         return METHOD.getIndex(target);
     }
 
