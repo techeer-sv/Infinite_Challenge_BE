@@ -50,15 +50,15 @@ public class MainController {
     public void CoreController(final String line) {
         int command = Integer.parseInt(line);
         if (command == STATION.getCommand()) {
-            stationController.work(STATION.getTarget());
+            stationController.work(stationController, STATION.getTarget());
             return;
         }
         if (command == LINE.getCommand()) {
-            lineController.work(LINE.getTarget());
+            lineController.work(lineController, LINE.getTarget());
             return;
         }
         if (command == SECTION.getCommand()) {
-            sectionController.work(SECTION.getTarget());
+            sectionController.work(sectionController, SECTION.getTarget());
             return;
         }
         if(command== MAP.getCommand()){

@@ -4,16 +4,16 @@ import subway.config.constants.views.Prefixes;
 
 public class LineMakeString {
     Prefixes INFO = Prefixes.INFO;
-    public String title(String rail){
+    public String title(final String rail){
         StringBuilder sb= new StringBuilder();
-        sb.append(INFO).append(rail).append("\n");
-        sb.append(INFO).append("---");
+        sb.append(INFO.getPrefix()).append(rail).append("\n");
+        sb.append(INFO.getPrefix()).append("---");
         return sb.toString();
     }
 
-    public String lines(String name){
+    public String lines(final String name){
         StringBuilder sb = new StringBuilder();
-        sb.append(INFO);
+        sb.append(INFO.getPrefix());
         sb.append(name);
         return sb.toString();
     }

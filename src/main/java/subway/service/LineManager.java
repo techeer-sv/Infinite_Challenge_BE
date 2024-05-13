@@ -48,7 +48,7 @@ public class LineManager extends Managerable {
     }
 
     public StringBuilder getStationLines(){
-        StringBuilder sb = new StringBuilder(); // 반복되는데 String으로바꿀까. 반환값 바꾸려면 이것저것 많이 건들어야 할 듯
+        StringBuilder sb = new StringBuilder();
         List<Line> lineList = lineRepo.lines();
         for(Line line:lineList){
             String rail = line.getName();

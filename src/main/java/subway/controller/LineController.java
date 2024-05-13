@@ -28,7 +28,7 @@ public class LineController extends ManageController{
 
             ask.Name(command, Targets.UPPER.getTarget());
             String upper = br.readLine();
-            ask.Name(command, "하행 종점역");
+            ask.Name(command, Targets.BOTTOM.getTarget());
             String bottom = br.readLine();
 
             lineManager.setStations(line, upper, bottom);

@@ -1,10 +1,6 @@
 package subway.controller;
 
 import subway.config.constants.views.Methods;
-import subway.config.constants.views.Targets;
-import subway.domain.LineRepository;
-import subway.domain.StationRepository;
-import subway.service.StationManager;
 import subway.view.AskView;
 import subway.view.ResponseView;
 
@@ -13,46 +9,38 @@ import java.io.InputStreamReader;
 
 import static subway.controller.StationController.subwayException;
 
-public abstract class ManageController {
+public abstract class ManageController implements Controller{
     AskView ask = new AskView();
     ResponseView response = new ResponseView();
 
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    public void work(String target){
+    public void work(Controller controller, String target){
         ask.WhatToManage(target);
         ask.Function();
         try{
             String command = br.readLine();
-            sendRequest(command);
+            sendRequest(controller, command);
         }catch (Exception e){
             subwayException.unexpected();
         }
     }
      // 등록하기
-     public void sendRequest(String command){
+     public void sendRequest(Controller controller, String command){
          if(command.equals(Methods.등록.getCommand())){
-             register();
+             controller.register();
              return;
          }
          if(command.equals(Methods.삭제.getCommand())){
-             delete();
+             controller.delete();
              return;
          }
          if(command.equals(Methods.조회.getCommand())){
-             read();
+             controller.read();
              return;
          }
-         if(command.equals("B")){
+         if(command.equals(Methods.돌아가기.getCommand())){
              return;
          }
          subwayException.notValidCommand();
      }
-
-     public abstract void register();
-        // db 접근해서 데이터 삽입하는 서비스와 연결
-
-    public abstract void delete();
-        // db 접근해서 데이터 삭제하는 서비스와 연결
-
-    public void read(){};
 }
