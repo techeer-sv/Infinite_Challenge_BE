@@ -11,7 +11,7 @@ import static subway.service.DataManager.*;
 public class LineManager extends Managerable {
     Prefixes INFO = Prefixes.INFO;
     @Override
-    public boolean register(String name) {
+    public boolean register(final String name) {
         if(lineRepo.getLineByName(name) != null){
             return false;
         }
@@ -19,7 +19,7 @@ public class LineManager extends Managerable {
         return true;
     }
 
-    public void setStations(String name, String upperStation, String bottomStation){
+    public void setStations(final String name, final String upperStation, final String bottomStation){
         Line line = lineRepo.getLineByName(name);
         Station upper = stationManager.getByName(upperStation);
         Station bottom = stationManager.getByName(bottomStation);
@@ -28,7 +28,7 @@ public class LineManager extends Managerable {
     }
 
     @Override
-    public boolean delete(String name) {
+    public boolean delete(final String name) {
         return lineRepo.deleteLineByName(name);
     }
 

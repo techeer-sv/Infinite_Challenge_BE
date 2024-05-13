@@ -8,7 +8,7 @@ public class Line {
     private Station upperStation;
     private Station bottomStation;
 
-    public Line(String name) {
+    public Line(final String name) {
         this.name = name;
     }
 
@@ -23,18 +23,18 @@ public class Line {
         return sb;
     }
 
-    public void setStations(Station upper, Station bottom) {
+    public void setStations(final Station upper, final Station bottom) {
         this.upperStation = upper;
         this.bottomStation = bottom;
         stations.addFirst(upper);
         stations.addLast(bottom);
     }
 
-    public void addStation(Station station, int index) {
+    public void addStation(final Station station, final int index) {
         stations.add(index, station);
     }
 
-    public boolean deleteStation(String station) {
+    public boolean deleteStation(final String station) {
         int index = 0;
         for (index = 0; index < stations.size(); index++) {
             Station s = stations.get(index);
@@ -47,7 +47,7 @@ public class Line {
     }
 
     // 추가 기능 구현
-    public Station getStationByName(String name) {
+    public Station getStationByName(final String name) {
         for (Station station : stations) {
             if (station.getName().equals(name)) {
                 return station;

@@ -6,7 +6,7 @@ public class Station {
     private String name;
     private List<Line>[] line;
 
-    public Station(String name) {
+    public Station(final String name) {
         this.name = name;
     }
 

@@ -6,7 +6,7 @@ import static subway.service.DataManager.stationRepo;
 // 역 관련 기능하는 서비스
 public class StationManager extends Managerable {
     @Override // 삽입
-    public boolean register(String name) {
+    public boolean register(final String name) {
 //        해당 역이 존재하는 지 확인
 //        삽입
         if(stationRepo.getStationByName(name)!=null){
@@ -17,7 +17,7 @@ public class StationManager extends Managerable {
         return true;
     }
 
-    public boolean isExist(String name){
+    public boolean isExist(final String name){
         if(stationRepo.getStationByName(name)!=null){
             // 이미 존재하는 역이라고 전달하기
             return true; // 문자열 반환해서 상태 메시지 출력에 활용
@@ -26,7 +26,7 @@ public class StationManager extends Managerable {
     }
 
     @Override
-    public boolean delete(String name) {
+    public boolean delete(final String name) {
         return stationRepo.deleteStation(name);
     }
 
@@ -40,7 +40,7 @@ public class StationManager extends Managerable {
         return sb;
     }
 
-    public Station getByName(String name){
+    public Station getByName(final String name){
         register(name);
         return stationRepo.getStationByName(name);
     }

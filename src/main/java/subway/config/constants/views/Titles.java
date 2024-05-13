@@ -1,4 +1,5 @@
 package subway.config.constants.views;
+// 상수도 화면 별로 3개 분할할까?
 
 public enum Titles {
     MAIN("메인 화면"),

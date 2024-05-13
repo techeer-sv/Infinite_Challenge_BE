@@ -9,7 +9,7 @@ import subway.service.LineManager;
 public class LineController extends ManageController{
     static LineManager lineManager;
     private static SubwayException subwayException;
-    public LineController(DataManager manager){
+    public LineController(final DataManager manager){
         lineManager = manager.getLineManager();
         subwayException = manager.getSubwayException();
     }
@@ -63,7 +63,7 @@ public class LineController extends ManageController{
         }
     }
 
-    public void infoMessage(String work, boolean result){
+    public void infoMessage(final String work, final boolean result){
         StringBuilder sb = new StringBuilder();
         sb.append("노선이 ");
         if(result == true){

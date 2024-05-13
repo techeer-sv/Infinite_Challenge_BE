@@ -12,20 +12,21 @@ public class LineRepository {
         return Collections.unmodifiableList(lines);
     }
 
-    public static void addLine(Line line) {
+    public static void addLine(final Line line) {
         lines.add(line);
     }
-    public static void addLine(Line line, Station station, int index) {
+
+    public static void addLine(final Line line, final Station station, final int index) {
         line.addStation(station, index);
     }
 
-    public static boolean deleteLineByName(String name) {
+    public static boolean deleteLineByName(final String name) {
         return lines.removeIf(line -> Objects.equals(line.getName(), name));
     }
 
-    public static Line getLineByName(String name){
-        for(Line line : lines){
-            if(line.getName().equals(name)){
+    public static Line getLineByName(final String name) {
+        for (Line line : lines) {
+            if (line.getName().equals(name)) {
                 return line;
             }
         }

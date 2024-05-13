@@ -55,7 +55,7 @@ public class DataManager{
         }
     }
 
-    public void lineSet(Line line){
+    public void lineSet(final Line line){
         if(line.getName().equals("2호선")){
             line.setStations(stationRepo.getStationByName("교대역"), stationRepo.getStationByName("역삼역"));
             line.addStation(stationRepo.getStationByName("강남역"), 1);

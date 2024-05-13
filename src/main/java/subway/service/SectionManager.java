@@ -11,20 +11,20 @@ public class SectionManager extends Managerable {
     private Line line;
     private SubwayException subwayException;
     @Override
-    public boolean register(String name) {
+    public boolean register(final String name) {
         line = lineRepo.getLineByName(name);
         if(line == null) subwayException.noLine();
         return true;
     }
 
-    public void insertSection(String sName,int index){
+    public void insertSection(final String sName,final int index){
         Station station = stationRepo.getStationByName(sName);
         if(station == null) subwayException.noStation();
         lineRepo.addLine(line, station, index);
     }
 
     @Override
-    public boolean delete(String name) {
+    public boolean delete(final String name) {
         if(line.deleteStation(name)) return true;
         subwayException.checkCommand();
         return false;

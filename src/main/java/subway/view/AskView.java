@@ -23,7 +23,7 @@ public class AskView { // view 가 너무 중구난방인 거 같은데 controll
         sb.setLength(0);
     }
 
-    public void WhatToManage(String target) {
+    public void WhatToManage(final String target) {
         sb.append(SHARP + target + " 관리 화면\n");
         sb.append("1. " + target + " 등록\n");
         sb.append("2. " + target + " 삭제\n");
@@ -51,13 +51,13 @@ public class AskView { // view 가 너무 중구난방인 거 같은데 controll
         sb.setLength(0);
     }
 
-    public void Name(String work, String name) { // 등록 or 삭제
+    public void Name(final String work, final String name) { // 등록 or 삭제
         sb.append(SHARP).append(Questions.NAME.Message(work, name));
         System.out.println(sb.toString());
         sb.setLength(0);
     }
 
-    public void orderWhat(String name) { // 등록 or 삭제
+    public void orderWhat(final  String name) { // 등록 or 삭제
         sb.append(SHARP).append(name + "을 입력하세요\n");
         System.out.println(sb.toString());
         sb.setLength(0);

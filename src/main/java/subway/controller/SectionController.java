@@ -1,5 +1,6 @@
 package subway.controller;
 
+import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
 import subway.service.DataManager;
 import subway.service.SectionManager;
@@ -11,7 +12,7 @@ public class SectionController extends ManageController {
     static SubwayException subwayException;
 
 
-    public SectionController(DataManager manager){
+    public SectionController(final DataManager manager){
         sectionManager = manager.getSectionManager();
         subwayException = manager.getSubwayException();
     }
@@ -56,7 +57,7 @@ public class SectionController extends ManageController {
     }
 
     public String getLine() {
-        ask.orderWhat("노선");
+        ask.orderWhat(Targets.LINE.getTarget());
         String line = "";
         try {
             line = br.readLine();
