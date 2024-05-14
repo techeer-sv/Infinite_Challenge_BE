@@ -42,9 +42,9 @@ public class DataManager{
     }
 
     public void addStations(){
-        String[] names = stations.getNames();
-        for(String station: names){
-            stationRepo.addStation(new Station(station));
+        Stations[] names = Stations.values();
+        for(Stations name: names){
+            stationRepo.addStation(new Station(String.valueOf(name)));
         }
     }
 
