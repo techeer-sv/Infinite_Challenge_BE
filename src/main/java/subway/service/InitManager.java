@@ -4,11 +4,12 @@ import subway.config.constants.initValues.*;
 import subway.config.handler.SubwayException;
 import subway.domain.Line;
 import subway.domain.Station;
+import subway.service.util.Constants;
 
 import java.util.List;
 
 
-public class InitManager implements Constants{
+public class InitManager implements Constants {
 
     public LineManager getLineManager(){
         return lineManager;

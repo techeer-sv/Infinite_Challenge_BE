@@ -1,8 +1,11 @@
-package subway.service;
+package subway.service.util;
 
 import subway.config.handler.SubwayException;
 import subway.domain.LineRepository;
 import subway.domain.StationRepository;
+import subway.service.LineManager;
+import subway.service.SectionManager;
+import subway.service.StationManager;
 
 public interface Constants {
     static final LineRepository lineRepo = new LineRepository();
