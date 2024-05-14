@@ -31,15 +31,15 @@ public class Line {
     }
 
     public void addStation(final Station station, final int index) {
-        if(index==stations.size()){
-            bottomStation = station;
-            return;
-        }
         if(index==0){
             upperStation=station;
             return;
         }
-        stations.add(index, station);
+        if(index==stations.size()){
+            bottomStation = station;
+            return;
+        }
+        stations.add(index-1, station);
     }
 
     public boolean deleteStation(final String station) {

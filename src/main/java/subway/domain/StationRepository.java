@@ -12,7 +12,7 @@ public class StationRepository {
         return Collections.unmodifiableList(stations);
     }
 
-    public static void addStation(final Station station) {
+    public static void addStation(Station station) {
         stations.add(station);
     }
 

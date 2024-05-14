@@ -2,17 +2,15 @@ package subway.controller;
 
 import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
-import subway.service.DataManager;
+import subway.service.InitManager;
 import subway.service.StationManager;
-import subway.view.util.MakeString;
 
 // 역을 관리하는 컨트롤러
 public class StationController extends ManageController{
     static StationManager stationManager;
     static SubwayException subwayException;
-    static MakeString makeString;
 
-    StationController(final DataManager manager){
+    StationController(final InitManager manager){
         stationManager = manager.getStationManager();
         subwayException = manager.getSubwayException();
     }
@@ -26,6 +24,7 @@ public class StationController extends ManageController{
             String message = makeString.infoMessage(REGISTER, result); // "지하철 역이 등록되었습니다." 출력
             response.printInfo(message);
         }catch (Exception e){
+            e.printStackTrace();
             subwayException.unexpected();
         }
     }

@@ -1,14 +1,13 @@
 package subway.controller;
 
-import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
-import subway.service.DataManager;
+import subway.service.InitManager;
 import subway.service.LineManager;
 
 public class LineController extends ManageController{
     static LineManager lineManager;
     private static SubwayException subwayException;
-    public LineController(final DataManager manager){
+    public LineController(final InitManager manager){
         lineManager = manager.getLineManager();
         subwayException = manager.getSubwayException();
     }
@@ -20,7 +19,6 @@ public class LineController extends ManageController{
         ask.Name(command, LINE);
         try{
             String line = br.readLine();
-            subwayException.notValidCommand();
             boolean result = lineManager.isValid(line);
             if(result!= true) return ;
 
@@ -32,6 +30,7 @@ public class LineController extends ManageController{
             lineManager.setStations(line, upper, bottom);
             infoMessage(command, result);
         }catch (Exception e){
+            e.printStackTrace();
             subwayException.unexpected();
         }
     }

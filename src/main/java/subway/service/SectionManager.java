@@ -4,12 +4,12 @@ import subway.config.handler.SubwayException;
 import subway.domain.Line;
 import subway.domain.Station;
 
-import static subway.service.DataManager.lineRepo;
-import static subway.service.DataManager.stationRepo;
+import static subway.service.InitManager.lineRepo;
+import static subway.service.InitManager.stationRepo;
 
-public class SectionManager extends Managerable {
+public class SectionManager implements Managerable {
     private Line line;
-    private SubwayException subwayException;
+    SubwayException subwayException = new SubwayException();
     @Override
     public boolean isValid(final String name) {
         if(subwayException.isBack(name) == true)

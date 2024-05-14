@@ -7,7 +7,7 @@ public class LineMakeString {
     public String title(final String rail){
         StringBuilder sb= new StringBuilder();
         sb.append(INFO).append(rail).append("\n");
-        sb.append(INFO).append("---");
+        sb.append(INFO).append("---").append("\n");
         return sb.toString();
     }
 

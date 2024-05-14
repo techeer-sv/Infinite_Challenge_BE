@@ -2,6 +2,7 @@ package subway.controller;
 
 import subway.view.AskView;
 import subway.view.ResponseView;
+import subway.view.util.MakeString;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,12 +10,13 @@ import java.io.InputStreamReader;
 import static subway.controller.StationController.subwayException;
 
 public abstract class ManageController implements Controller, Constants {
-    final static AskView ask = new AskView();
-    final static ResponseView response = new ResponseView();
+    static final AskView ask = new AskView();
+    static final ResponseView response = new ResponseView();
+    static final MakeString makeString = new MakeString();
 
     protected static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public void work(Controller controller, String target) {
+    public void work(final Controller controller, final String target) {
         ask.WhatToManage(target);
         ask.Function();
         try {

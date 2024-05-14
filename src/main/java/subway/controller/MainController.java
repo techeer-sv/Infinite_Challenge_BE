@@ -2,7 +2,7 @@ package subway.controller;
 
 import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
-import subway.service.DataManager;
+import subway.service.InitManager;
 import subway.view.AskView;
 
 import java.io.BufferedReader;
@@ -23,7 +23,7 @@ public class MainController {
 
     public MainController() {
         ask = new AskView();
-        DataManager manager = new DataManager();
+        InitManager manager = new InitManager();
         stationController = new StationController(manager);
         lineController = new LineController(manager);
         sectionController = new SectionController(manager);

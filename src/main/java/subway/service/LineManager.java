@@ -7,9 +7,9 @@ import subway.service.util.LineMakeString;
 
 import java.util.List;
 
-import static subway.service.DataManager.*;
+import static subway.service.InitManager.*;
 
-public class LineManager extends Managerable {
+public class LineManager implements Managerable {
     LineMakeString makeString = new LineMakeString();
     SubwayException subwayException = new SubwayException();
     @Override
@@ -17,8 +17,8 @@ public class LineManager extends Managerable {
         if(subwayException.isBack(name) == true){
             return false;
         }
-        if(lineRepo.getLineByName(name) != null){
-            subwayException.areadyCreated();
+        if(lineRepo.getLineByName(name) == null){
+            subwayException.noStation();
         }
         lineRepo.addLine(new Line(name));
         return true;

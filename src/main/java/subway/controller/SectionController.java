@@ -1,8 +1,7 @@
 package subway.controller;
 
-import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
-import subway.service.DataManager;
+import subway.service.InitManager;
 import subway.service.SectionManager;
 import subway.view.ResponseView;
 
@@ -11,7 +10,7 @@ public class SectionController extends ManageController {
     private static ResponseView response = new ResponseView();
     static SubwayException subwayException;
 
-    public SectionController(final DataManager manager){
+    public SectionController(final InitManager manager){
         sectionManager = manager.getSectionManager();
         subwayException = manager.getSubwayException();
     }
@@ -19,11 +18,11 @@ public class SectionController extends ManageController {
     @Override
     public void sendRequest(final Controller controller, final String command){
         if (command.equals(REGISTER_COMMAND)) { // 등록
-            this.register();
+            controller.register();
             return;
         }
         if (command.equals(DELETE_COMMAND)) { // 삭제
-            this.delete();
+            controller.delete();
             return;
         }
         if (command.equals(BACK_COMMAND)) { // 되돌아가기
@@ -51,13 +50,14 @@ public class SectionController extends ManageController {
 
     public String getLine() {
         ask.orderWhat(LINE);
-        String line = "";
         try {
-            line = br.readLine();
+            String line = br.readLine();
+            return line;
         } catch (Exception e) {
+            e.printStackTrace();
             subwayException.unexpected();
         }
-        return line;
+        return null;
     }
 
     public String getStation() {

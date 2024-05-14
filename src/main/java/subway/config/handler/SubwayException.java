@@ -8,7 +8,6 @@ public class SubwayException extends IllegalArgumentException {
     public void notValidCommand() {
         throw new IllegalArgumentException(ERROR+ Errors.VALID.getError());
     }
-
     public void areadyCreated(){
         throw new IllegalArgumentException(ERROR+Errors.ADD_LINE.getError());
     }

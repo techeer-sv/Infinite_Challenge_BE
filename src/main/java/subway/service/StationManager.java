@@ -1,10 +1,10 @@
 package subway.service;
 
 import subway.domain.Station;
-import static subway.service.DataManager.stationRepo;
+import static subway.service.InitManager.stationRepo;
 
 // 역 관련 기능하는 서비스
-public class StationManager extends Managerable {
+public class StationManager implements Managerable {
     @Override // 삽입
     public boolean isValid(final String name) {
         if(stationRepo.getStationByName(name)!=null){
