@@ -2,6 +2,9 @@ package subway.controller.utils;
 
 import subway.config.constants.views.Methods;
 import subway.config.constants.views.Targets;
+import subway.view.AskView;
+import subway.view.ResponseView;
+import subway.view.util.MakeString;
 
 public interface Constants {
     static final String REGISTER_COMMAND = Methods.등록.getCommand();
@@ -22,4 +25,8 @@ public interface Constants {
     static final int LINE_COMMAND = Targets.LINE.getCommand();
     static final int SECTION_COMMAND = Targets.SECTION.getCommand();
     static final int MAP_COMMAND = Targets.MAP.getCommand();
+
+    static final AskView ask = new AskView();
+    static final ResponseView response = new ResponseView();
+    static final MakeString makeString = new MakeString();
 }

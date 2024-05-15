@@ -15,12 +15,14 @@ public class LineController extends ManageController {
 
     @Override
     public boolean register() {
+        String upper, bottom;
         // 새로운 노선 db 와 연동하여 생성하기
         try {
-            String line = getLineName();
+            String line = method.getLine(REGISTER, LINE);
             if (lineManager.isValid(line) != true) return false; // 에러 커스텀
-            String upper = getSubStation(REGISTER, UPPER);
-            String bottom = getSubStation(REGISTER, BOTTOM);
+
+            upper = method.getStation(lineManager, REGISTER, UPPER);
+            bottom = method.getStation(lineManager, REGISTER, BOTTOM);
             if(upper == null || bottom == null) return false; // ERROR 커스텀해서 적용해야겟다
             lineManager.setStations(line, upper, bottom);
         } catch (Exception e) {
@@ -30,31 +32,6 @@ public class LineController extends ManageController {
         }
         infoMessage(REGISTER, true);
         return true;
-    }
-
-    public String getLineName() {
-        try {
-            ask.orderWhere(REGISTER, LINE);
-            return br.readLine();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public String getSubStation(String function, String station) {
-        try {
-            ask.orderWhere(function, station);
-            String node = br.readLine();
-            if(lineManager.isValid(node)!= true){ // 에러 커스텀
-                System.err.println("[ERROR] 존재하지 않는 역입니다.");
-                return null;
-            }
-            return node;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 
