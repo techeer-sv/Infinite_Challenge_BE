@@ -30,22 +30,20 @@ public abstract class ManageController implements Controller, Constants {
     }
 
     // 등록하기
-    public void sendRequest(final Controller controller, final String command) {
+    public boolean sendRequest(final Controller controller, final String command) {
         if (command.equals(REGISTER_COMMAND)) {
-            controller.register();
-            return;
+            return controller.register();
         }
         if (command.equals(DELETE_COMMAND)) {
-            controller.delete();
-            return;
+            return controller.delete();
         }
         if (command.equals(READ_COMMAND)) {
-            controller.read();
-            return;
+            return controller.read();
         }
         if (command.equals(BACK_COMMAND)) {
-            return;
+            return true;
         }
         subwayException.notValidCommand();
+        return false;
     }
 }

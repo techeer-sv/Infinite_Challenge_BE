@@ -16,26 +16,24 @@ public class SectionController extends ManageController {
     }
 
     @Override
-    public void sendRequest(final Controller controller, final String command){
+    public boolean sendRequest(final Controller controller, final String command){
         if (command.equals(REGISTER_COMMAND)) { // 등록
-            controller.register();
-            return;
+            return controller.register();
         }
         if (command.equals(DELETE_COMMAND)) { // 삭제
-            controller.delete();
-            return;
+            return controller.delete();
         }
         if (command.equals(BACK_COMMAND)) { // 되돌아가기
-            return;
         }
         subwayException.notValidCommand();
+        return false;
     }
 
     @Override
-    public void register() { // 노선, 역 이름, 순서 입력 받고 등록
+    public boolean register() { // 노선, 역 이름, 순서 입력 받고 등록
         String line = getLine();
         if(!sectionManager.isValid(line)){
-            return;
+            return false;
         }
 
         String station = getStation();
@@ -43,6 +41,7 @@ public class SectionController extends ManageController {
 
         sectionManager.insertSection(station, index-1);
         response.printInfo("구간이 등록되었습니다.");
+        return true;
     }
 
     public String getLine() { // util 로 뺄까?
@@ -81,7 +80,7 @@ public class SectionController extends ManageController {
     }
 
     @Override
-    public void delete() {
+    public boolean delete() {
         try{
             ask.orderWhere(DELETE, "구간의 노선");
             String line = br.readLine();
@@ -95,9 +94,11 @@ public class SectionController extends ManageController {
             }
         } catch (Exception e){
             subwayException.unexpected();
+            return false;
         }
+        return true;
     }
 
     @Override
-    public void read() {}
+    public boolean read() {return false;}
 }

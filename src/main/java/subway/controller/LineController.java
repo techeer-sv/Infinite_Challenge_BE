@@ -14,14 +14,14 @@ public class LineController extends ManageController {
     }
 
     @Override
-    public void register() {
+    public boolean register() {
         // 새로운 노선 db 와 연동하여 생성하기
         try {
             String line = getLineName();
-            if (lineManager.isValid(line) != true) return; // 에러 커스텀
+            if (lineManager.isValid(line) != true) return false; // 에러 커스텀
             String upper = getSubStation(REGISTER, UPPER);
             String bottom = getSubStation(REGISTER, BOTTOM);
-            if(upper == null || bottom == null) return; // ERROR 커스텀해서 적용해야겟다
+            if(upper == null || bottom == null) return false; // ERROR 커스텀해서 적용해야겟다
             lineManager.setStations(line, upper, bottom);
         } catch (Exception e) {
             infoMessage(REGISTER, false);
@@ -29,6 +29,7 @@ public class LineController extends ManageController {
             subwayException.unexpected();
         }
         infoMessage(REGISTER, true);
+        return true;
     }
 
     public String getLineName() {
@@ -72,7 +73,7 @@ public class LineController extends ManageController {
     }
 
     @Override
-    public void delete() {
+    public boolean delete() {
         // 노선 db 에서 삭제
         ask.orderWhere(DELETE, LINE);
         try {
@@ -81,12 +82,15 @@ public class LineController extends ManageController {
             infoMessage(DELETE, result);
         } catch (Exception e) {
             subwayException.unexpected();
+            return false;
         }
+        return true;
     }
 
-    public void read() {
+    public boolean read() {
         response.printTitle("지하철 노선도");
         StringBuilder list = lineManager.read();
         response.printList(list);
+        return true;
     }
 }
