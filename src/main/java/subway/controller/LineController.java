@@ -15,7 +15,7 @@ public class LineController extends ManageController {
 
     @Override
     public boolean register() {
-        String upper, bottom;
+        String upper, bottom, message;
         // 새로운 노선 db 와 연동하여 생성하기
         try {
             String line = method.getLine(REGISTER, LINE);
@@ -26,41 +26,33 @@ public class LineController extends ManageController {
             if(upper == null || bottom == null) return false; // ERROR 커스텀해서 적용해야겟다
             lineManager.setStations(line, upper, bottom);
         } catch (Exception e) {
-            infoMessage(REGISTER, false);
+            message= makeString.infoMessage(REGISTER, LINE,false);
+            System.out.println(message);
             e.printStackTrace();
             subwayException.unexpected();
         }
-        infoMessage(REGISTER, true);
+        message= makeString.infoMessage(REGISTER, LINE, true);
+        System.out.println(message);
         return true;
-    }
-
-
-    // view 로 보내도 ㄱㅊ할듯? // TODO:  MakeString.java 에 비슷한 코드있음 확인 요망
-    public void infoMessage(final String work, final boolean result) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("노선이 ");
-        if (result == true) {
-            sb.append(work).append("되었습니다.");
-        }
-        if (result == false) {
-            sb.append(work).append("되지 않았습니다.");
-        }
-        String message = sb.toString();
-        response.printInfo(message);
     }
 
     @Override
     public boolean delete() {
+        String message;
+        boolean result=false;
         // 노선 db 에서 삭제
         ask.orderWhere(DELETE, LINE);
         try {
             String command = br.readLine();// 존재하지 않는 노선을 받았을 때 예외처리 커스텀
-            boolean result = lineManager.delete(command);
-            infoMessage(DELETE, result);
+            result = lineManager.delete(command);
+            message=makeString.infoMessage(DELETE,LINE, result);
         } catch (Exception e) {
+            message=makeString.infoMessage(DELETE,LINE, result);
+            System.out.println(message);
             subwayException.unexpected();
             return false;
         }
+        System.out.println(message);
         return true;
     }
 

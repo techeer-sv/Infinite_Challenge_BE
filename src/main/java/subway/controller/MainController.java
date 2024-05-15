@@ -43,7 +43,7 @@ public class MainController implements Constants {
     }
 
     public boolean isEnd(String node) {
-        if (node.equals("Q")) {
+        if (node.equals("Q")|| node.equals("q")) {
             System.out.println(" 안녕히 가세요. ");
             return true;
         }
