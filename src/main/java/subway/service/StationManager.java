@@ -8,7 +8,7 @@ public class StationManager implements Managerable {
     @Override // 삽입
     public boolean isValid(final String name) {
         if(stationRepo.getStationByName(name)!=null){
-            // 이미 존재하는 역
+            // TODO: 이미 존재하는 역
 
             return false;
         }
@@ -22,7 +22,6 @@ public class StationManager implements Managerable {
 
     @Override
     public StringBuilder read() {
-//        역 조회
         StringBuilder sb = new StringBuilder();
         for(Station station : stationRepo.stations()){
             sb.append("[INFO] " + station.getName()+"\n");

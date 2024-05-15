@@ -72,7 +72,7 @@ public class MainController implements Constants {
         if (command == MAP_COMMAND) {
             return mapController.work();
         }
-        System.err.println("[ERROR] 유효한 범위 내의 명령어를 입력해주세요.");
+        System.err.println("[ERROR] 유효한 범위 내의 명령어를 입력해주세요."); // TODO:
         return false;
     }
 

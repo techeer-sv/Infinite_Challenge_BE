@@ -20,7 +20,7 @@ public class StationController extends ManageController{
         try{
             String station = br.readLine();
             boolean result = stationManager.isValid(station);
-            String message = makeString.infoMessage(REGISTER, STATION,result); // "지하철 역이 등록되었습니다." 출력
+            String message = makeString.infoMessage(REGISTER, STATION,result);
             response.printInfo(message);
             return false;
         }catch (Exception e){
@@ -32,7 +32,6 @@ public class StationController extends ManageController{
 
     @Override
     public boolean delete(){
-        // db 접근해서 데이터 삭제하는 서비스와 연결
         ask.orderWhere(DELETE,  STATION);
         try{
             String command = br.readLine();

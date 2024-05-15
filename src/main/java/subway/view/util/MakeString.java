@@ -27,7 +27,7 @@ public class MakeString implements Constants{
     }
     public String infoMessage(final String work, final String target, final boolean result){
         StringBuilder sb = new StringBuilder();
-        sb.append("지하철 ").append(target).append("이 "); // 쓸데없이 긴 것 같은데 string 다루는 모듈을 따로 만들까. controller 기능이 잘 안보이는 것 같음
+        sb.append("지하철 ").append(target).append("이 ");
         if(result == true){
             sb.append(work).append("되었습니다.");
         }
