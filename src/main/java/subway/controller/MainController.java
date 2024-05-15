@@ -19,52 +19,74 @@ public class MainController {
     private static Targets STATION = Targets.STATION;
     private static Targets SECTION = Targets.SECTION;
     private static Targets MAP = Targets.MAP;
+    private static int command;
 
 
     public MainController() {
         ask = new AskView();
         InitManager manager = new InitManager();
+        setControllers(manager);
+        subwayException = manager.getSubwayException();
+    }
+
+    public void setControllers(InitManager manager){
         stationController = new StationController(manager);
         lineController = new LineController(manager);
         sectionController = new SectionController(manager);
         mapController = new MapController(manager);
-        subwayException = manager.getSubwayException();
     }
 
     public void headController() throws Exception {
-        ask.printMain();
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String command = br.readLine();
-        if (command.equals("Q")) {
-            System.out.println(" 안녕히 가세요. ");
-            return;
+        while (true) {
+            ask.printMain();
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            String node = br.readLine();
+            if (isEnd(node)) return;
+            nextStep(node);
         }
-        try{
-            CoreController(command);
-        }catch (Exception e){
-            subwayException.unexpected();
-        }
-        headController();
     }
 
-    public void CoreController(final String line) {
-        int command = Integer.parseInt(line);
+    public boolean isEnd(String node) {
+        if (node.equals("Q")) {
+            System.out.println(" 안녕히 가세요. ");
+            return true;
+        }
+        return false;
+    }
+
+    public void nextStep(String node) {
+        try {
+            if (!strToInt(node)) return;
+            CoreController(command);
+        } catch (Exception e) {
+            subwayException.unexpected();
+        }
+    }
+
+    public boolean CoreController(int command) {
         if (command == STATION.getCommand()) {
-            stationController.work(stationController, STATION.getTarget());
-            return;
+            return stationController.work(stationController, STATION.getTarget());
         }
         if (command == LINE.getCommand()) {
-            lineController.work(lineController, LINE.getTarget());
-            return;
+            return lineController.work(lineController, LINE.getTarget());
         }
         if (command == SECTION.getCommand()) {
-            sectionController.work(sectionController, SECTION.getTarget());
-            return;
+            return sectionController.work(sectionController, SECTION.getTarget());
         }
-        if(command== MAP.getCommand()){
-            mapController.work();
-            return;
+        if (command == MAP.getCommand()) {
+            return mapController.work();
         }
-        subwayException.notValidCommand();
+        System.err.println("[ERROR] 유효한 범위 내의 명령어를 입력해주세요.");
+        return false;
+    }
+
+    public boolean strToInt(final String node) {
+        try {
+            command = Integer.parseInt(node);
+            return true;
+        } catch (NumberFormatException e) {
+            System.err.println("[ERROR] 4 이하의 자연수나 'Q' 만 입력 가능합니다.");
+        }
+        return false;
     }
 }

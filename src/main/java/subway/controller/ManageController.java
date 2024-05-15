@@ -16,15 +16,17 @@ public abstract class ManageController implements Controller, Constants {
 
     protected static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public void work(final Controller controller, final String target) {
+    public boolean work(final Controller controller, final String target) {
         ask.WhatToManage(target);
         ask.Function();
         try {
             String command = br.readLine();
             sendRequest(controller, command);
+            return true;
         } catch (Exception e) {
             subwayException.unexpected();
         }
+        return false;
     }
 
     // 등록하기

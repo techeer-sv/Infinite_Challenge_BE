@@ -8,8 +8,9 @@ public class MapController {
     MapController(InitManager manager){
         lineManager = manager.getLineManager();
     }
-    public void work(){
+    public boolean work(){
         printMap();
+        return true;
     }
     public void printMap(){
         System.out.println(lineManager.getStationLines());
