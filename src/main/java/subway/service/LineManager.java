@@ -23,21 +23,28 @@ public class LineManager implements Managerable {
         return false;
     }
 
-    public Line setStation(final String name){
+    public Line setLine(final String name){
         Line node = new Line(name);
         lineRepo.addLine(node);
         return node;
     }
 
     public void setStations(final String name, final String upperStation, final String bottomStation){
-        Line line = setStation(name);
+        Line line = setLine(name);
         Station upper = stationManager.getByName(upperStation);
         Station bottom = stationManager.getByName(bottomStation);
+        upper.addLine(line);
+        bottom.addLine(line);
         line.setStations(upper, bottom);
     }
 
     @Override
     public boolean delete(final String name) {
+        Line line = lineRepo.getLineByName(name);
+        for(int i=0;i<line.getSize();i++){
+            Station node = line.getStation(i);
+            node.deleteLine(line);
+        }
         return lineRepo.deleteLineByName(name);
     }
 

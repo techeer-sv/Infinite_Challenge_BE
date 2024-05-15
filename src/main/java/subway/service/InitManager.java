@@ -60,6 +60,7 @@ public class InitManager implements Constants {
 
     public Line addStation(Line line , final String value, final int index ){
         Station station = stationRepo.getStationByName(value);
+        station.addLine(line);
         line.addStation(station, index);
         return line;
     }

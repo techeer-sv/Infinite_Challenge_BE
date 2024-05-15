@@ -53,6 +53,17 @@ public class Line {
         return false;
     }
 
+    public <Station>Object[] getStations(){
+        return this.stations.toArray();
+    }
+    public int getSize(){
+        return this.stations.size();
+    }
+
+    public Station getStation(int index){
+        return this.stations.get(index);
+    }
+
     public Station getUpperStation(){
         return this.upperStation;
     }
