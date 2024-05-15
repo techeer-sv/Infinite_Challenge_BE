@@ -1,4 +1,4 @@
-package subway.controller;
+package subway.controller.utils;
 
 import subway.config.constants.views.Methods;
 import subway.config.constants.views.Targets;

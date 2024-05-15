@@ -3,7 +3,7 @@ package subway.service;
 import subway.config.handler.SubwayException;
 import subway.domain.Line;
 import subway.domain.Station;
-import subway.service.util.LineMakeString;
+import subway.service.utils.LineMakeString;
 
 import java.util.List;
 

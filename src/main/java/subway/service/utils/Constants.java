@@ -1,4 +1,4 @@
-package subway.service.util;
+package subway.service.utils;
 
 import subway.config.handler.SubwayException;
 import subway.domain.LineRepository;

@@ -1,13 +1,14 @@
 package subway.controller;
 
 import subway.config.handler.SubwayException;
+import subway.controller.utils.Constants;
 import subway.service.InitManager;
 import subway.view.AskView;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class MainController implements Constants{
+public class MainController implements Constants {
     private AskView ask;
     private StationController stationController;
     private LineController lineController;
