@@ -13,14 +13,14 @@ public class LineManager implements Managerable {
     LineMakeString makeString = new LineMakeString();
     SubwayException subwayException = new SubwayException();
     @Override
-    public boolean isValid(final String name) {
+    public boolean isEmpty(final String name) {
         if(subwayException.isBack(name)){
             return false;
         }
-        if(lineRepo.getLineByName(name) != null){
-            subwayException.areadyCreated();
+        if(lineRepo.getLineByName(name) == null){
+            return true;
         }
-        return true;
+        return false;
     }
 
     public Line setStation(final String name){
@@ -33,7 +33,6 @@ public class LineManager implements Managerable {
         Line line = setStation(name);
         Station upper = stationManager.getByName(upperStation);
         Station bottom = stationManager.getByName(bottomStation);
-// TODO:  존재하지 않는 역일 때 예외 처리
         line.setStations(upper, bottom);
     }
 

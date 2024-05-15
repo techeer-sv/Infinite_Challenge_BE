@@ -4,6 +4,9 @@ import subway.config.handler.SubwayException;
 import subway.service.InitManager;
 import subway.service.StationManager;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 // 역을 관리하는 컨트롤러
 public class StationController extends ManageController{
     static StationManager stationManager;
@@ -17,9 +20,9 @@ public class StationController extends ManageController{
     @Override
     public boolean register(){
         ask.orderWhere(REGISTER, STATION);
-        try{
+        try {
             String station = br.readLine();
-            boolean result = stationManager.isValid(station);
+            boolean result = stationManager.isEmpty(station);
             String message = makeString.infoMessage(REGISTER, STATION,result);
             response.printInfo(message);
             return false;
@@ -33,7 +36,7 @@ public class StationController extends ManageController{
     @Override
     public boolean delete(){
         ask.orderWhere(DELETE,  STATION);
-        try{
+        try {
             String command = br.readLine();
             boolean result = stationManager.delete(command);
             String message = makeString.infoMessage(DELETE, STATION, result);

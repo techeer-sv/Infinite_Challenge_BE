@@ -1,5 +1,6 @@
 package subway.controller.utils;
 
+import subway.config.handler.SubwayException;
 import subway.service.Managerable;
 
 import java.io.BufferedReader;
@@ -7,16 +8,19 @@ import java.io.InputStreamReader;
 
 import static subway.service.utils.Constants.subwayException;
 
-public class Methods implements Constants{
-    private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    public Methods(){}
-    public int getIndex() { // numberformat error 추가
+public class Methods implements Constants {
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public Methods() {}
+
+    public int getIndex() {
         ask.orderWhere();
         try {
             String input = br.readLine();
-            if(subwayException.isBack(input) == true) return -1;
+            if (subwayException.isBack(input) == true) return -1;
             int index = Integer.parseInt(input);
             return index;
+        } catch (SubwayException e) {
+            e.isNotNumber();
         } catch (Exception e) {
             subwayException.checkCommand();
         }
@@ -35,7 +39,8 @@ public class Methods implements Constants{
         return null;
     }
 
-    public String getLine(String function, String target){
+    public String getLine(String function, String target) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
             ask.orderWhere(function, target);
             return br.readLine();
@@ -47,6 +52,7 @@ public class Methods implements Constants{
 
     public String getStation() {
         ask.orderWhere("역 이름");
+
         try {
             return br.readLine();
         } catch (Exception e) {
@@ -59,9 +65,8 @@ public class Methods implements Constants{
         try {
             ask.orderWhere(function, station);
             String node = br.readLine();
-            if(manager.isValid(node)!= true){ // 에러 커스텀
-                System.err.println("[ERROR] 존재하지 않는 역입니다.");
-                return null;
+            if (manager.isEmpty(node) != true) {
+                subwayException.noStation();
             }
             return node;
         } catch (Exception e) {

@@ -4,6 +4,9 @@ import subway.config.handler.SubwayException;
 import subway.service.InitManager;
 import subway.service.LineManager;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 public class LineController extends ManageController {
     static LineManager lineManager;
     private static SubwayException subwayException;
@@ -18,11 +21,16 @@ public class LineController extends ManageController {
         String upper, bottom, message;
         try {
             String line = method.getLine(REGISTER, LINE);
-            if (lineManager.isValid(line) != true) return false; //TODO:  에러 커스텀
+            if (lineManager.isEmpty(line) != true) {
+                subwayException.alreadyCreatedLine();
+            }
 
             upper = method.getStation(lineManager, REGISTER, UPPER);
             bottom = method.getStation(lineManager, REGISTER, BOTTOM);
-            if(upper == null || bottom == null) return false; // TODO: ERROR 커스텀해서 적용해야겟다
+            if(upper == null || bottom == null){
+                subwayException.noStation();
+            }
+
             lineManager.setStations(line, upper, bottom);
         } catch (Exception e) {
             message= makeString.infoMessage(REGISTER, LINE,false);
@@ -42,13 +50,13 @@ public class LineController extends ManageController {
         // 노선 db 에서 삭제
         ask.orderWhere(DELETE, LINE);
         try {
-            String command = br.readLine();// TODO: 존재하지 않는 노선을 받았을 때 예외처리 커스텀
+            String command = br.readLine();
             result = lineManager.delete(command);
             message=makeString.infoMessage(DELETE,LINE, result);
         } catch (Exception e) {
             message=makeString.infoMessage(DELETE,LINE, result);
             System.out.println(message);
-            subwayException.unexpected();
+            subwayException.noLine();
             return false;
         }
         System.out.println(message);

@@ -11,7 +11,7 @@ public class SectionManager implements Managerable {
     private Line line;
     SubwayException subwayException = new SubwayException();
     @Override
-    public boolean isValid(final String name) {
+    public boolean isEmpty(final String name) {
         if(subwayException.isBack(name) == true)
             return false;
 

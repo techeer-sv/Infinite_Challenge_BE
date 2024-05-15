@@ -32,12 +32,15 @@ public class SectionController extends ManageController {
     @Override
     public boolean register() { // 노선, 역 이름, 순서 입력 받고 등록
         String line = method.getLine();
-        if(!sectionManager.isValid(line)){
+        if(!sectionManager.isEmpty(line)){
             return false;
         }
 
         String station = method.getStation();
         int index = method.getIndex();
+        if(index == -1){
+            return false;
+        }
 
         sectionManager.insertSection(station, index-1);
         response.printInfo("구간이 등록되었습니다.");
@@ -50,7 +53,7 @@ public class SectionController extends ManageController {
             String line = method.getLine(DELETE, "구간의 노선");
             String station = method.getStation(sectionManager, DELETE, "구간의 역");
 
-            if(sectionManager.isValid(line)){
+            if(sectionManager.isEmpty(line)){
                 sectionManager.delete(station);
                 response.printInfo("구간이 삭제되었습니다.");
             }

@@ -1,16 +1,16 @@
 package subway.service;
 
+import subway.config.handler.SubwayException;
 import subway.domain.Station;
 import static subway.service.InitManager.stationRepo;
 
 // 역 관련 기능하는 서비스
 public class StationManager implements Managerable {
     @Override // 삽입
-    public boolean isValid(final String name) {
+    public boolean isEmpty(final String name) {
         if(stationRepo.getStationByName(name)!=null){
             // TODO: 이미 존재하는 역
-
-            return false;
+            throw new SubwayException();
         }
         stationRepo.addStation(new Station(name));
         return true;
@@ -30,7 +30,11 @@ public class StationManager implements Managerable {
     }
 
     public Station getByName(final String name){
-        isValid(name);
+        try{
+            isEmpty(name);
+        }catch (SubwayException e){
+            e.alreadyCreatedStation();
+        }
         return stationRepo.getStationByName(name);
     }
 }

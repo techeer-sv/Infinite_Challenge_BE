@@ -5,8 +5,9 @@ import subway.controller.utils.Constants;
 import subway.service.InitManager;
 import subway.view.AskView;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.IOException;
+
+import static subway.controller.ManageController.br;
 
 public class MainController implements Constants {
     private AskView ask;
@@ -25,7 +26,7 @@ public class MainController implements Constants {
         subwayException = manager.getSubwayException();
     }
 
-    public void setControllers(InitManager manager){
+    public void setControllers(InitManager manager) {
         stationController = new StationController(manager);
         lineController = new LineController(manager);
         sectionController = new SectionController(manager);
@@ -35,16 +36,16 @@ public class MainController implements Constants {
     public void headController() throws Exception {
         while (true) {
             ask.printMain();
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String node = br.readLine();
             if (isEnd(node)) return;
             nextStep(node);
         }
     }
 
-    public boolean isEnd(String node) {
-        if (node.equals("Q")|| node.equals("q")) {
+    public boolean isEnd(String node) throws IOException {
+        if (node.equals("Q") || node.equals("q")) {
             System.out.println(" 안녕히 가세요. ");
+            br.close();
             return true;
         }
         return false;
@@ -54,8 +55,8 @@ public class MainController implements Constants {
         try {
             if (!strToInt(node)) return;
             CoreController(command);
-        } catch (Exception e) {
-            subwayException.unexpected();
+        } catch (SubwayException e) {
+            subwayException.isNotUnder4OrQ();
         }
     }
 
@@ -72,8 +73,7 @@ public class MainController implements Constants {
         if (command == MAP_COMMAND) {
             return mapController.work();
         }
-        System.err.println("[ERROR] 유효한 범위 내의 명령어를 입력해주세요."); // TODO:
-        return false;
+        throw new SubwayException();
     }
 
     public boolean strToInt(final String node) {
@@ -81,7 +81,7 @@ public class MainController implements Constants {
             command = Integer.parseInt(node);
             return true;
         } catch (NumberFormatException e) {
-            System.err.println("[ERROR] 4 이하의 자연수나 'Q' 만 입력 가능합니다.");
+            subwayException.isNotUnder4OrQ();
         }
         return false;
     }
