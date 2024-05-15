@@ -11,11 +11,15 @@ public interface Constants {
 
     static final String REGISTER = Methods.등록.toString();
     static final String DELETE = Methods.삭제.toString();
-    static final String READ = Methods.조회.toString();
-    static final String BACK = Methods.돌아가기.toString();
 
     static final String STATION = Targets.STATION.getTarget();
     static final String LINE = Targets.LINE.getTarget();
     static final String UPPER = Targets.UPPER.getTarget();
     static final String BOTTOM = Targets.BOTTOM.getTarget();
+    static final String SECTION = Targets.SECTION.getTarget();
+
+    static final int STATION_COMMAND = Targets.STATION.getCommand();
+    static final int LINE_COMMAND = Targets.LINE.getCommand();
+    static final int SECTION_COMMAND = Targets.SECTION.getCommand();
+    static final int MAP_COMMAND = Targets.MAP.getCommand();
 }

@@ -1,6 +1,5 @@
 package subway.controller;
 
-import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
 import subway.service.InitManager;
 import subway.view.AskView;
@@ -8,17 +7,13 @@ import subway.view.AskView;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class MainController {
+public class MainController implements Constants{
     private AskView ask;
     private StationController stationController;
     private LineController lineController;
     private SectionController sectionController;
     private MapController mapController;
     private static SubwayException subwayException;
-    private static Targets LINE = Targets.LINE;
-    private static Targets STATION = Targets.STATION;
-    private static Targets SECTION = Targets.SECTION;
-    private static Targets MAP = Targets.MAP;
     private static int command;
 
 
@@ -64,16 +59,16 @@ public class MainController {
     }
 
     public boolean CoreController(int command) {
-        if (command == STATION.getCommand()) {
-            return stationController.work(stationController, STATION.getTarget());
+        if (command == STATION_COMMAND) {
+            return stationController.work(stationController, STATION);
         }
-        if (command == LINE.getCommand()) {
-            return lineController.work(lineController, LINE.getTarget());
+        if (command == LINE_COMMAND) {
+            return lineController.work(lineController, LINE);
         }
-        if (command == SECTION.getCommand()) {
-            return sectionController.work(sectionController, SECTION.getTarget());
+        if (command == SECTION_COMMAND) {
+            return sectionController.work(sectionController, SECTION);
         }
-        if (command == MAP.getCommand()) {
+        if (command == MAP_COMMAND) {
             return mapController.work();
         }
         System.err.println("[ERROR] 유효한 범위 내의 명령어를 입력해주세요.");

@@ -17,7 +17,7 @@ public class StationController extends ManageController{
 
     @Override
     public void register(){
-        ask.orderWhere(REGISTER, Targets.STATION.getTarget());
+        ask.orderWhere(REGISTER, STATION);
         try{
             String station = br.readLine();
             boolean result = stationManager.isValid(station);

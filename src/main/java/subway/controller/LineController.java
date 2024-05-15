@@ -14,21 +14,20 @@ public class LineController extends ManageController{
 
     @Override
     public void register() {
-        String command = REGISTER;
         // 새로운 노선 db 와 연동하여 생성하기
-        ask.orderWhere(command, LINE);
+        ask.orderWhere(REGISTER, LINE);
         try{
             String line = br.readLine();
             boolean result = lineManager.isValid(line);
             if(result!= true) return ;
 
-            ask.orderWhere(command, UPPER);
+            ask.orderWhere(REGISTER, UPPER);
             String upper = br.readLine();
-            ask.orderWhere(command, BOTTOM);
+            ask.orderWhere(REGISTER, BOTTOM);
             String bottom = br.readLine();
 
             lineManager.setStations(line, upper, bottom);
-            infoMessage(command, result);
+            infoMessage(REGISTER, result);
         }catch (Exception e){
             e.printStackTrace();
             subwayException.unexpected();
