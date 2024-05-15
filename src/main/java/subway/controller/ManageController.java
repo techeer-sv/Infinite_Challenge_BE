@@ -16,9 +16,9 @@ public abstract class ManageController implements Controller, Constants {
         ask.Function();
         try {
             String command = br.readLine();
-            return sendRequest(controller, command);
+            sendRequest(controller, command);
         } catch (Exception e) {
-            subwayException.unexpected();
+            subwayException.checkCommand();
         }
         return false;
     }

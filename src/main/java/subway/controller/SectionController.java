@@ -42,7 +42,7 @@ public class SectionController extends ManageController {
             return false;
         }
 
-        sectionManager.insertSection(station, index-1);
+        sectionManager.insertSection(station, index);
         response.printInfo("구간이 등록되었습니다.");
         return true;
     }

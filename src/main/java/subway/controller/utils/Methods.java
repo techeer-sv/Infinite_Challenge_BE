@@ -1,6 +1,7 @@
 package subway.controller.utils;
 
 import subway.config.handler.SubwayException;
+import subway.controller.StationController;
 import subway.service.Managerable;
 
 import java.io.BufferedReader;
@@ -33,8 +34,7 @@ public class Methods implements Constants {
             String line = br.readLine();
             return line;
         } catch (Exception e) {
-            e.printStackTrace();
-            subwayException.unexpected();
+            subwayException.checkCommand();
         }
         return null;
     }
@@ -45,7 +45,7 @@ public class Methods implements Constants {
             ask.orderWhere(function, target);
             return br.readLine();
         } catch (Exception e) {
-            e.printStackTrace();
+            subwayException.checkCommand();
         }
         return null;
     }
@@ -56,7 +56,7 @@ public class Methods implements Constants {
         try {
             return br.readLine();
         } catch (Exception e) {
-            subwayException.unexpected();
+            subwayException.noStation();
         }
         return null;
     }
@@ -70,7 +70,7 @@ public class Methods implements Constants {
             }
             return node;
         } catch (Exception e) {
-            e.printStackTrace();
+            subwayException.unexpected();
         }
         return null;
     }
