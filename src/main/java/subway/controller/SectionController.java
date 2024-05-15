@@ -38,7 +38,7 @@ public class SectionController extends ManageController {
             return;
         }
 
-        ask.orderWhat("역 이름");
+        ask.orderWhere("역 이름");
         String station = getStation();
 
         ask.orderWhere();
@@ -48,8 +48,8 @@ public class SectionController extends ManageController {
         response.printInfo("구간이 등록되었습니다.");
     }
 
-    public String getLine() {
-        ask.orderWhat(LINE);
+    public String getLine() { // util 로 뺄까?
+        ask.orderWhere(LINE);
         try {
             String line = br.readLine();
             return line;
@@ -69,7 +69,7 @@ public class SectionController extends ManageController {
         return null;
     }
 
-    public int getIndex() {
+    public int getIndex() { // util?
         try {
             String input = br.readLine();
             if(subwayException.isBack(input) == true) return -1;
@@ -84,10 +84,10 @@ public class SectionController extends ManageController {
     @Override
     public void delete() {
         try{
-            ask.Name(DELETE, "구간의 노선");
+            ask.orderWhere(DELETE, "구간의 노선");
             String line = br.readLine();
 
-            ask.Name(DELETE, "구간의 역");
+            ask.orderWhere(DELETE, "구간의 역");
             String station = br.readLine();
 
             if(sectionManager.isValid(line)){

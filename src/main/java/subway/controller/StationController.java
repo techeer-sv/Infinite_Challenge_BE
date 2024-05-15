@@ -17,7 +17,7 @@ public class StationController extends ManageController{
 
     @Override
     public void register(){
-        ask.Name(REGISTER, Targets.STATION.getTarget());
+        ask.orderWhere(REGISTER, Targets.STATION.getTarget());
         try{
             String station = br.readLine();
             boolean result = stationManager.isValid(station);
@@ -32,7 +32,7 @@ public class StationController extends ManageController{
     @Override
     public void delete(){
         // db 접근해서 데이터 삭제하는 서비스와 연결
-        ask.Name(DELETE,  STATION);
+        ask.orderWhere(DELETE,  STATION);
         try{
             String command = br.readLine();
             boolean result = stationManager.delete(command);

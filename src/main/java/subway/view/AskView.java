@@ -22,13 +22,13 @@ public class AskView implements Constants { // view 가 너무 중구난방인 �
     }
 
     //## 등록/삭제할 역/노선을 입력하세요
-    public void Name(final String work, final String name) {
+    public void orderWhere(final String work, final String name) {
         String sentence = makeString.askName(work, name);
         System.out.println(sentence);
     }
 
     // 역/노선을 입력하세요
-    public void orderWhat(final String name) {
+    public void orderWhere(final String name) {
         String sentence = makeString.askName(name);
         System.out.println(sentence);
     }

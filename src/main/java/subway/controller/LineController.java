@@ -16,15 +16,15 @@ public class LineController extends ManageController{
     public void register() {
         String command = REGISTER;
         // 새로운 노선 db 와 연동하여 생성하기
-        ask.Name(command, LINE);
+        ask.orderWhere(command, LINE);
         try{
             String line = br.readLine();
             boolean result = lineManager.isValid(line);
             if(result!= true) return ;
 
-            ask.Name(command, UPPER);
+            ask.orderWhere(command, UPPER);
             String upper = br.readLine();
-            ask.Name(command, BOTTOM);
+            ask.orderWhere(command, BOTTOM);
             String bottom = br.readLine();
 
             lineManager.setStations(line, upper, bottom);
@@ -35,6 +35,8 @@ public class LineController extends ManageController{
         }
     }
 
+
+    // view 로 보내도 ㄱㅊ할듯?
     public void infoMessage(final String work, final boolean result){
         StringBuilder sb = new StringBuilder();
         sb.append("노선이 ");
@@ -52,7 +54,7 @@ public class LineController extends ManageController{
     @Override
     public void delete() {
         // 노선 db 에서 삭제
-        ask.Name(DELETE, LINE);
+        ask.orderWhere(DELETE, LINE);
         try{
             String command = br.readLine();
             boolean result = lineManager.delete(command);
