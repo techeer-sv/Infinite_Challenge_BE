@@ -3,11 +3,9 @@ package subway.controller;
 import subway.config.handler.SubwayException;
 import subway.service.InitManager;
 import subway.service.SectionManager;
-import subway.view.ResponseView;
 
 public class SectionController extends ManageController {
     private static SectionManager sectionManager;
-    private static ResponseView response = new ResponseView();
     static SubwayException subwayException;
 
     public SectionController(final InitManager manager){
@@ -24,6 +22,7 @@ public class SectionController extends ManageController {
             return controller.delete();
         }
         if (command.equals(BACK_COMMAND)) { // 되돌아가기
+            return true;
         }
         subwayException.notValidCommand();
         return false;
@@ -42,18 +41,6 @@ public class SectionController extends ManageController {
         sectionManager.insertSection(station, index-1);
         response.printInfo("구간이 등록되었습니다.");
         return true;
-    }
-
-    public String getLine() { // util 로 뺄까?
-        ask.orderWhere(LINE);
-        try {
-            String line = br.readLine();
-            return line;
-        } catch (Exception e) {
-            e.printStackTrace();
-            subwayException.unexpected();
-        }
-        return null;
     }
 
     public String getStation() {
@@ -82,11 +69,8 @@ public class SectionController extends ManageController {
     @Override
     public boolean delete() {
         try{
-            ask.orderWhere(DELETE, "구간의 노선");
-            String line = br.readLine();
-
-            ask.orderWhere(DELETE, "구간의 역");
-            String station = br.readLine();
+            String line = getLine(DELETE);
+            String station = getStation(DELETE, "구간의 역");
 
             if(sectionManager.isValid(line)){
                 sectionManager.delete(station);
@@ -98,7 +82,37 @@ public class SectionController extends ManageController {
         }
         return true;
     }
+    public String getLine() { // util 로 뺄까?
+        ask.orderWhere(LINE);
+        try {
+            String line = br.readLine();
+            return line;
+        } catch (Exception e) {
+            e.printStackTrace();
+            subwayException.unexpected();
+        }
+        return null;
+    }
 
+    public String getLine(String Target){
+        try{
+            ask.orderWhere(Target, "구간의 노선");
+            return br.readLine();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getStation(String function, String target){
+        try{
+            ask.orderWhere(function, target);
+            return br.readLine();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
     @Override
     public boolean read() {return false;}
 }
