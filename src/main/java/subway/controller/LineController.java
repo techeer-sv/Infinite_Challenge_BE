@@ -4,10 +4,11 @@ import subway.config.handler.SubwayException;
 import subway.service.InitManager;
 import subway.service.LineManager;
 
-public class LineController extends ManageController{
+public class LineController extends ManageController {
     static LineManager lineManager;
     private static SubwayException subwayException;
-    public LineController(final InitManager manager){
+
+    public LineController(final InitManager manager) {
         lineManager = manager.getLineManager();
         subwayException = manager.getSubwayException();
     }
@@ -15,55 +16,75 @@ public class LineController extends ManageController{
     @Override
     public void register() {
         // 새로운 노선 db 와 연동하여 생성하기
-        ask.orderWhere(REGISTER, LINE);
-        try{
-            String line = br.readLine();
-            boolean result = lineManager.isValid(line);
-            if(result!= true) return ;
-
-            ask.orderWhere(REGISTER, UPPER);
-            String upper = br.readLine();
-            ask.orderWhere(REGISTER, BOTTOM);
-            String bottom = br.readLine();
-
+        try {
+            String line = getLineName();
+            if (lineManager.isValid(line) != true) return; // 에러 커스텀
+            String upper = getSubStation(REGISTER, UPPER);
+            String bottom = getSubStation(REGISTER, BOTTOM);
+            if(upper == null || bottom == null) return; // ERROR 커스텀해서 적용해야겟다
             lineManager.setStations(line, upper, bottom);
-            infoMessage(REGISTER, result);
-        }catch (Exception e){
+        } catch (Exception e) {
+            infoMessage(REGISTER, false);
             e.printStackTrace();
             subwayException.unexpected();
         }
+        infoMessage(REGISTER, true);
+    }
+
+    public String getLineName() {
+        try {
+            ask.orderWhere(REGISTER, LINE);
+            return br.readLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getSubStation(String function, String station) {
+        try {
+            ask.orderWhere(function, station);
+            String node = br.readLine();
+            if(lineManager.isValid(node)!= true){ // 에러 커스텀
+                System.err.println("[ERROR] 존재하지 않는 역입니다.");
+                return null;
+            }
+            return node;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
-    // view 로 보내도 ㄱㅊ할듯?
-    public void infoMessage(final String work, final boolean result){
+    // view 로 보내도 ㄱㅊ할듯? // TODO:  MakeString.java 에 비슷한 코드있음 확인 요망
+    public void infoMessage(final String work, final boolean result) {
         StringBuilder sb = new StringBuilder();
         sb.append("노선이 ");
-        if(result == true){
+        if (result == true) {
             sb.append(work).append("되었습니다.");
         }
-        if(result == false){
+        if (result == false) {
             sb.append(work).append("되지 않았습니다.");
         }
         String message = sb.toString();
         response.printInfo(message);
-        sb.setLength(0);
     }
 
     @Override
     public void delete() {
         // 노선 db 에서 삭제
         ask.orderWhere(DELETE, LINE);
-        try{
-            String command = br.readLine();
+        try {
+            String command = br.readLine();// 존재하지 않는 노선을 받았을 때 예외처리 커스텀
             boolean result = lineManager.delete(command);
             infoMessage(DELETE, result);
-        }catch (Exception e){
+        } catch (Exception e) {
             subwayException.unexpected();
         }
     }
 
-    public void read(){
+    public void read() {
         response.printTitle("지하철 노선도");
         StringBuilder list = lineManager.read();
         response.printList(list);

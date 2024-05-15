@@ -1,6 +1,6 @@
 package subway.controller;
 
-import subway.config.constants.views.Methods;
+import subway.config.constants.views.Targets;
 
 public interface Controller {
     public void register();

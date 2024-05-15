@@ -38,10 +38,7 @@ public class SectionController extends ManageController {
             return;
         }
 
-        ask.orderWhere("역 이름");
         String station = getStation();
-
-        ask.orderWhere();
         int index = getIndex();
 
         sectionManager.insertSection(station, index-1);
@@ -61,6 +58,7 @@ public class SectionController extends ManageController {
     }
 
     public String getStation() {
+        ask.orderWhere("역 이름");
         try {
             return br.readLine();
         } catch (Exception e) {
@@ -70,6 +68,7 @@ public class SectionController extends ManageController {
     }
 
     public int getIndex() { // util?
+        ask.orderWhere();
         try {
             String input = br.readLine();
             if(subwayException.isBack(input) == true) return -1;

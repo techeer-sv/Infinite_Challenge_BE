@@ -1,6 +1,5 @@
 package subway.controller;
 
-import subway.config.constants.views.Targets;
 import subway.config.handler.SubwayException;
 import subway.service.InitManager;
 import subway.service.StationManager;

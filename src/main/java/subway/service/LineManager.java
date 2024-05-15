@@ -14,21 +14,26 @@ public class LineManager implements Managerable {
     SubwayException subwayException = new SubwayException();
     @Override
     public boolean isValid(final String name) {
-        if(subwayException.isBack(name) == true){
+        if(subwayException.isBack(name)){
             return false;
         }
-        if(lineRepo.getLineByName(name) == null){
-            subwayException.noStation();
+        if(lineRepo.getLineByName(name) != null){
+            subwayException.areadyCreated();
         }
-        lineRepo.addLine(new Line(name));
         return true;
     }
 
+    public Line setStation(final String name){
+        Line node = new Line(name);
+        lineRepo.addLine(node);
+        return node;
+    }
+
     public void setStations(final String name, final String upperStation, final String bottomStation){
-        Line line = lineRepo.getLineByName(name);
+        Line line = setStation(name);
         Station upper = stationManager.getByName(upperStation);
         Station bottom = stationManager.getByName(bottomStation);
-
+// 존재하지 않는 역일 때 예외 처리
         line.setStations(upper, bottom);
     }
 
