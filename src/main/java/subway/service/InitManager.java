@@ -62,6 +62,11 @@ public class InitManager implements Constants {
         Station station = stationRepo.getStationByName(value);
         station.addLine(line);
         line.addStation(station, index);
+        if(line.getSize()<=2){
+            station.neverDelete();
+            return line;
+        }
+        station.canDelete();
         return line;
     }
 }

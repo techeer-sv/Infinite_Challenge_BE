@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Station {
     private String name;
-    //TODO : 노선 관리에서 연결시키기 -> 삭제 관련 기능추가 구현
     private List<Line> line = new LinkedList();
+    private int canDelete=0;
 
     public Station(final String name) {
         this.name = name;
@@ -24,9 +24,17 @@ public class Station {
     }
 
     public boolean hasNoLine(){
-        if(line.size()==0){
+        if(canDelete==0){
             return true;
         }
         return false;
+    }
+
+    public void canDelete(){
+        this.canDelete-=1;
+    }
+
+    public void neverDelete(){
+        this.canDelete+=1;
     }
 }
