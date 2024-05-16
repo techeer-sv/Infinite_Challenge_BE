@@ -1,17 +1,14 @@
 package subway.controller;
 
 import subway.config.handler.SubwayException;
-import subway.service.InitManager;
+import subway.service.InitSubwayValues;
 import subway.service.LineManager;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 public class LineController extends ManageController {
     static LineManager lineManager;
     private static SubwayException subwayException;
 
-    public LineController(final InitManager manager) {
+    public LineController(final InitSubwayValues manager) {
         lineManager = manager.getLineManager();
         subwayException = manager.getSubwayException();
     }

@@ -7,7 +7,7 @@ import subway.service.utils.LineMakeString;
 
 import java.util.List;
 
-import static subway.service.InitManager.*;
+import static subway.service.InitSubwayValues.*;
 
 public class LineManager implements Managerable {
     LineMakeString makeString = new LineMakeString();

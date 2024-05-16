@@ -2,14 +2,14 @@ package subway.controller;
 
 import subway.config.handler.SubwayException;
 import subway.controller.utils.Controller;
-import subway.service.InitManager;
+import subway.service.InitSubwayValues;
 import subway.service.SectionManager;
 
 public class SectionController extends ManageController {
     private static SectionManager sectionManager;
     static SubwayException subwayException;
 
-    public SectionController(final InitManager manager){
+    public SectionController(final InitSubwayValues manager){
         sectionManager = manager.getSectionManager();
         subwayException = manager.getSubwayException();
     }

@@ -1,13 +1,10 @@
 package subway.controller;
 
 import subway.config.handler.SubwayException;
+import subway.controller.utils.CheckCommand;
 import subway.controller.utils.Constants;
-import subway.service.InitManager;
+import subway.service.InitSubwayValues;
 import subway.view.AskView;
-
-import java.io.IOException;
-
-import static subway.controller.ManageController.br;
 
 public class MainController implements Constants {
     private AskView ask;
@@ -16,51 +13,55 @@ public class MainController implements Constants {
     private SectionController sectionController;
     private MapController mapController;
     private static SubwayException subwayException;
-    private static int command;
+    private CheckCommand isValidCommand = new CheckCommand();
 
 
     public MainController() {
         ask = new AskView();
-        InitManager manager = new InitManager();
-        setControllers(manager);
+        InitSubwayValues manager = new InitSubwayValues();
+        prepareControl(manager);
         subwayException = manager.getSubwayException();
     }
 
-    public void setControllers(InitManager manager) {
+    public void prepareControl(InitSubwayValues manager) {
         stationController = new StationController(manager);
         lineController = new LineController(manager);
         sectionController = new SectionController(manager);
         mapController = new MapController(manager);
     }
 
-    public void headController() throws Exception {
-        while (true) {
+    public void headController(int tryCount) {
+        String node;
+        if (tryCount == 3) return;
+        do {
             ask.printMain();
-            String node = br.readLine();
-            if (isEnd(node)) return;
-            nextStep(node);
-        }
+            node = isValidCommand.getCommand();
+        } while (isValidCommand.isMainCommand(node) && serviceOn(node));
+        if (!isValidCommand.isQ(node)) reService(tryCount);
     }
 
-    public boolean isEnd(String node) throws IOException {
-        if (node.equals("Q") || node.equals("q")) {
-            System.out.println(" 안녕히 가세요. ");
-            br.close();
+
+    public boolean serviceOn(String node) {
+        int command = Integer.parseInt(node);
+        try {
+            commandMapping(command);
             return true;
+        } catch (SubwayException e) {
+            subwayException.isNotUnder4OrQ(); // 에러 메시지 변경하기, while 조건문에서 검증 마침
         }
         return false;
     }
 
-    public void nextStep(String node) {
-        try {
-            if (!strToInt(node)) return;
-            CoreController(command);
-        } catch (SubwayException e) {
-            subwayException.isNotUnder4OrQ();
-        }
+    public void reService(int tryCount) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("오류가 발생했습니다. 다시 시도해주세요.") // view 랑 연결해도 될 것 같은데
+                .append("\n남은 시도 횟수 : ")
+                .append(2-tryCount).append("회");
+        System.out.println(sb);
+        headController(tryCount+1);
     }
 
-    public boolean CoreController(int command) {
+    public boolean commandMapping(int command) {
         if (command == STATION_COMMAND) {
             return stationController.work(stationController, STATION);
         }
@@ -72,16 +73,6 @@ public class MainController implements Constants {
         }
         if (command == MAP_COMMAND) {
             return mapController.work();
-        }
-        throw new SubwayException();
-    }
-
-    public boolean strToInt(final String node) {
-        try {
-            command = Integer.parseInt(node);
-            return true;
-        } catch (NumberFormatException e) {
-            subwayException.isNotUnder4OrQ();
         }
         return false;
     }

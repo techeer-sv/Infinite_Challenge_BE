@@ -1,7 +1,7 @@
 package subway.controller.utils;
 
 import subway.config.constants.views.Methods;
-import subway.config.constants.views.Targets;
+import subway.config.constants.Targets;
 import subway.view.AskView;
 import subway.view.ResponseView;
 import subway.view.util.MakeString;

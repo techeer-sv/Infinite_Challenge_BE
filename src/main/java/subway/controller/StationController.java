@@ -1,18 +1,15 @@
 package subway.controller;
 
 import subway.config.handler.SubwayException;
-import subway.service.InitManager;
+import subway.service.InitSubwayValues;
 import subway.service.StationManager;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 // 역을 관리하는 컨트롤러
 public class StationController extends ManageController{
     static StationManager stationManager;
     static SubwayException subwayException;
 
-    StationController(final InitManager manager){
+    StationController(final InitSubwayValues manager){
         stationManager = manager.getStationManager();
         subwayException = manager.getSubwayException();
     }

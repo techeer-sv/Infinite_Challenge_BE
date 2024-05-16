@@ -2,7 +2,7 @@ package subway.service;
 
 import subway.config.handler.SubwayException;
 import subway.domain.Station;
-import static subway.service.InitManager.stationRepo;
+import static subway.service.InitSubwayValues.stationRepo;
 
 // 역 관련 기능하는 서비스
 public class StationManager implements Managerable {

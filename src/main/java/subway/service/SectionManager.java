@@ -4,8 +4,8 @@ import subway.config.handler.SubwayException;
 import subway.domain.Line;
 import subway.domain.Station;
 
-import static subway.service.InitManager.lineRepo;
-import static subway.service.InitManager.stationRepo;
+import static subway.service.InitSubwayValues.lineRepo;
+import static subway.service.InitSubwayValues.stationRepo;
 
 public class SectionManager implements Managerable {
     private Line line;

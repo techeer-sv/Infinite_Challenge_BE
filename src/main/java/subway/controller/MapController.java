@@ -1,11 +1,11 @@
 package subway.controller;
 
-import subway.service.InitManager;
+import subway.service.InitSubwayValues;
 import subway.service.LineManager;
 
 public class MapController {
     static LineManager lineManager;
-    MapController(InitManager manager){
+    MapController(InitSubwayValues manager){
         lineManager = manager.getLineManager();
     }
     public boolean work(){

@@ -1,4 +1,4 @@
-package subway.config.constants.views;
+package subway.config.constants;
 
 public enum Targets {
     STATION("역", 1),

@@ -9,7 +9,7 @@ import subway.service.utils.Constants;
 import java.util.List;
 
 
-public class InitManager implements Constants {
+public class InitSubwayValues implements Constants {
 
     public LineManager getLineManager(){
         return lineManager;
@@ -24,7 +24,7 @@ public class InitManager implements Constants {
     }
     public static SubwayException getSubwayException(){return subwayException;}
 
-    public InitManager(){
+    public InitSubwayValues(){
         // 초기값 삽입
         addStations();
         addLines();
