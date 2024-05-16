@@ -13,10 +13,10 @@ import subway.view.AskView;
 
 public class MainController implements Constants {
     private AskView ask;
-    private StationController stationController;
-    private LineController lineController;
-    private SectionController sectionController;
-    private MapController mapController;
+    private StationController station;
+    private LineController line;
+    private SectionController section;
+    private MapController map;
     private static SubwayException subwayException;
     private CheckCommand checkCommand = new CheckCommand();
     private Methods method=new Methods();
@@ -30,10 +30,10 @@ public class MainController implements Constants {
     }
 
     public void createSubControllers(InitSubwayValues manager) {
-        stationController = new StationController(manager);
-        lineController = new LineController(manager);
-        sectionController = new SectionController(manager);
-        mapController = new MapController(manager);
+        station = new StationController(manager);
+        line = new LineController(manager);
+        section = new SectionController(manager);
+        map = new MapController(manager);
     }
 
     public void startService(int tryCount) {
@@ -78,16 +78,16 @@ public class MainController implements Constants {
 
     public boolean commandMapping(int target) {
         if (target == STATION_COMMAND) {
-            return stationController.work(stationController, STATION, false);
+            return station.work(station, STATION, false);
         }
         if (target == LINE_COMMAND) {
-            return lineController.work(lineController, LINE, false);
+            return line.work(line, LINE, false);
         }
         if (target == SECTION_COMMAND) {
-            return sectionController.work(sectionController, SECTION, true);
+            return section.work(section, SECTION, true);
         }
         if (target == MAP_COMMAND) {
-            return mapController.work();
+            return map.work();
         }
         return false;
     }
