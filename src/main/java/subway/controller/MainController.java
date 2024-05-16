@@ -19,11 +19,11 @@ public class MainController implements Constants {
     public MainController() {
         ask = new AskView();
         InitSubwayValues manager = new InitSubwayValues();
-        prepareControl(manager);
+        prepareServer(manager);
         subwayException = manager.getSubwayException();
     }
 
-    public void prepareControl(InitSubwayValues manager) {
+    public void prepareServer(InitSubwayValues manager) {
         stationController = new StationController(manager);
         lineController = new LineController(manager);
         sectionController = new SectionController(manager);
@@ -61,17 +61,17 @@ public class MainController implements Constants {
         headController(tryCount+1);
     }
 
-    public boolean commandMapping(int command) {
-        if (command == STATION_COMMAND) {
+    public boolean commandMapping(int target) {
+        if (target == STATION_COMMAND) {
             return stationController.work(stationController, STATION);
         }
-        if (command == LINE_COMMAND) {
+        if (target == LINE_COMMAND) {
             return lineController.work(lineController, LINE);
         }
-        if (command == SECTION_COMMAND) {
+        if (target == SECTION_COMMAND) {
             return sectionController.work(sectionController, SECTION);
         }
-        if (command == MAP_COMMAND) {
+        if (target == MAP_COMMAND) {
             return mapController.work();
         }
         return false;

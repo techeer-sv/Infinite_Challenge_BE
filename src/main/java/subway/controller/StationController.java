@@ -5,7 +5,7 @@ import subway.service.InitSubwayValues;
 import subway.service.StationManager;
 
 // 역을 관리하는 컨트롤러
-public class StationController extends ManageController{
+public class StationController extends ClassifyMethods {
     static StationManager stationManager;
     static SubwayException subwayException;
 

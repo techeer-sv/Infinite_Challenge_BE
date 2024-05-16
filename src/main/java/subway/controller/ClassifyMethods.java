@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 
 import static subway.controller.StationController.subwayException;
 
-public abstract class ManageController implements Controller, Constants {
+public abstract class ClassifyMethods implements Controller, Constants {
     protected static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public boolean work(final Controller controller, final String target) {

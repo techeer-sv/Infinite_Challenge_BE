@@ -5,7 +5,7 @@ import subway.controller.utils.Controller;
 import subway.service.InitSubwayValues;
 import subway.service.SectionManager;
 
-public class SectionController extends ManageController {
+public class SectionController extends ClassifyMethods {
     private static SectionManager sectionManager;
     static SubwayException subwayException;
 

@@ -4,7 +4,7 @@ import subway.config.handler.SubwayException;
 import subway.service.InitSubwayValues;
 import subway.service.LineManager;
 
-public class LineController extends ManageController {
+public class LineController extends ClassifyMethods {
     static LineManager lineManager;
     private static SubwayException subwayException;
 
