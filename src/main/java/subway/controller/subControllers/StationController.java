@@ -2,7 +2,6 @@ package subway.controller.subControllers;
 
 import subway.config.handler.SubwayException;
 import subway.controller.utils.ClassifyMethods;
-import subway.controller.utils.Methods;
 import subway.service.InitSubwayValues;
 import subway.service.StationManager;
 

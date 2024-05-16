@@ -11,7 +11,9 @@ public abstract class ClassifyMethods implements Controller, Constants {
         ask.WhatToManage(target);
         ask.Function();
         String command = method.getUserInput();
-        if(checkCommand.isMainCommand(command, isSection)){
+        if (subwayException.isBack(command)) return true;
+
+        if(checkCommand.isValidInteger(command, isSection)){
             sendRequest(controller, command);
             return true;
         }

@@ -33,17 +33,10 @@ public class Methods implements Constants {
 
     public int getIndex() {
         ask.orderWhere();
-        try {
-            String input = getUserInput();
-            if (subwayException.isBack(input) == true) return -1;
-            int index = checkCommand.strToInt(input);
-            return index;
-        } catch (SubwayException e) {
-            e.isNotNumber();
-        } catch (Exception e) {
-            subwayException.checkCommand();
-        }
-        return -1;
+        String input = getUserInput();
+        if (subwayException.isBack(input) == true) return -1;
+        int index = checkCommand.strToInt(input);
+        return index;
     }
 
     public String getLine() {

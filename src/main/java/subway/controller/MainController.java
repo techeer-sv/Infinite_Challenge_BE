@@ -42,7 +42,7 @@ public class MainController implements Constants {
         do {
             ask.printMain();
             node = method.getUserInput();
-        } while (checkCommand.isMainCommand(node, false) && serviceOn(node));
+        } while (checkCommand.isValidInteger(node, false) && serviceOn(node));
         if (!checkCommand.isQ(node)) reService(tryCount);
     }
 

@@ -26,7 +26,7 @@ public class SubwayException extends RuntimeException {
         throw new IllegalArgumentException(ERROR+Errors.UNEXPECTED.getError());
     }
     public boolean isBack(String command){
-        if(command.equals('B')){
+        if(command.equals("B")){
             return true;
         }
         return false;

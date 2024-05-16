@@ -14,7 +14,7 @@ public class CheckCommand {
         return false;
     }
 
-    public boolean isMainCommand(String node, boolean isSection){
+    public boolean isValidInteger(String node, boolean isSection){
         int command = strToInt(node);
         if(isSection)
             return isSectionCommand(command);
@@ -38,7 +38,9 @@ public class CheckCommand {
         try {
             return Integer.parseInt(node);
         } catch (NumberFormatException e) {
-            subwayException.isNotUnder4OrQ();
+            return 0;
+        }catch (Exception e){
+            subwayException.unexpected();
         }
         return 0;
     }

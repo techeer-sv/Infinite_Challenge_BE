@@ -39,7 +39,7 @@ public class SectionController extends ClassifyMethods {
 
         String station = method.getStation();
         int index = method.getIndex();
-        if(index == -1){
+        if(index < 0){
             return false;
         }
 
