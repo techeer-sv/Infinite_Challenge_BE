@@ -6,7 +6,7 @@ import subway.view.util.MakeString;
 public class AskView implements Constants { // TODO: (고민) view 가 너무 중구난방인 거 같은데 controller, service 처럼 분할할까.
     static final MakeString makeString = new MakeString();
 
-    public void printMain() {
+    public void manageTarget() {
         System.out.println(makeString.showTitle(MAIN));
         System.out.println(makeString.showIndex(MAIN));
     }

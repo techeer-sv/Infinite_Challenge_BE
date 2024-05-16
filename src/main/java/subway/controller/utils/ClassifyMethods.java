@@ -17,6 +17,7 @@ public abstract class ClassifyMethods implements Controller, Constants {
             sendRequest(controller, command);
             return true;
         }
+        //에러 발생하는 부분 : 유효하지 않은 입력값
         return false;
     }
 

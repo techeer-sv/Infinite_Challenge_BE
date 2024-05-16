@@ -1,6 +1,5 @@
 package subway.controller.utils;
 
-import subway.config.handler.SubwayException;
 import subway.service.Managerable;
 
 import java.io.BufferedReader;

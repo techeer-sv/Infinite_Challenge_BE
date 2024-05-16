@@ -37,24 +37,29 @@ public class MainController implements Constants {
     }
 
     public void startService(int tryCount) {
-        String node;
         if (tryCount == 3) return;
-        do {
-            ask.printMain();
-            node = method.getUserInput();
-        } while (checkCommand.isValidInteger(node, false) && serviceOn(node));
+        ask.manageTarget();
+        String node = method.getUserInput();
+        if(checkCommand.isValidInteger(node,false)){
+            node = repeatService(node);
+        }
         if (!checkCommand.isQ(node)) reService(tryCount);
     }
 
-    public void closeService(){
-        method.closeBuffer();
+    public String repeatService(String node){
+        do {
+            int command = checkCommand.strToInt(node);
+            serviceOn(command);
+            ask.manageTarget();
+            node = method.getUserInput();
+        } while (checkCommand.isValidInteger(node, false));
+        return node;
     }
 
 
-    public boolean serviceOn(String node) {
-        int command = checkCommand.strToInt(node);
+    public boolean serviceOn(int node) {
         try {
-            commandMapping(command);
+            commandMapping(node);
             return true;
         } catch (SubwayException e) {
             subwayException.isNotUnder4OrQ(); // 에러 메시지 변경하기, while 조건문에서 검증 마침
@@ -85,5 +90,9 @@ public class MainController implements Constants {
             return mapController.work();
         }
         return false;
+    }
+
+    public void closeService(){
+        method.closeBuffer();
     }
 }
