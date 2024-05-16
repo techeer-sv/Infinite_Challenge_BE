@@ -1,4 +1,4 @@
-package subway.controller.controllers;
+package subway.controller.subControllers;
 
 import subway.config.handler.SubwayException;
 import subway.controller.utils.ClassifyMethods;

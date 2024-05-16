@@ -7,11 +7,14 @@ import java.io.InputStreamReader;
 
 public abstract class ClassifyMethods implements Controller, Constants {
     static SubwayException subwayException = new SubwayException();
+    private BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+
 
     public boolean work(final Controller controller, final String target) {
         ask.WhatToManage(target);
         ask.Function();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
+
+        try {
             String command = br.readLine();
             sendRequest(controller, command);
         } catch (Exception e) {

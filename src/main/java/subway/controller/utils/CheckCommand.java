@@ -4,9 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static subway.service.utils.Constants.subwayException;
+import static subway.controller.utils.ClassifyMethods.subwayException;
 
 public class CheckCommand {
+    private BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+
     public boolean isQ(String node) {
         if (node.equals("Q") || node.equals("q")) {
             return true;
@@ -24,6 +26,7 @@ public class CheckCommand {
     }
 
     public int strToInt(final String node) {
+        if(node == null) return 0;
         try {
             return Integer.parseInt(node);
         } catch (NumberFormatException e) {
@@ -33,12 +36,12 @@ public class CheckCommand {
     }
 
     public String getCommand(){
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
+        try {
             String command = br.readLine();
             return command;
         }catch (IOException e){
             System.err.println("입력 오류 발생");
-            return null;
         }
+        return null;
     }
 }

@@ -1,4 +1,4 @@
-package subway.controller.controllers;
+package subway.controller.subControllers;
 
 import subway.service.InitSubwayValues;
 import subway.service.LineManager;

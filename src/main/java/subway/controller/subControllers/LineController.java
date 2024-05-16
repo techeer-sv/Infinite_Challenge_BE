@@ -1,7 +1,8 @@
-package subway.controller.controllers;
+package subway.controller.subControllers;
 
 import subway.config.handler.SubwayException;
 import subway.controller.utils.ClassifyMethods;
+import subway.controller.utils.Methods;
 import subway.service.InitSubwayValues;
 import subway.service.LineManager;
 
@@ -9,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class LineController extends ClassifyMethods {
+    private BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+
     static LineManager lineManager;
     private static SubwayException subwayException;
 
@@ -50,7 +53,7 @@ public class LineController extends ClassifyMethods {
         boolean result=false;
         // 노선 db 에서 삭제
         ask.orderWhere(DELETE, LINE);
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
+        try {
             String command = br.readLine();
             result = lineManager.delete(command);
             message=makeString.infoMessage(DELETE,LINE, result);

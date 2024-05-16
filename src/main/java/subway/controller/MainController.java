@@ -1,10 +1,10 @@
 package subway.controller;
 
 import subway.config.handler.SubwayException;
-import subway.controller.controllers.LineController;
-import subway.controller.controllers.MapController;
-import subway.controller.controllers.SectionController;
-import subway.controller.controllers.StationController;
+import subway.controller.subControllers.LineController;
+import subway.controller.subControllers.MapController;
+import subway.controller.subControllers.SectionController;
+import subway.controller.subControllers.StationController;
 import subway.controller.utils.CheckCommand;
 import subway.controller.utils.Constants;
 import subway.service.InitSubwayValues;
@@ -17,17 +17,17 @@ public class MainController implements Constants {
     private SectionController sectionController;
     private MapController mapController;
     private static SubwayException subwayException;
-    private CheckCommand isValidCommand = new CheckCommand();
+    private CheckCommand checkCommand = new CheckCommand();
 
 
     public MainController() {
         ask = new AskView();
         InitSubwayValues manager = new InitSubwayValues();
-        prepareServer(manager);
+        createSubControllers(manager);
         subwayException = manager.getSubwayException();
     }
 
-    public void prepareServer(InitSubwayValues manager) {
+    public void createSubControllers(InitSubwayValues manager) {
         stationController = new StationController(manager);
         lineController = new LineController(manager);
         sectionController = new SectionController(manager);
@@ -39,9 +39,9 @@ public class MainController implements Constants {
         if (tryCount == 3) return;
         do {
             ask.printMain();
-            node = isValidCommand.getCommand();
-        } while (isValidCommand.isMainCommand(node) && serviceOn(node));
-        if (!isValidCommand.isQ(node)) reService(tryCount);
+            node = checkCommand.getCommand();
+        } while (checkCommand.isMainCommand(node) && serviceOn(node));
+        if (!checkCommand.isQ(node)) reService(tryCount);
     }
 
 
@@ -58,11 +58,11 @@ public class MainController implements Constants {
 
     public void reService(int tryCount) {
         StringBuilder sb = new StringBuilder();
-        sb.append("오류가 발생했습니다. 다시 시도해주세요.") // view 랑 연결해도 될 것 같은데
+        sb.append("오류가 발생했습니다.") // view 랑 연결해도 될 것 같은데
                 .append("\n남은 시도 횟수 : ")
                 .append(2-tryCount).append("회");
         System.out.println(sb);
-        headController(tryCount+1);
+        headController(tryCount + 1);
     }
 
     public boolean commandMapping(int target) {
