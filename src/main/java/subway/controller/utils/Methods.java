@@ -21,10 +21,19 @@ public class Methods implements Constants {
         }
     }
 
+    public String getUserInput(){
+        try{
+            return br.readLine();
+        }catch (IOException e){
+            System.err.println("[ERROR] 사용자 입력을 받는 중 에러가 발생했습니다.");
+        }
+        return null;
+    }
+
     public int getIndex() {
         ask.orderWhere();
         try {
-            String input = br.readLine();
+            String input = getUserInput();
             if (subwayException.isBack(input) == true) return -1;
             int index = Integer.parseInt(input);
             return index;
@@ -39,7 +48,7 @@ public class Methods implements Constants {
     public String getLine() {
         ask.orderWhere(LINE);
         try {
-            String line = br.readLine();
+            String line = getUserInput();
             return line;
         } catch (Exception e) {
             subwayException.checkCommand();
@@ -71,7 +80,7 @@ public class Methods implements Constants {
     public String getStation(Managerable manager, String function, String station) {
         try {
             ask.orderWhere(function, station);
-            String node = br.readLine();
+            String node = getUserInput();
             if (manager.isEmpty(node) != true) {
                 subwayException.noStation();
             }

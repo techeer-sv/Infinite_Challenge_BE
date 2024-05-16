@@ -29,12 +29,7 @@ public class StationManager implements Managerable {
         return sb;
     }
 
-    public Station getByName(final String name){
-        try{
-            isEmpty(name);
-        }catch (SubwayException e){
-            e.alreadyCreatedStation();
-        }
+    public Station getByStationName(final String name){
         return stationRepo.getStationByName(name);
     }
 }

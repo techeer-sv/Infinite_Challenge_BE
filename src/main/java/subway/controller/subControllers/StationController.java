@@ -25,7 +25,7 @@ public class StationController extends ClassifyMethods {
     public boolean register(){
         ask.orderWhere(REGISTER, STATION);
         try {
-            String station = br.readLine();
+            String station = method.getUserInput();
             boolean result = stationManager.isEmpty(station);
             String message = makeString.infoMessage(REGISTER, STATION,result);
             response.printInfo(message);
@@ -41,7 +41,7 @@ public class StationController extends ClassifyMethods {
     public boolean delete(){
         ask.orderWhere(DELETE,  STATION);
         try {
-            String command = br.readLine();
+            String command = method.getUserInput();
             boolean result = stationManager.delete(command);
             String message = makeString.infoMessage(DELETE, STATION, result);
             response.printInfo(message);

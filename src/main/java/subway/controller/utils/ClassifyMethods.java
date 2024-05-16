@@ -2,23 +2,18 @@ package subway.controller.utils;
 
 import subway.config.handler.SubwayException;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 public abstract class ClassifyMethods implements Controller, Constants {
     static SubwayException subwayException = new SubwayException();
-    private BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+    static CheckCommand checkCommand =new CheckCommand();
 
-
-    public boolean work(final Controller controller, final String target) {
+    public boolean work(final Controller controller, final String target, boolean isSection) {
         ask.WhatToManage(target);
         ask.Function();
-
-        try {
-            String command = br.readLine();
+        String command = method.getUserInput();
+        if(checkCommand.isMainCommand(command, isSection)){
             sendRequest(controller, command);
-        } catch (Exception e) {
-            subwayException.checkCommand();
+            return true;
         }
         return false;
     }

@@ -7,6 +7,7 @@ import subway.controller.subControllers.SectionController;
 import subway.controller.subControllers.StationController;
 import subway.controller.utils.CheckCommand;
 import subway.controller.utils.Constants;
+import subway.controller.utils.Methods;
 import subway.service.InitSubwayValues;
 import subway.view.AskView;
 
@@ -18,6 +19,7 @@ public class MainController implements Constants {
     private MapController mapController;
     private static SubwayException subwayException;
     private CheckCommand checkCommand = new CheckCommand();
+    private Methods method=new Methods();
 
 
     public MainController() {
@@ -39,8 +41,8 @@ public class MainController implements Constants {
         if (tryCount == 3) return;
         do {
             ask.printMain();
-            node = checkCommand.getCommand();
-        } while (checkCommand.isMainCommand(node) && serviceOn(node));
+            node = method.getUserInput();
+        } while (checkCommand.isMainCommand(node, false) && serviceOn(node));
         if (!checkCommand.isQ(node)) reService(tryCount);
     }
 
@@ -67,13 +69,13 @@ public class MainController implements Constants {
 
     public boolean commandMapping(int target) {
         if (target == STATION_COMMAND) {
-            return stationController.work(stationController, STATION);
+            return stationController.work(stationController, STATION, false);
         }
         if (target == LINE_COMMAND) {
-            return lineController.work(lineController, LINE);
+            return lineController.work(lineController, LINE, false);
         }
         if (target == SECTION_COMMAND) {
-            return sectionController.work(sectionController, SECTION);
+            return sectionController.work(sectionController, SECTION, true);
         }
         if (target == MAP_COMMAND) {
             return mapController.work();

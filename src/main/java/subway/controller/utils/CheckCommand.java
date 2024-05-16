@@ -8,7 +8,6 @@ import static subway.controller.utils.ClassifyMethods.subwayException;
 
 public class CheckCommand {
     private BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
-
     public boolean isQ(String node) {
         if (node.equals("Q") || node.equals("q")) {
             return true;
@@ -16,11 +15,21 @@ public class CheckCommand {
         return false;
     }
 
-    public boolean isMainCommand(String node){
+    public boolean isMainCommand(String node, boolean isSection){
+        if(isSection) return isSectionCommand(node);
         int command = strToInt(node);
         if(command == 0)
             return false;
         if(command < 0 || command > 4)
+            return false;
+        return true;
+    }
+
+    public boolean isSectionCommand(String node){
+        int command = strToInt(node);
+        if(command == 0)
+            return false;
+        if(command < 0 || command > 2)
             return false;
         return true;
     }
@@ -33,15 +42,5 @@ public class CheckCommand {
             subwayException.isNotUnder4OrQ();
         }
         return 0;
-    }
-
-    public String getCommand(){
-        try {
-            String command = br.readLine();
-            return command;
-        }catch (IOException e){
-            System.err.println("입력 오류 발생");
-        }
-        return null;
     }
 }

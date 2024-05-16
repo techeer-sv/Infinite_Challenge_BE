@@ -29,8 +29,8 @@ public class LineManager implements Managerable {
 
     public void setStations(final String name, final String upperStation, final String bottomStation){
         Line line = setLine(name);
-        Station upper = stationManager.getByName(upperStation);
-        Station bottom = stationManager.getByName(bottomStation);
+        Station upper = stationManager.getByStationName(upperStation);
+        Station bottom = stationManager.getByStationName(bottomStation);
         upper.addLine(line);
         bottom.addLine(line);
         line.setStations(upper, bottom);
