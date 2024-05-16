@@ -10,6 +10,7 @@ import java.util.List;
 
 
 public class InitSubwayValues implements Constants {
+    static final SubwayException subwayException = new SubwayException();
 
     public LineManager getLineManager(){
         return lineManager;

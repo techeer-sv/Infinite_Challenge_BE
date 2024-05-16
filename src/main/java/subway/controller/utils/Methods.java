@@ -1,7 +1,6 @@
 package subway.controller.utils;
 
 import subway.config.handler.SubwayException;
-import subway.controller.StationController;
 import subway.service.Managerable;
 
 import java.io.BufferedReader;
@@ -10,12 +9,12 @@ import java.io.InputStreamReader;
 import static subway.service.utils.Constants.subwayException;
 
 public class Methods implements Constants {
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    public Methods() {}
+    public Methods() {
+    }
 
     public int getIndex() {
         ask.orderWhere();
-        try {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
             String input = br.readLine();
             if (subwayException.isBack(input) == true) return -1;
             int index = Integer.parseInt(input);
@@ -30,7 +29,7 @@ public class Methods implements Constants {
 
     public String getLine() {
         ask.orderWhere(LINE);
-        try {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
             String line = br.readLine();
             return line;
         } catch (Exception e) {
@@ -40,8 +39,7 @@ public class Methods implements Constants {
     }
 
     public String getLine(String function, String target) {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        try {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
             ask.orderWhere(function, target);
             return br.readLine();
         } catch (Exception e) {
@@ -53,7 +51,7 @@ public class Methods implements Constants {
     public String getStation() {
         ask.orderWhere("역 이름");
 
-        try {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
             return br.readLine();
         } catch (Exception e) {
             subwayException.noStation();
@@ -62,7 +60,7 @@ public class Methods implements Constants {
     }
 
     public String getStation(Managerable manager, String function, String station) {
-        try {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
             ask.orderWhere(function, station);
             String node = br.readLine();
             if (manager.isEmpty(node) != true) {

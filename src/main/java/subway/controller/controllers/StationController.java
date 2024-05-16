@@ -1,15 +1,19 @@
-package subway.controller;
+package subway.controller.controllers;
 
 import subway.config.handler.SubwayException;
+import subway.controller.utils.ClassifyMethods;
 import subway.service.InitSubwayValues;
 import subway.service.StationManager;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 // 역을 관리하는 컨트롤러
 public class StationController extends ClassifyMethods {
     static StationManager stationManager;
-    static SubwayException subwayException;
+    SubwayException subwayException;
 
-    StationController(final InitSubwayValues manager){
+    public StationController(final InitSubwayValues manager){
         stationManager = manager.getStationManager();
         subwayException = manager.getSubwayException();
     }
@@ -17,7 +21,7 @@ public class StationController extends ClassifyMethods {
     @Override
     public boolean register(){
         ask.orderWhere(REGISTER, STATION);
-        try {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
             String station = br.readLine();
             boolean result = stationManager.isEmpty(station);
             String message = makeString.infoMessage(REGISTER, STATION,result);
@@ -33,7 +37,7 @@ public class StationController extends ClassifyMethods {
     @Override
     public boolean delete(){
         ask.orderWhere(DELETE,  STATION);
-        try {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
             String command = br.readLine();
             boolean result = stationManager.delete(command);
             String message = makeString.infoMessage(DELETE, STATION, result);

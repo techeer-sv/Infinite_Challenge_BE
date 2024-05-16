@@ -9,7 +9,7 @@ import static subway.service.InitSubwayValues.stationRepo;
 
 public class SectionManager implements Managerable {
     private Line line;
-    SubwayException subwayException = new SubwayException();
+    SubwayException subwayException ;
     @Override
     public boolean isEmpty(final String name) {
         if(subwayException.isBack(name) == true)

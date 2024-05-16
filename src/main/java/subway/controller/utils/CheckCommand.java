@@ -33,8 +33,7 @@ public class CheckCommand {
     }
 
     public String getCommand(){
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        try{
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
             String command = br.readLine();
             return command;
         }catch (IOException e){

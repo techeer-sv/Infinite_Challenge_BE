@@ -1,20 +1,17 @@
-package subway.controller;
+package subway.controller.utils;
 
-import subway.controller.utils.Constants;
-import subway.controller.utils.Controller;
+import subway.config.handler.SubwayException;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import static subway.controller.StationController.subwayException;
-
 public abstract class ClassifyMethods implements Controller, Constants {
-    protected static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static SubwayException subwayException = new SubwayException();
 
     public boolean work(final Controller controller, final String target) {
         ask.WhatToManage(target);
         ask.Function();
-        try {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
             String command = br.readLine();
             sendRequest(controller, command);
         } catch (Exception e) {

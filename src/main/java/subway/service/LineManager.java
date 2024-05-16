@@ -1,6 +1,5 @@
 package subway.service;
 
-import subway.config.handler.SubwayException;
 import subway.domain.Line;
 import subway.domain.Station;
 import subway.service.utils.LineMakeString;
@@ -11,7 +10,6 @@ import static subway.service.InitSubwayValues.*;
 
 public class LineManager implements Managerable {
     LineMakeString makeString = new LineMakeString();
-    SubwayException subwayException = new SubwayException();
     @Override
     public boolean isEmpty(final String name) {
         if(subwayException.isBack(name)){
