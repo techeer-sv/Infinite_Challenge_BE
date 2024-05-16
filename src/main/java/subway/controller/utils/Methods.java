@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import static subway.controller.utils.ClassifyMethods.checkCommand;
 import static subway.controller.utils.ClassifyMethods.subwayException;
 
 public class Methods implements Constants {
@@ -35,7 +36,7 @@ public class Methods implements Constants {
         try {
             String input = getUserInput();
             if (subwayException.isBack(input) == true) return -1;
-            int index = Integer.parseInt(input);
+            int index = checkCommand.strToInt(input);
             return index;
         } catch (SubwayException e) {
             e.isNotNumber();
@@ -57,24 +58,13 @@ public class Methods implements Constants {
     }
 
     public String getLine(String function, String target) {
-        try {
-            ask.orderWhere(function, target);
-            return br.readLine();
-        } catch (Exception e) {
-            subwayException.checkCommand();
-        }
-        return null;
+        ask.orderWhere(function, target);
+        return getUserInput();
     }
 
     public String getStation() {
         ask.orderWhere("역 이름");
-
-        try {
-            return br.readLine();
-        } catch (Exception e) {
-            subwayException.noStation();
-        }
-        return null;
+        return getUserInput();
     }
 
     public String getStation(Managerable manager, String function, String station) {

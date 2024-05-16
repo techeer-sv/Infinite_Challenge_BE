@@ -1,7 +1,6 @@
 package subway.controller.utils;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 import static subway.controller.utils.ClassifyMethods.subwayException;
@@ -16,17 +15,17 @@ public class CheckCommand {
     }
 
     public boolean isMainCommand(String node, boolean isSection){
-        if(isSection) return isSectionCommand(node);
         int command = strToInt(node);
-        if(command == 0)
+        if(isSection)
+            return isSectionCommand(command);
+        if(command <= 0)
             return false;
-        if(command < 0 || command > 4)
+        if(command > 4)
             return false;
         return true;
     }
 
-    public boolean isSectionCommand(String node){
-        int command = strToInt(node);
+    public boolean isSectionCommand(int command){
         if(command == 0)
             return false;
         if(command < 0 || command > 2)

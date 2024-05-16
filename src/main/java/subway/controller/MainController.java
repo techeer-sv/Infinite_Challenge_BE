@@ -36,7 +36,7 @@ public class MainController implements Constants {
         mapController = new MapController(manager);
     }
 
-    public void headController(int tryCount) {
+    public void startService(int tryCount) {
         String node;
         if (tryCount == 3) return;
         do {
@@ -46,9 +46,13 @@ public class MainController implements Constants {
         if (!checkCommand.isQ(node)) reService(tryCount);
     }
 
+    public void closeService(){
+        method.closeBuffer();
+    }
+
 
     public boolean serviceOn(String node) {
-        int command = Integer.parseInt(node);
+        int command = checkCommand.strToInt(node);
         try {
             commandMapping(command);
             return true;
@@ -64,7 +68,7 @@ public class MainController implements Constants {
                 .append("\n남은 시도 횟수 : ")
                 .append(2-tryCount).append("회");
         System.out.println(sb);
-        headController(tryCount + 1);
+        startService(tryCount + 1);
     }
 
     public boolean commandMapping(int target) {
