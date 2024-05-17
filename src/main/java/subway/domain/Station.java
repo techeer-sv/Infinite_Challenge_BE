@@ -7,7 +7,7 @@ import java.util.List;
 public class Station {
     private String name;
     private List<Line> line = new LinkedList();
-    private int canDelete=0;
+    private int canDelete = 0;
 
     public Station(final String name) {
         this.name = name;
@@ -16,25 +16,31 @@ public class Station {
     public String getName() {
         return this.name;
     }
-    public void addLine(Line lineNode){
+
+    public void addLine(Line lineNode) {
         line.add(lineNode);
     }
-    public void deleteLine(Line lineNode){
+
+    public void deleteLine(Line lineNode) {
         line.remove(lineNode);
     }
 
-    public boolean hasNoLine(){
-        if(canDelete==0){
+    public List getLine() {
+        return this.line;
+    }
+
+    public boolean hasNoLine() {
+        if (canDelete == 0) {
             return true;
         }
         return false;
     }
 
-    public void canDelete(){
-        this.canDelete-=1;
+    public void canDelete() {
+        this.canDelete -= 1;
     }
 
-    public void neverDelete(){
-        this.canDelete+=1;
+    public void neverDelete() {
+        this.canDelete += 1;
     }
 }
