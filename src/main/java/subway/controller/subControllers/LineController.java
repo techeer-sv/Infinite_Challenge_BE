@@ -30,6 +30,7 @@ public class LineController extends ClassifyMethods {
             lineManager.setStations(line, upper, bottom);
         } catch (IllegalArgumentException e) {
             inputException.noStation();
+            return false;
         }
         message= makeString.infoMessage(REGISTER, LINE, true);
         System.out.println(message);
