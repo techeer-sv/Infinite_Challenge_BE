@@ -37,16 +37,17 @@ public class SectionController extends ClassifyMethods {
     @Override
     public boolean register() { // 노선, 역 이름, 순서 입력 받고 등록
         String line = method.getLine();
-        if (!sectionManager.isEmpty(Targets.LINE.getTarget(), line)) {
+        if (sectionManager.isEmpty(Targets.LINE.getTarget(), line)) {
             inputException.noCreatedLine();
             return false;
         }
+        String station = method.getStation();
+        if(!sectionManager.isValidLine(line, station)) return false; // TODO: 예외처리
+        if(sectionManager.isEmpty(Targets.STATION.getTarget(), station)) return false; // TODO: 예외처리
 
-        String sName = method.getStation();
-        if (!sectionManager.isEmpty(Targets.STATION.getTarget(), sName)) {
-            int index = method.getIndex();
-            sectionManager.insertSection(sName, index);
-        }
+        int index = method.getIndex();
+        sectionManager.insertSection(station, index);
+
         response.printInfo("구간이 등록되었습니다.");
         return true;
     }

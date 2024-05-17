@@ -49,6 +49,13 @@ public class Line {
         return false;
     }
 
+    public boolean haveStation(final String name){
+        for(Station station:stations){
+            if(name.equals(station.getName())) return true;
+        }
+        return false;
+    }
+
     public int getSize(){
         return this.stations.size();
     }

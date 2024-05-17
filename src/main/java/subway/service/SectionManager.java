@@ -19,7 +19,7 @@ public class SectionManager implements Managerable {
     public boolean isEmpty(final String type, final String name){
         if(subwayException.isBack(name) == true) return false; // TODO: 종료시키는 에러? 커스텀?
         if(type.equals(Targets.STATION.getTarget())) return isStationEmpty(name);
-        if(type.equals(Targets.LINE.getTarget())) return isLineEmpty(name);
+        if(type.equals(Targets.LINE.getTarget())) return isValidLine(name);
         return true;
     }
 
@@ -27,10 +27,17 @@ public class SectionManager implements Managerable {
         if(stationRepo.getStationByName(station) == null ) return true;
         return false;
     }
-    boolean isLineEmpty(final String line){
+    boolean isValidLine(final String line){
         if(subwayException.isBack(line) == true) return false; // TODO: 종료시키는 에러? 커스텀?
         if(lineRepo.getLineByName(line) == null ) return true;
         return false;
+    }
+    public boolean isValidLine(final String lName, final String sName){
+        Line line = getLine(lName);
+        if(line.haveStation(sName)){
+            return false;
+        }
+        return true;
     }
 
     public void insertSection(final String sName,final int index){

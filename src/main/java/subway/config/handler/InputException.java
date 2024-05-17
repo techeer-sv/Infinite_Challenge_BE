@@ -24,7 +24,7 @@ public class InputException {
 
     public void noCreatedLine(){
         StringBuilder sb = new StringBuilder();
-        sb.append(DEL_STATION.getError());
+        sb.append(DEL_LINE.getError());
         System.err.println(sb);
     }
 
