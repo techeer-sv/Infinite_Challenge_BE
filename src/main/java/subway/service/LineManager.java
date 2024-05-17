@@ -4,34 +4,15 @@ import subway.config.constants.Targets;
 import subway.domain.Line;
 import subway.domain.Station;
 import subway.service.utils.LineMakeString;
+import subway.service.utils.Managerable;
+import subway.service.utils.Verify;
 
 import java.util.List;
 
 import static subway.service.InitSubwayValues.*;
 
-public class LineManager implements Managerable {
+public class LineManager extends Verify implements Managerable {
     LineMakeString makeString = new LineMakeString();
-    @Override // TODO: Util 화? 할까? Section 이랑도 너무 겹치는데
-    public boolean isEmpty(final String station) {
-        if(subwayException.isBack(station) == true) return false; // TODO: 종료시키는 에러? 커스텀?
-        return isStationEmpty(station);
-    }
-    public boolean isEmpty(final String type, final String name){
-        if(subwayException.isBack(name) == true) return false; // TODO: 종료시키는 에러? 커스텀?
-        if(type.equals(Targets.STATION.getTarget())) return isStationEmpty(name);
-        if(type.equals(Targets.LINE.getTarget())) return isValidLine(name);
-        return true;
-    }
-    boolean isValidLine(final String line){
-        if(subwayException.isBack(line) == true) return false; // TODO: 종료시키는 에러? 커스텀?
-        if(lineRepo.getLineByName(line) == null ) return true;
-        return false;
-    }
-
-    boolean isStationEmpty(final String station){
-        if(stationRepo.getStationByName(station) == null ) return true;
-        return false;
-    }
     public Line setLine(final String name){
         Line node = new Line(name);
         lineRepo.addLine(node);

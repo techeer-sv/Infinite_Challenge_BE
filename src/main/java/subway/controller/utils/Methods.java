@@ -1,7 +1,9 @@
 package subway.controller.utils;
 
+import subway.config.constants.Targets;
 import subway.config.handler.InputException;
-import subway.service.Managerable;
+import subway.service.utils.Managerable;
+import subway.service.utils.Verify;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +12,7 @@ import java.io.InputStreamReader;
 import static subway.controller.utils.ClassifyMethods.checkCommand;
 import static subway.controller.utils.ClassifyMethods.subwayException;
 
-public class Methods implements Constants {
+public class Methods extends Verify implements Constants {
     private BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
     InputException inputException = new InputException();
     public Methods() {}
@@ -65,7 +67,7 @@ public class Methods implements Constants {
     public String getStation(Managerable manager, String function, String station) {
         ask.orderWhere(function, station);
         String node = getUserInput();
-        if (manager.isEmpty(node) == true) {
+        if (manager.isEmpty(Targets.STATION.getTarget(),node) == true) {
             subwayException.noStation();
         }
         return node;

@@ -2,7 +2,7 @@ package subway.domain;
 
 import java.util.LinkedList;
 
-import static subway.service.Managerable.subwayException;
+import static subway.service.utils.Managerable.subwayException;
 
 public class Line {
     private String name;

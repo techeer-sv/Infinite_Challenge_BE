@@ -1,25 +1,20 @@
 package subway.service;
 
 import subway.config.handler.InputException;
-import subway.config.handler.SubwayException;
 import subway.domain.Line;
 import subway.domain.Station;
+import subway.service.utils.Managerable;
+import subway.service.utils.Verify;
 
 import java.util.List;
 
 import static subway.service.InitSubwayValues.stationRepo;
 
 // 역 관련 기능하는 서비스
-public class StationManager implements Managerable {
-    InputException inputException= new InputException();
-    @Override // 삽입
-    public boolean isEmpty(final String name) {
-        if(stationRepo.getStationByName(name)!=null){
-            inputException.alreadyCreatedStation();
-            return false;
-        }
+public class StationManager extends Verify implements Managerable {
+
+    public void register(String name){
         stationRepo.addStation(new Station(name));
-        return true;
     }
     @Override
     public boolean delete(final String name) {

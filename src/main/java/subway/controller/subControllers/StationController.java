@@ -1,5 +1,6 @@
 package subway.controller.subControllers;
 
+import subway.config.constants.Targets;
 import subway.config.handler.InputException;
 import subway.config.handler.SubwayException;
 import subway.controller.utils.ClassifyMethods;
@@ -22,11 +23,13 @@ public class StationController extends ClassifyMethods {
         ask.orderWhere(REGISTER, STATION);
         boolean result = false;
         String station = method.getUserInput();
-        try {
-            result = stationManager.isEmpty(station);
-        } catch (Exception e) {
+        if(!stationManager.isEmpty(Targets.STATION.getTarget(), station)){
             inputException.alreadyCreatedStation();
+            return false;
         }
+        stationManager.register(station);
+        result = true;
+
         String message = makeString.infoMessage(REGISTER, STATION, result);
         response.printInfo(message);
         return result;
@@ -37,6 +40,10 @@ public class StationController extends ClassifyMethods {
         ask.orderWhere(DELETE, STATION);
         String command = method.getUserInput();
         boolean result=false;
+        if(method.isEmpty(command)) {
+            inputException.noStation();
+            return false;
+        }
         try {
             result = stationManager.delete(command);
         } catch(IllegalArgumentException e){

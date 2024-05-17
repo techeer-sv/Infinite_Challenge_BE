@@ -1,44 +1,17 @@
 package subway.service;
 
-import subway.config.constants.Targets;
 import subway.config.handler.SubwayException;
 import subway.domain.Line;
 import subway.domain.Station;
+import subway.service.utils.Managerable;
+import subway.service.utils.Verify;
 
 import static subway.service.InitSubwayValues.lineRepo;
 import static subway.service.InitSubwayValues.stationRepo;
 
-public class SectionManager implements Managerable {
+public class SectionManager extends Verify implements Managerable {
     private Line line=null;
     SubwayException subwayException =new SubwayException();
-    @Override
-    public boolean isEmpty(final String station) {
-        if(subwayException.isBack(station) == true) return false; // TODO: 종료시키는 에러? 커스텀?
-        return isStationEmpty(station);
-    }
-    public boolean isEmpty(final String type, final String name){
-        if(subwayException.isBack(name) == true) return false; // TODO: 종료시키는 에러? 커스텀?
-        if(type.equals(Targets.STATION.getTarget())) return isStationEmpty(name);
-        if(type.equals(Targets.LINE.getTarget())) return isValidLine(name);
-        return true;
-    }
-
-    boolean isStationEmpty(final String station){
-        if(stationRepo.getStationByName(station) == null ) return true;
-        return false;
-    }
-    boolean isValidLine(final String line){
-        if(subwayException.isBack(line) == true) return false; // TODO: 종료시키는 에러? 커스텀?
-        if(lineRepo.getLineByName(line) == null ) return true;
-        return false;
-    }
-    public boolean isValidLine(final String lName, final String sName){
-        Line line = getLine(lName);
-        if(line.haveStation(sName)){
-            return false;
-        }
-        return true;
-    }
 
     public void insertSection(final String sName,final int index){
         Station station = stationRepo.getStationByName(sName);
