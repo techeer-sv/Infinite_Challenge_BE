@@ -1,57 +1,54 @@
 package subway.controller.subControllers;
 
+import subway.config.handler.InputException;
 import subway.config.handler.SubwayException;
 import subway.controller.utils.ClassifyMethods;
 import subway.service.InitSubwayValues;
 import subway.service.StationManager;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 // 역을 관리하는 컨트롤러
 public class StationController extends ClassifyMethods {
-    private BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
-
     static StationManager stationManager;
     SubwayException subwayException;
-
-    public StationController(final InitSubwayValues manager){
+    InputException inputException = new InputException();
+    public StationController(final InitSubwayValues manager) {
         stationManager = manager.getStationManager();
         subwayException = manager.getSubwayException();
     }
 
     @Override
-    public boolean register(){
+    public boolean register() {
         ask.orderWhere(REGISTER, STATION);
+        boolean result = false;
+        String station = method.getUserInput();
         try {
-            String station = method.getUserInput();
-            boolean result = stationManager.isEmpty(station);
-            String message = makeString.infoMessage(REGISTER, STATION,result);
-            response.printInfo(message);
-            return false;
-        }catch (Exception e){
-            e.printStackTrace();
-            subwayException.unexpected();
+            result = stationManager.isEmpty(station);
+        } catch (Exception e) {
+            inputException.alreadyCreatedStation();
         }
-        return true;
+        String message = makeString.infoMessage(REGISTER, STATION, result);
+        response.printInfo(message);
+        return result;
     }
 
     @Override
-    public boolean delete(){
-        ask.orderWhere(DELETE,  STATION);
+    public boolean delete() {
+        ask.orderWhere(DELETE, STATION);
+        String command = method.getUserInput();
+        boolean result=false;
         try {
-            String command = method.getUserInput();
-            boolean result = stationManager.delete(command);
-            String message = makeString.infoMessage(DELETE, STATION, result);
-            response.printInfo(message);
-        }catch (Exception e){
-            subwayException.unexpected();
+            result = stationManager.delete(command);
+        } catch (Exception e) {
+            inputException.unExpectedError();
             return false;
         }
+        String message = makeString.infoMessage(DELETE, STATION, result);
+        response.printInfo(message);
         return true;
     }
 
-    public boolean read(){
+    public boolean read() {
         response.printTitle("역 목록");
         StringBuilder list = stationManager.read();
         response.printList(list);
