@@ -37,6 +37,7 @@ public class Methods implements Constants {
         String input = getUserInput();
         if (subwayException.isBack(input) == true) return -1;
         int index = checkCommand.strToInt(input);
+        if(index <= 0) subwayException.checkCommand();
         return index;
     }
 
@@ -64,7 +65,7 @@ public class Methods implements Constants {
     public String getStation(Managerable manager, String function, String station) {
         ask.orderWhere(function, station);
         String node = getUserInput();
-        if (manager.isEmpty(node) != true) {
+        if (manager.isEmpty(node) == true) {
             subwayException.noStation();
         }
         return node;

@@ -22,6 +22,12 @@ public class InputException {
         System.err.println(sb);
     }
 
+    public void alreadyCreated(String target){
+        StringBuilder sb = new StringBuilder();
+        sb.append(target).append("는 ").append(ADDED.getError());
+        System.err.println(sb);
+    }
+
     public void unExpectedError(){
         StringBuilder sb = new StringBuilder();
         sb.append(UNEXPECTED.getError());

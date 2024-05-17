@@ -42,7 +42,7 @@ public class Line {
         for (int index = 0; index < stations.size(); index++) {
             Station s = stations.get(index);
             if (s.getName().equals(station)) {
-                stations.remove(index);
+                stations.remove(s);
                 return true;
             }
         }
