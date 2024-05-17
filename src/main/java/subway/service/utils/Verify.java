@@ -9,6 +9,7 @@ import static subway.service.utils.Constants.stationRepo;
 
 public class Verify {
     SubwayException subwayException = new SubwayException();
+
     public boolean isEmpty(final String station) {
         if(subwayException.isBack(station) == true) return false; // TODO: 종료시키는 에러? 커스텀?
         return isStationEmpty(station);
@@ -27,6 +28,13 @@ public class Verify {
     boolean isValidLine(final String line){
         if(subwayException.isBack(line) == true) return false; // TODO: 종료시키는 에러? 커스텀?
         if(lineRepo.getLineByName(line) == null ) return true;
+        return false;
+    }
+
+    public boolean lineEqualStation(String line){
+        if(stationRepo.getStationByName(line) != null) {
+            return true;
+        }
         return false;
     }
     public boolean isValidLine(final String lName, final String sName){

@@ -40,4 +40,10 @@ public class InputException {
         sb.append(UNDER_TWO_STATIONS.getError());
         System.err.println(sb);
     }
+
+    public void lineEqualStation(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(ADD_STATION.getError());
+        System.err.println(sb);
+    }
 }

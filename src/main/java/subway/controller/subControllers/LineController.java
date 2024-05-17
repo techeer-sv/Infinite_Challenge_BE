@@ -1,5 +1,6 @@
 package subway.controller.subControllers;
 
+import subway.config.constants.Targets;
 import subway.config.handler.InputException;
 import subway.config.handler.SubwayException;
 import subway.controller.utils.ClassifyMethods;
@@ -21,8 +22,12 @@ public class LineController extends ClassifyMethods {
         String upper, bottom, message;
         String line = method.getLine(REGISTER, LINE);
         try {
-            if (lineManager.isEmpty(line) != true) {
+            if (lineManager.isEmpty(Targets.LINE.getTarget(), line) != true) {
                 inputException.alreadyCreatedLine();
+                return false;
+            }
+            if(lineManager.lineEqualStation(line)) {
+                inputException.lineEqualStation();
                 return false;
             }
             upper = method.getStation(lineManager, REGISTER, UPPER);
