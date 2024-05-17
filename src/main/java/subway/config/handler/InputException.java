@@ -35,5 +35,9 @@ public class InputException {
     }
 
 
-
+    public void underTwoStation() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(UNDER_TWO_STATIONS.getError());
+        System.err.println(sb);
+    }
 }

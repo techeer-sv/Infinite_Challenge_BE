@@ -11,7 +11,7 @@ import static subway.service.InitSubwayValues.*;
 
 public class LineManager implements Managerable {
     LineMakeString makeString = new LineMakeString();
-    @Override
+    @Override // TODO: Util 화? 할까? Section 이랑도 너무 겹치는데
     public boolean isEmpty(final String station) {
         if(subwayException.isBack(station) == true) return false; // TODO: 종료시키는 에러? 커스텀?
         return isStationEmpty(station);

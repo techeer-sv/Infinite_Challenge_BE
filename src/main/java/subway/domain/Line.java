@@ -2,6 +2,8 @@ package subway.domain;
 
 import java.util.LinkedList;
 
+import static subway.service.Managerable.subwayException;
+
 public class Line {
     private String name;
     private LinkedList<Station> stations = new LinkedList<>();
@@ -39,6 +41,7 @@ public class Line {
     }
 
     public boolean deleteStation(final String station) {
+        if(stations.size() <= 2) subwayException.underTwoStation();
         for (int index = 0; index < stations.size(); index++) {
             Station s = stations.get(index);
             if (s.getName().equals(station)) {

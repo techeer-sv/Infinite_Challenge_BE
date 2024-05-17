@@ -7,6 +7,7 @@ public enum Errors {
     ADDED("이미 등록된 이름입니다."),
     DEL_STATION("존재하지 않은 역 이름입니다."),
     UNEXPECTED("예상치 못한 에러가 발생했습니다."),
+    UNDER_TWO_STATIONS("속한 역의 개수가 2개 이하인 노선은 삭제할 수 없습니다."),
     DEL_LINE("존재하지 않는 노선 이름입니다.");
 
     private final String message;

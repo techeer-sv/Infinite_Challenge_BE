@@ -39,7 +39,10 @@ public class StationController extends ClassifyMethods {
         boolean result=false;
         try {
             result = stationManager.delete(command);
-        } catch (Exception e) {
+        } catch(IllegalArgumentException e){
+            inputException.underTwoStation();
+            return false;
+        }catch (Exception e) {
             inputException.unExpectedError();
             return false;
         }

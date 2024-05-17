@@ -3,6 +3,7 @@ package subway.config.handler;
 import subway.config.constants.views.Errors;
 import subway.config.constants.views.Prefixes;
 
+import static subway.config.constants.views.Errors.UNDER_TWO_STATIONS;
 import static subway.config.handler.InputExceptionError.ErrorMessage.*;
 
 public class SubwayException extends RuntimeException {
@@ -49,5 +50,8 @@ public class SubwayException extends RuntimeException {
 
     public void noLine() {
         throw new IllegalArgumentException(THERE_IS_NO_SUCH_LINE.getMessage());
+    }
+    public void underTwoStation() {
+        throw new IllegalArgumentException();
     }
 }
