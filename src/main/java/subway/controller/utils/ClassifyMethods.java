@@ -35,7 +35,7 @@ public abstract class ClassifyMethods implements Controller, Constants {
         if (command.equals(BACK_COMMAND)) {
             return true;
         }
-        subwayException.notValidCommand();
+//        subwayException.notValidCommand();
         return false;
     }
 }
