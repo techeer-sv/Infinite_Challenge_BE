@@ -30,6 +30,10 @@ public class StationManager implements Managerable {
     }
 
     public Station getByStationName(final String name){
-        return stationRepo.getStationByName(name);
+        Station station =stationRepo.getStationByName(name);
+        if(station == null){
+            subwayException.noStation();
+        }
+        return station;
     }
 }
