@@ -18,8 +18,9 @@ public class SectionManager implements Managerable {
         return isStationEmpty(station);
     }
     public boolean isEmpty(final String type, final String name){
+        if(subwayException.isBack(name) == true) return false; // TODO: 종료시키는 에러? 커스텀?
         if(type.equals(Targets.STATION.getTarget())) return isStationEmpty(name);
-        if(type.equals(Targets.LINE.getTarget())) return isStationEmpty(name);
+        if(type.equals(Targets.LINE.getTarget())) return isLineEmpty(name);
         return true;
     }
 
@@ -37,15 +38,6 @@ public class SectionManager implements Managerable {
         Station station = stationRepo.getStationByName(sName);
         if(station == null) subwayException.noStation();
         lineRepo.addLine(line, station, index);
-    }
-
-    public boolean getStation(String name){
-        try{
-            stationRepo.getStationByName(name);
-            return true;
-        }catch (Exception e) {
-        }
-        return false;
     }
 
     public Line getLine(String name){
