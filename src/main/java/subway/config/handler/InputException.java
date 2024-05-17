@@ -22,9 +22,9 @@ public class InputException {
         System.err.println(sb);
     }
 
-    public void alreadyCreated(String target){
+    public void noCreatedLine(){
         StringBuilder sb = new StringBuilder();
-        sb.append(target).append("는 ").append(ADDED.getError());
+        sb.append(DEL_STATION.getError());
         System.err.println(sb);
     }
 
@@ -33,4 +33,7 @@ public class InputException {
         sb.append(UNEXPECTED.getError());
         System.err.println(sb);
     }
+
+
+
 }
