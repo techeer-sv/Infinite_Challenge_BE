@@ -41,7 +41,7 @@ public class SectionController extends ClassifyMethods {
             return false;
         }
         String station = method.getStation();
-        if(!sectionManager.isValidLine(line, station)) return false; // TODO: 예외처리
+        if(sectionManager.lineHaveStation(line, station)) return false; // TODO: 예외처리
         if(sectionManager.isEmpty(STATION, station)) return false; // TODO: 예외처리
 
         int index = method.getIndex();

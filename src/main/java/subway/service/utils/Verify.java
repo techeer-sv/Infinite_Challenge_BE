@@ -20,7 +20,7 @@ public class Verify {
     public boolean isEmpty(final String type, final String name){
         if(subwayException.isBack(name) == true) return false; // TODO: 종료시키는 에러? 커스텀?
         if(type.equals(STATION)) return isStationEmpty(name);
-        if(type.equals(LINE)) return isValidLine(LINE, name);
+        if(type.equals(LINE)) return isEmptyLine(name);
         return true;
     }
 
@@ -29,7 +29,7 @@ public class Verify {
         return false;
     }
 
-    public boolean isValidLine(String target, String name){
+    public boolean isEmptyLine(String name){
         if(lineRepo.getLineByName(name) != null ) return false;
         return true;
     }
@@ -44,9 +44,9 @@ public class Verify {
     public boolean lineHaveStation(final String lName, final String sName){
         Line line = getLine(lName);
         if(line.haveStation(sName)){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
     public Line getLine(String name){
         Line line = lineRepo.getLineByName(name);
