@@ -28,6 +28,12 @@ public class SectionManager extends Verify implements Managerable {
         return line;
     }
 
+    public boolean isDeletable(String name){
+        Line line = lineRepo.getLineByName(name);
+        if(line.getSize()>2) return true;
+        return false;
+    }
+
     @Override
     public boolean delete(final String station) {
         if(subwayException.isBack(station) == true) return true;
@@ -43,14 +49,15 @@ public class SectionManager extends Verify implements Managerable {
     }
 
     public boolean isEmptySpace(String line, String station){
-        if(isEmptyStation(station)){
+        if(isEmptyStation(station)){ // 등록 : 참
             inputException.noStation();
             return true;
         }
-        if(isEmptyLine(line)){
+        if(isEmptyLine(line)){ // 등록: 참
             inputException.noCreatedLine();
             return true;
         }
+//        inputException.noSuchLine();
         return false;
     }
 

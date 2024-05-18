@@ -21,39 +21,34 @@ public class StationController extends ClassifyMethods {
     @Override
     public boolean register() {
         ask.orderIndex(REGISTER, STATION);
-        boolean result = false;
         String station = method.getUserInput();
-        // 조건 모듈
-        if(!stationManager.haveSameName(station)){
-            inputException.alreadyCreatedStation();
-            return false;
+        if(stationManager.register(station)){
+            return setPrint.printResult(REGISTER, STATION, true);
         }
-        stationManager.register(station);
-        result = true;
-
-        return setPrint.printResult(REGISTER, STATION, result);
+        return setPrint.printResult(REGISTER, STATION, false);
     }
 
     @Override
     public boolean delete() {
         ask.orderIndex(DELETE, STATION);
         String command = method.getUserInput();
-        boolean result=false;
-        if(method.isEmpty(command)) {
+        if(method.isEmpty(STATION, command)) {
             inputException.noStation();
             return false;
         }
+        boolean result = deleteStation(command);
+        return setPrint.printResult(DELETE, STATION, result);
+    }
+
+    boolean deleteStation(String command){
         try {
-            result = stationManager.delete(command);
+            return stationManager.delete(command);
         } catch(IllegalArgumentException e){
             inputException.underTwoStation();
-            return false;
         }catch (Exception e) {
             inputException.unExpectedError();
-            return false;
         }
-
-        return setPrint.printResult(DELETE, STATION, result);
+        return false;
     }
 
     public boolean read() {

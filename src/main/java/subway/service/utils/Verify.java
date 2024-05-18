@@ -37,23 +37,22 @@ public class Verify {
         }
         return false;
     }
-    public boolean haveSameNameLine(String line){
-        if (isEmpty(LINE, line) != true) {
+    public boolean sameNameLine(String line){
+        if (isEmpty(LINE, line) == true) {
             return false;
         }
         if(lineEqualStation(line)) {
-            inputException.lineEqualStation();
             return false;
         }
         return true;
     }
 
     public boolean haveSameNameStation(String station){
-        if (isEmpty(STATION, station) != true) {
+        if (isEmpty(STATION, station) == false) {
             inputException.alreadyCreatedStation();
             return false;
         }
-        if(isEmptyLine(station) != true) {
+        if(isEmptyLine(station) == false) {
             inputException.lineEqualStation();
             return false;
         }

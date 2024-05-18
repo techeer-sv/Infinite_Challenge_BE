@@ -35,4 +35,12 @@ public class InputException {
     public void alreadyWithStation() {
         System.err.print(ALREADY_WITH_STAION.getError());
     }
+
+    public void haveLines() {
+        System.err.println(STATIONS_UNDER_LINE.getError());
+    }
+
+    public void noSuchLine() {
+        System.err.println(NO_SUCH_LINE.getError());
+    }
 }

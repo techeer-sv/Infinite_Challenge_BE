@@ -19,7 +19,7 @@ public class LineController extends ClassifyMethods {
     @Override
     public boolean register() {
         String line = method.getLine(REGISTER, LINE);
-        if(!lineManager.haveSameName(line)) return false;
+        if(lineManager.haveSameName(line)) return false;
         if(!addSubStations(line)) return false;
         return setPrint.printResult(REGISTER, LINE, true);
     }
@@ -27,7 +27,6 @@ public class LineController extends ClassifyMethods {
     public boolean addSubStations(String line){
         String upper, bottom;
         try {
-            if(!lineManager.haveSameName(line)) return false;
             upper = method.getStation(lineManager, REGISTER, UPPER);
             bottom = method.getStation(lineManager, REGISTER, BOTTOM);
             return lineManager.setStations(line, upper, bottom);

@@ -17,7 +17,7 @@ public class StationRepository {
     }
 
     public static boolean deleteStation(final String name) {
-        return stations.removeIf(station -> Objects.equals(station.getName(), name) && station.hasNoLine());
+        return stations.removeIf(station -> Objects.equals(station.getName(), name));
     }
     public static Station getStationByName(final String name){
         for(Station station : stations){

@@ -9,6 +9,8 @@ public enum Errors {
     ALREADY_WITH_STAION("노선에 해당 역이 이미 포함되어 있습니다.\n"),
     UNEXPECTED("예상치 못한 에러가 발생했습니다.\n"),
     UNDER_TWO_STATIONS("속한 역의 개수가 2개 이하인 노선은 삭제할 수 없습니다.\n"),
+    STATIONS_UNDER_LINE("노선에 속한 역은 삭제할 수 없습니다.\n"),
+    NO_SUCH_LINE("요청하신 노선 정보를 불러올 수 없습니다.\n"),
     DEL_LINE("존재하지 않는 노선 이름입니다.\n");
 
     private final String message;

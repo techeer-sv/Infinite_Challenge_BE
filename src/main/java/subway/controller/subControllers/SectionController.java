@@ -37,44 +37,42 @@ public class SectionController extends ClassifyMethods {
     public boolean register() { // 노선, 역 이름, 순서 입력 받고 등록
         String line = method.getLine();
         String station = method.getStation();
-        if(!isValid(line, station))return false;
+        if(isEmptySpace(line, station)) return false;
+        if(lineHaveStation(line, station))return false;
         int index = method.getIndex();
         sectionManager.insertSection(station, index);
 
         return setPrint.printResult(REGISTER, SECTION, true);
     }
 
-    public boolean isValid(String line, String station){
-        try{
-            if(sectionManager.isEmptySpace(line, station)) {
-                return false;
-            }
-            if(sectionManager.lineHaveStation(line, station)) {
-                inputException.alreadyWithStation();
-                return false;
-            }; // TODO: 예외처리
-        }catch (Exception e){
-            inputException.unExpectedError();
-            return false;
-        }
-        return true;
+    public boolean isEmptySpace(String line, String station){
+        return sectionManager.isEmptySpace(line, station);
+    }
+
+    public boolean lineHaveStation(String line, String station){
+        return sectionManager.lineHaveStation(line, station);
     }
 
     @Override
     public boolean delete() {
-        try {
-            String line = method.getLine(DELETE, "구간의 노선");
-            sectionManager.getLine(line);
-            String station = method.getStation(sectionManager, DELETE, "구간의 역");
+        String line = method.getLine(DELETE, "구간의 노선");
+        sectionManager.getLine(line);
+        String station = method.getStation(sectionManager, DELETE, "구간의 역");
 
-            if (!sectionManager.isEmpty(STATION, station)) {
-                return setPrint.printResult(DELETE, STATION, true);
-            }
-//            response.printInfo("존재하지 않는 역에 접근했습니다.");
-        } catch (IllegalArgumentException e) {
-            System.err.println(Errors.VALID.getError());
+        return deleteSection(line, station) == true;
+    }
+
+    public boolean deleteSection(String line, String station) {
+        if (isEmptySpace(line, station)) return false;
+        if (!lineHaveStation(line, station)) {
+            inputException.noStation();
+            return false;
         }
-        return false;
+        if (sectionManager.isDeletable(line)) {
+            inputException.underTwoStation();
+            return false;
+        }
+        return setPrint.printResult(DELETE, STATION, true);
     }
 
     @Override

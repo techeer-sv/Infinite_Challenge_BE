@@ -1,6 +1,5 @@
 package subway.service;
 
-import subway.config.constants.Targets;
 import subway.config.handler.InputException;
 import subway.domain.Line;
 import subway.domain.Station;
@@ -63,6 +62,10 @@ public class LineManager extends Verify implements Managerable {
     }
 
     public boolean haveSameName(String line){
-        return haveSameNameLine(line);
+        if(sameNameLine(line) == true) {
+            inputException.alreadyCreatedLine();
+            return true;
+        }
+        return false;
     }
 }
