@@ -38,7 +38,10 @@ public class SectionController extends ClassifyMethods {
         String line = method.getLine();
         String station = method.getStation();
         if(isEmptySpace(line, station)) return false;
-        if(lineHaveStation(line, station))return false;
+        if(lineHaveStation(line, station)){
+            inputException.alreadyWithStation();
+            return false;
+        }
         int index = method.getIndex();
         sectionManager.insertSection(station, index);
 
