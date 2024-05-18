@@ -32,7 +32,7 @@ public class MakeString implements Constants{
             sb.append(work).append("되었습니다.");
         }
         if(result == false){
-            sb.append(work).append("되지 않았습니다. 연결된 노선이나 해당 노선에 속한 역을 확인해주세요.");
+            sb.append(work).append("되지 않았습니다.");
         }
         return sb.toString();
     }

@@ -43,4 +43,9 @@ public class StationManager extends Verify implements Managerable {
         }
         return station;
     }
+
+    public boolean haveSameName(String station){
+        if(haveSameNameStation(station)) return true;
+        return false;
+    }
 }

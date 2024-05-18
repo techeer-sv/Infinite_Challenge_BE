@@ -24,7 +24,7 @@ public class StationController extends ClassifyMethods {
         boolean result = false;
         String station = method.getUserInput();
         // 조건 모듈
-        if(!stationManager.isEmpty(Targets.STATION.getTarget(), station)){
+        if(!stationManager.haveSameName(station)){
             inputException.alreadyCreatedStation();
             return false;
         }

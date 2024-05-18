@@ -23,9 +23,10 @@ public class Line {
         return sb;
     }
 
-    public void setStations(final Station upper, final Station bottom) {
+    public boolean setStations(final Station upper, final Station bottom) {
         stations.addFirst(upper);
         stations.addLast(bottom);
+        return true;
     }
 
     public void addStation(final Station station, final int index) {

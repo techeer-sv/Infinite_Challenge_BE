@@ -19,7 +19,7 @@ public class LineController extends ClassifyMethods {
     @Override
     public boolean register() {
         String line = method.getLine(REGISTER, LINE);
-        if(!canRegister(line)) return false;
+        if(!lineManager.haveSameName(line)) return false;
         if(!addSubStations(line)) return false;
         return setPrint.printResult(REGISTER, LINE, true);
     }
@@ -27,27 +27,14 @@ public class LineController extends ClassifyMethods {
     public boolean addSubStations(String line){
         String upper, bottom;
         try {
-            if(!canRegister(line)) return false;
+            if(!lineManager.haveSameName(line)) return false;
             upper = method.getStation(lineManager, REGISTER, UPPER);
             bottom = method.getStation(lineManager, REGISTER, BOTTOM);
-            lineManager.setStations(line, upper, bottom);
-            return true;
+            return lineManager.setStations(line, upper, bottom);
         } catch (IllegalArgumentException e) {
             inputException.noStation();
         }
         return false;
-    }
-
-    public boolean canRegister(String line){
-        if (lineManager.isEmpty(LINE, line) != true) {
-            inputException.alreadyCreatedLine();
-            return false;
-        }
-        if(lineManager.lineEqualStation(line)) {
-            inputException.lineEqualStation();
-            return false;
-        }
-        return true;
     }
 
     @Override

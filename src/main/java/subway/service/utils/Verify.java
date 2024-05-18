@@ -15,23 +15,23 @@ public class Verify {
 
     public boolean isEmpty(final String station) {
         if(subwayException.isBack(station) == true) return false; // TODO: 종료시키는 에러? 커스텀?
-        return isStationEmpty(station);
+        return isEmptyStation(station);
     }
     public boolean isEmpty(final String type, final String name){
         if(subwayException.isBack(name) == true) return false; // TODO: 종료시키는 에러? 커스텀?
-        if(type.equals(STATION)) return isStationEmpty(name);
+        if(type.equals(STATION)) return isEmptyStation(name);
         if(type.equals(LINE)) return isEmptyLine(name);
         return true;
     }
 
-    boolean isStationEmpty(final String station){
+    public boolean isEmptyStation(final String station){
         if(stationRepo.getStationByName(station) == null ) return true;
         return false;
     }
 
     public boolean isEmptyLine(String name){
-        if(lineRepo.getLineByName(name) != null ) return false;
-        return true;
+        if(lineRepo.getLineByName(name) != null ) return true;
+        return false;
     }
 
     public boolean lineEqualStation(String line){
@@ -52,6 +52,30 @@ public class Verify {
         Line line = lineRepo.getLineByName(name);
         if(line == null) subwayException.noLine();
         return line;
+    }
+
+    public boolean haveSameNameLine(String line){
+        if (isEmpty(LINE, line) != true) {
+            inputException.alreadyCreatedLine();
+            return false;
+        }
+        if(lineEqualStation(line)) {
+            inputException.lineEqualStation();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean haveSameNameStation(String station){
+        if (isEmpty(STATION, station) != true) {
+            inputException.alreadyCreatedStation();
+            return false;
+        }
+        if(lineEqualStation(station)) {
+            inputException.lineEqualStation();
+            return false;
+        }
+        return true;
     }
 
 }

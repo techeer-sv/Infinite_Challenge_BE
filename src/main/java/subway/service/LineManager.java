@@ -10,7 +10,6 @@ import subway.service.utils.Verify;
 
 import java.util.List;
 
-import static subway.controller.utils.Constants.LINE;
 import static subway.service.InitSubwayValues.*;
 
 public class LineManager extends Verify implements Managerable {
@@ -22,13 +21,13 @@ public class LineManager extends Verify implements Managerable {
         return node;
     }
 
-    public void setStations(final String name, final String upperStation, final String bottomStation){
+    public boolean setStations(final String name, final String upperStation, final String bottomStation){
         Line line = setLine(name);
         Station upper = stationManager.getByStationName(upperStation);
         Station bottom = stationManager.getByStationName(bottomStation);
         upper.addLine(line);
         bottom.addLine(line);
-        line.setStations(upper, bottom);
+        return line.setStations(upper, bottom);
     }
 
     @Override
@@ -61,5 +60,9 @@ public class LineManager extends Verify implements Managerable {
             sb.append(line.stationList()).append("\n");
         }
         return sb;
+    }
+
+    public boolean haveSameName(String line){
+        return haveSameNameLine(line);
     }
 }

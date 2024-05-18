@@ -36,18 +36,32 @@ public class SectionController extends ClassifyMethods {
     @Override
     public boolean register() { // 노선, 역 이름, 순서 입력 받고 등록
         String line = method.getLine();
-        if (sectionManager.isEmpty(LINE, line)) {
-            inputException.noCreatedLine();
-            return false;
-        }
         String station = method.getStation();
-        if(sectionManager.lineHaveStation(line, station)) return false; // TODO: 예외처리
-        if(sectionManager.isEmpty(STATION, station)) return false; // TODO: 예외처리
-
+        if(!isValid(line, station))return false;
         int index = method.getIndex();
         sectionManager.insertSection(station, index);
 
         return setPrint.printResult(REGISTER, SECTION, true);
+    }
+
+    public boolean isValid(String line, String station){
+        try{
+            if(sectionManager.isEmptySpace(line, station)) {
+                return false;
+            }
+            if (!sectionManager.haveSameName(line)) {
+                inputException.noCreatedLine();
+                return false;
+            }
+            if(sectionManager.lineHaveStation(line, station)) {
+                inputException.alreadyWithStation();
+                return false;
+            }; // TODO: 예외처리
+        }catch (Exception e){
+            inputException.unExpectedError();
+            return false;
+        }
+        return true;
     }
 
     @Override
