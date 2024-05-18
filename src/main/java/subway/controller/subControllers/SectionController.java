@@ -68,10 +68,11 @@ public class SectionController extends ClassifyMethods {
             inputException.noStation();
             return false;
         }
-        if (sectionManager.isDeletable(line)) {
+        if (!sectionManager.isDeletable(line)) {
             inputException.underTwoStation();
             return false;
         }
+        sectionManager.delete(station);
         return setPrint.printResult(DELETE, STATION, true);
     }
 
