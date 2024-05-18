@@ -33,8 +33,8 @@ public class LineManager extends Verify implements Managerable {
     public boolean delete(final String name) {
         Line line = lineRepo.getLineByName(name);
         for(int i=0;i<line.getSize();i++){
-            Station node = line.getStation(i);
-            node.deleteLine(line);
+            Station station = line.getStation(i);
+            station.deleteLine(line);
         }
         return lineRepo.deleteLineByName(name);
     }

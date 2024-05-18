@@ -3,7 +3,6 @@ package subway.config.handler;
 import subway.config.constants.views.Errors;
 import subway.config.constants.views.Prefixes;
 
-import static subway.config.constants.views.Errors.UNDER_TWO_STATIONS;
 import static subway.config.handler.InputExceptionError.ErrorMessage.*;
 
 public class SubwayException extends RuntimeException {
