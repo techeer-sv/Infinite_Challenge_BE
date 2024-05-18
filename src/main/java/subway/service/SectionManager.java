@@ -7,7 +7,6 @@ import subway.domain.Station;
 import subway.service.utils.Managerable;
 import subway.service.utils.Verify;
 
-import static subway.controller.utils.Constants.STATION;
 import static subway.service.InitSubwayValues.lineRepo;
 import static subway.service.InitSubwayValues.stationRepo;
 
@@ -48,15 +47,16 @@ public class SectionManager extends Verify implements Managerable {
             inputException.noStation();
             return true;
         }
-        if(!isEmptyLine(line)){
+        if(isEmptyLine(line)){
             inputException.noCreatedLine();
             return true;
         }
         return false;
     }
 
-    public boolean haveSameName(String line){
-        if(haveSameNameLine(line)) {
+    public boolean lineHaveStation(final String lName, final String sName){
+        Line line = getLine(lName);
+        if(line.haveStation(sName)){
             return true;
         }
         return false;

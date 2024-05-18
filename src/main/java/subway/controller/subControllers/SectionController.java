@@ -49,10 +49,6 @@ public class SectionController extends ClassifyMethods {
             if(sectionManager.isEmptySpace(line, station)) {
                 return false;
             }
-            if (!sectionManager.haveSameName(line)) {
-                inputException.noCreatedLine();
-                return false;
-            }
             if(sectionManager.lineHaveStation(line, station)) {
                 inputException.alreadyWithStation();
                 return false;
