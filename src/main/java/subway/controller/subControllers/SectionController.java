@@ -1,6 +1,5 @@
 package subway.controller.subControllers;
 
-import subway.config.constants.Targets;
 import subway.config.constants.views.Errors;
 import subway.config.handler.InputException;
 import subway.config.handler.SubwayException;
@@ -37,19 +36,18 @@ public class SectionController extends ClassifyMethods {
     @Override
     public boolean register() { // 노선, 역 이름, 순서 입력 받고 등록
         String line = method.getLine();
-        if (sectionManager.isEmpty(Targets.LINE.getTarget(), line)) {
+        if (sectionManager.isEmpty(LINE, line)) {
             inputException.noCreatedLine();
             return false;
         }
         String station = method.getStation();
         if(!sectionManager.isValidLine(line, station)) return false; // TODO: 예외처리
-        if(sectionManager.isEmpty(Targets.STATION.getTarget(), station)) return false; // TODO: 예외처리
+        if(sectionManager.isEmpty(STATION, station)) return false; // TODO: 예외처리
 
         int index = method.getIndex();
         sectionManager.insertSection(station, index);
 
-        response.printInfo("구간이 등록되었습니다.");
-        return true;
+        return setPrint.printResult(REGISTER, SECTION, true);
     }
 
     @Override
@@ -59,15 +57,14 @@ public class SectionController extends ClassifyMethods {
             sectionManager.getLine(line);
             String station = method.getStation(sectionManager, DELETE, "구간의 역");
 
-            if (!sectionManager.isEmpty(Targets.STATION.getTarget(), station)) { // TODO: 존재하지 않는 구간을 삭제하려 할 때 예외 처리 추가
-                sectionManager.delete(station);
-                response.printInfo("구간이 삭제되었습니다.");
+            if (!sectionManager.isEmpty(STATION, station)) {
+                return setPrint.printResult(DELETE, STATION, true);
             }
+//            response.printInfo("존재하지 않는 역에 접근했습니다.");
         } catch (IllegalArgumentException e) {
             System.err.println(Errors.VALID.getError());
-            return false;
         }
-        return true;
+        return false;
     }
 
     @Override

@@ -20,9 +20,10 @@ public class StationController extends ClassifyMethods {
 
     @Override
     public boolean register() {
-        ask.orderWhere(REGISTER, STATION);
+        ask.orderIndex(REGISTER, STATION);
         boolean result = false;
         String station = method.getUserInput();
+        // 조건 모듈
         if(!stationManager.isEmpty(Targets.STATION.getTarget(), station)){
             inputException.alreadyCreatedStation();
             return false;
@@ -30,14 +31,12 @@ public class StationController extends ClassifyMethods {
         stationManager.register(station);
         result = true;
 
-        String message = makeString.infoMessage(REGISTER, STATION, result);
-        response.printInfo(message);
-        return result;
+        return setPrint.printResult(REGISTER, STATION, result);
     }
 
     @Override
     public boolean delete() {
-        ask.orderWhere(DELETE, STATION);
+        ask.orderIndex(DELETE, STATION);
         String command = method.getUserInput();
         boolean result=false;
         if(method.isEmpty(command)) {
@@ -53,9 +52,8 @@ public class StationController extends ClassifyMethods {
             inputException.unExpectedError();
             return false;
         }
-        String message = makeString.infoMessage(DELETE, STATION, result);
-        response.printInfo(message);
-        return true;
+
+        return setPrint.printResult(DELETE, STATION, result);
     }
 
     public boolean read() {

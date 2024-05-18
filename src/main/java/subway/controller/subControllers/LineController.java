@@ -1,6 +1,5 @@
 package subway.controller.subControllers;
 
-import subway.config.constants.Targets;
 import subway.config.handler.InputException;
 import subway.config.handler.SubwayException;
 import subway.controller.utils.ClassifyMethods;
@@ -19,34 +18,42 @@ public class LineController extends ClassifyMethods {
 
     @Override
     public boolean register() {
-        String upper, bottom, message;
         String line = method.getLine(REGISTER, LINE);
+        if(!canRegister(line)) return false;
+        if(!addSubStations(line)) return false;
+        return setPrint.printResult(REGISTER, LINE, true);
+    }
+
+    public boolean addSubStations(String line){
+        String upper, bottom;
         try {
-            if (lineManager.isEmpty(Targets.LINE.getTarget(), line) != true) {
-                inputException.alreadyCreatedLine();
-                return false;
-            }
-            if(lineManager.lineEqualStation(line)) {
-                inputException.lineEqualStation();
-                return false;
-            }
+            if(!canRegister(line)) return false;
             upper = method.getStation(lineManager, REGISTER, UPPER);
             bottom = method.getStation(lineManager, REGISTER, BOTTOM);
             lineManager.setStations(line, upper, bottom);
+            return true;
         } catch (IllegalArgumentException e) {
             inputException.noStation();
+        }
+        return false;
+    }
+
+    public boolean canRegister(String line){
+        if (lineManager.isEmpty(LINE, line) != true) {
+            inputException.alreadyCreatedLine();
             return false;
         }
-        message= makeString.infoMessage(REGISTER, LINE, true);
-        System.out.println(message);
+        if(lineManager.lineEqualStation(line)) {
+            inputException.lineEqualStation();
+            return false;
+        }
         return true;
     }
 
     @Override
     public boolean delete() {
-        String message;
         boolean result=false;
-        ask.orderWhere(DELETE, LINE);
+        ask.orderIndex(DELETE, LINE);
         try {
             String command = method.getUserInput();
             result = lineManager.delete(command);
@@ -54,9 +61,7 @@ public class LineController extends ClassifyMethods {
             subwayException.noLine();
             return false;
         }
-        message=makeString.infoMessage(DELETE,LINE, result);
-        System.out.println(message);
-        return true;
+        return setPrint.printResult(DELETE, LINE, result);
     }
 
     public boolean read() {

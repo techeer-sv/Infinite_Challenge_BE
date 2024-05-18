@@ -1,7 +1,7 @@
 package subway.controller.utils;
 
 public interface Controller {
-    static final Methods method = new Methods();
+    static final GetUserInput method = new GetUserInput();
 
     public boolean register();
     public boolean delete();

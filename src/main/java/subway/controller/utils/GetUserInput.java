@@ -1,7 +1,5 @@
 package subway.controller.utils;
 
-import subway.config.constants.Targets;
-import subway.config.handler.InputException;
 import subway.service.utils.Managerable;
 import subway.service.utils.Verify;
 
@@ -12,10 +10,9 @@ import java.io.InputStreamReader;
 import static subway.controller.utils.ClassifyMethods.checkCommand;
 import static subway.controller.utils.ClassifyMethods.subwayException;
 
-public class Methods extends Verify implements Constants {
+public class GetUserInput extends Verify implements Constants {
     private BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
-    InputException inputException = new InputException();
-    public Methods() {}
+    public GetUserInput() {}
 
     public void closeBuffer(){
         try{
@@ -35,7 +32,7 @@ public class Methods extends Verify implements Constants {
     }
 
     public int getIndex() {
-        ask.orderWhere();
+        ask.orderIndex();
         String input = getUserInput();
         if (subwayException.isBack(input) == true) return -1;
         int index = checkCommand.strToInt(input);
@@ -44,10 +41,9 @@ public class Methods extends Verify implements Constants {
     }
 
     public String getLine() {
-        ask.orderWhere(LINE);
+        ask.orderIndex(LINE);
         try {
-            String line = getUserInput();
-            return line;
+            return getUserInput();
         } catch (Exception e) {
             subwayException.checkCommand();
         }
@@ -55,19 +51,19 @@ public class Methods extends Verify implements Constants {
     }
 
     public String getLine(String function, String target) {
-        ask.orderWhere(function, target);
+        ask.orderIndex(function, target);
         return getUserInput();
     }
 
     public String getStation() {
-        ask.orderWhere("역 이름");
+        ask.orderIndex("역 이름");
         return getUserInput();
     }
 
     public String getStation(Managerable manager, String function, String station) {
-        ask.orderWhere(function, station);
+        ask.orderIndex(function, station);
         String node = getUserInput();
-        if (manager.isEmpty(Targets.STATION.getTarget(),node) == true) {
+        if (manager.isEmpty(STATION,node) == true) {
             subwayException.noStation();
         }
         return node;

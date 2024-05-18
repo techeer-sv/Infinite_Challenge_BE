@@ -29,4 +29,6 @@ public interface Constants {
     static final AskView ask = new AskView();
     static final ResponseView response = new ResponseView();
     static final MakeString makeString = new MakeString();
+
+    static SetPrint setPrint = new SetPrint();
 }

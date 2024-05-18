@@ -22,18 +22,18 @@ public class AskView implements Constants { // TODO: (고민) view 가 너무 �
     }
 
     //## 등록/삭제할 역/노선을 입력하세요
-    public void orderWhere(final String work, final String name) {
+    public void orderIndex(final String work, final String name) {
         String sentence = makeString.askName(work, name);
         System.out.println(sentence);
     }
 
     // 역/노선을 입력하세요
-    public void orderWhere(final String name) {
+    public void orderIndex(final String name) {
         String sentence = makeString.askName(name);
         System.out.println(sentence);
     }
 
-    public void orderWhere() { // 등록 or 삭제
+    public void orderIndex() { // 등록 or 삭제
         System.out.println(makeString.askSequence());
     }
 

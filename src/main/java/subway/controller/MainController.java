@@ -7,7 +7,7 @@ import subway.controller.subControllers.SectionController;
 import subway.controller.subControllers.StationController;
 import subway.controller.utils.CheckCommand;
 import subway.controller.utils.Constants;
-import subway.controller.utils.Methods;
+import subway.controller.utils.GetUserInput;
 import subway.service.InitSubwayValues;
 import subway.view.AskView;
 
@@ -19,7 +19,7 @@ public class MainController implements Constants {
     private MapController map;
     private static SubwayException subwayException;
     private CheckCommand checkCommand = new CheckCommand();
-    private Methods method=new Methods();
+    private GetUserInput method=new GetUserInput();
 
 
     public MainController() {

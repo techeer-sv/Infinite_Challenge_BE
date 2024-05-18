@@ -1,6 +1,7 @@
 package subway.service;
 
 import subway.config.constants.Targets;
+import subway.config.handler.InputException;
 import subway.domain.Line;
 import subway.domain.Station;
 import subway.service.utils.LineMakeString;
@@ -9,10 +10,12 @@ import subway.service.utils.Verify;
 
 import java.util.List;
 
+import static subway.controller.utils.Constants.LINE;
 import static subway.service.InitSubwayValues.*;
 
 public class LineManager extends Verify implements Managerable {
     LineMakeString makeString = new LineMakeString();
+    InputException inputException = new InputException();
     public Line setLine(final String name){
         Line node = new Line(name);
         lineRepo.addLine(node);
