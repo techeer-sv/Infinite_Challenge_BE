@@ -13,6 +13,18 @@ public class Verify {
     SubwayException subwayException = new SubwayException();
     InputException inputException = new InputException();
 
+    public boolean isEmptyName(final String name){
+        if(isEmpty(LINE, name) == false) {
+            inputException.alreadyCreatedLine();
+            return false;
+        }
+        if(isEmpty(STATION, name) == false) {
+            inputException.alreadyCreatedStation();
+            return false;
+        }
+        return true;
+    }
+
     public boolean isEmpty(final String type, final String name){
         if(subwayException.isBack(name) == true) return false; // TODO: 종료시키는 에러? 커스텀?
         if(type.equals(STATION)) return isEmptyStation(name);
@@ -28,35 +40,6 @@ public class Verify {
     public boolean isEmptyLine(String name){
         if(lineRepo.getLineByName(name) == null ) return true;
         return false;
-    }
-
-    public boolean lineEqualStation(String line){
-        if(stationRepo.getStationByName(line) != null) {
-            inputException.lineEqualStation();
-            return true;
-        }
-        return false;
-    }
-    public boolean sameNameLine(String line){
-        if (isEmpty(LINE, line) == true) {
-            return false;
-        }
-        if(lineEqualStation(line)) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean haveSameNameStation(String station){
-        if (isEmpty(STATION, station) == false) {
-            inputException.alreadyCreatedStation();
-            return false;
-        }
-        if(isEmptyLine(station) == false) {
-            inputException.lineEqualStation();
-            return false;
-        }
-        return true;
     }
 
     public Line getLine(String name){

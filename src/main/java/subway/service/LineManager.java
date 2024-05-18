@@ -60,12 +60,4 @@ public class LineManager extends Verify implements Managerable {
         }
         return sb;
     }
-
-    public boolean haveSameName(String line){
-        if(sameNameLine(line) == true) {
-            inputException.alreadyCreatedLine();
-            return true;
-        }
-        return false;
-    }
 }

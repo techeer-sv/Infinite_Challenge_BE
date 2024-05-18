@@ -56,8 +56,4 @@ public class StationManager extends Verify implements Managerable {
         }
         return station;
     }
-
-    public boolean haveSameName(String station){
-        return haveSameNameStation(station) ;
-    }
 }

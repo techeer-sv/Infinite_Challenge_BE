@@ -19,7 +19,7 @@ public class LineController extends ClassifyMethods {
     @Override
     public boolean register() {
         String line = method.getLine(REGISTER, LINE);
-        if(lineManager.haveSameName(line)) return false;
+        if(!lineManager.isEmptyName(line)) return false;
         if(!addSubStations(line)) return false;
         return setPrint.printResult(REGISTER, LINE, true);
     }
