@@ -18,7 +18,7 @@ public class SectionManager extends Verify implements Managerable {
     public void insertSection(final String sName,final int index){
         Station station = stationRepo.getStationByName(sName);
         if(station == null) subwayException.noStation();
-        lineRepo.addLine(line, station, index);
+        lineRepo.addLine(line, station, index-1);
     }
 
     public Line getLine(String name){
