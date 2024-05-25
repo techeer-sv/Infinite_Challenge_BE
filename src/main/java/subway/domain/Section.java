@@ -16,7 +16,7 @@ public class Section {
 		stations.add(station);
 	}
 
-	public boolean removeStation(String stationName) {
+	public boolean deleteStation(String stationName) {
 		return stations.removeIf(station -> station.getName().equals(stationName));
 	}
 

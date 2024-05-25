@@ -38,7 +38,7 @@ public class LineController {
 				lineService.addLine(lineName, startStationName, endStationName);
 				lineView.printSuccessAddLine();
 			}
-			if (command.equals(CommandLine.REMOVE_LINE)) {
+			if (command.equals(CommandLine.DELETE_LINE)) {
 				lineView.printDeleteLine();
 				String lineName = scanner.nextLine().trim();
 				lineService.deleteLine(lineName);

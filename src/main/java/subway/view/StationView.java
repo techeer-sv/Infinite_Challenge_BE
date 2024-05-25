@@ -5,7 +5,7 @@ import java.util.List;
 public class StationView {
 	private static final String STATION = "## 역 관리 화면";
 	private static final String ADD_STATION = "1. 역 등록";
-	private static final String REMOVE_STATION = "2. 역 삭제";
+	private static final String DELETE_STATION = "2. 역 삭제";
 	private static final String VIEW_STATIONS = "3. 역 조회";
 	private static final String BACK = "B. 돌아가기";
 	private static final String ADD_STATION_NAME = "## 등록할 역 이름을 입력하세요.";
@@ -19,7 +19,7 @@ public class StationView {
 	public void printStationView() {
 		System.out.println(STATION + "\n" +
 			ADD_STATION + "\n" +
-			REMOVE_STATION + "\n" +
+			DELETE_STATION + "\n" +
 			VIEW_STATIONS + "\n" +
 			BACK);
 	}

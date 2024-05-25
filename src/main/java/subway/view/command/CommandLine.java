@@ -6,7 +6,7 @@ import subway.view.error.MainErrorMessage;
 
 public enum CommandLine {
 	ADD_LINE("1"),
-	REMOVE_LINE("2"),
+	DELETE_LINE("2"),
 	VIEW_LINES("3"),
 	BACK("B");
 

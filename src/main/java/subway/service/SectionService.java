@@ -47,8 +47,8 @@ public class SectionService {
 			throw new IllegalArgumentException(SectionErrorMessage.INSUFFICIENT_STATIONS.getMessage());
 		}
 
-		boolean removed = section.removeStation(stationName);
-		if (!removed) {
+		boolean delete = section.deleteStation(stationName);
+		if (!delete) {
 			throw new IllegalArgumentException(SectionErrorMessage.UN_REMOVABLE.getMessage());
 		}
 	}
