@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import subway.view.error.StationErrorMessage;
 
@@ -22,10 +23,9 @@ public class StationRepository {
         return stations.removeIf(station -> Objects.equals(station.getName(), name));
     }
 
-    public Station findStationByName(String name) {
+    public static Optional<Station> findStationByName(String name) {
         return stations.stream()
             .filter(station -> Objects.equals(station.getName(), name))
-            .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException(StationErrorMessage.NOT_EXISTS.getMessage()));
+            .findFirst();
     }
 }
