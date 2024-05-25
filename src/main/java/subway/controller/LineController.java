@@ -6,6 +6,7 @@ import java.util.Scanner;
 import subway.service.LineService;
 import subway.view.LineView;
 import subway.view.MainView;
+import subway.view.command.CommandLine;
 
 public class LineController {
 	private final LineView lineView;
@@ -25,8 +26,9 @@ public class LineController {
 		while (back) {
 			lineView.printLineView();
 			mainView.printSelectView();
-			String command = scanner.nextLine().trim();
-			if (command.equals("1")) {
+			String commandInput = scanner.nextLine().trim();
+			CommandLine command = CommandLine.fromString(commandInput);
+			if (command.equals(CommandLine.ADD_LINE)) {
 				lineView.printAddLine();
 				String lineName = scanner.nextLine().trim();
 				lineView.printAddFirstLine();
@@ -36,18 +38,18 @@ public class LineController {
 				lineService.addLine(lineName, startStationName, endStationName);
 				lineView.printSuccessAddLine();
 			}
-			if (command.equals("2")) {
+			if (command.equals(CommandLine.REMOVE_LINE)) {
 				lineView.printDeleteLine();
 				String lineName = scanner.nextLine().trim();
 				lineService.deleteLine(lineName);
 				lineView.printSuccessDeleteLine();
 			}
-			if (command.equals("3")) {
+			if (command.equals(CommandLine.VIEW_LINES)) {
 				lineView.printSelectLine();
 				List<String> lines = lineService.getLines();
 				lineView.printLineList(lines);
 			}
-			if (command.equals("B")) {
+			if (command.equals(CommandLine.BACK)) {
 				back = false;
 			}
 		}

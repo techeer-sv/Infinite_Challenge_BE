@@ -10,6 +10,7 @@ import subway.view.LineView;
 import subway.view.MainView;
 import subway.view.SectionView;
 import subway.view.StationView;
+import subway.view.command.CommandMain;
 
 public class MainController {
 	private final StationController stationController;
@@ -41,20 +42,21 @@ public class MainController {
 		while (quit){
 			mainView.printMainView();
 			mainView.printSelectView();
-			String command = scanner.nextLine().trim();
-			if (command.equals("1")) {
+			String commandInput = scanner.nextLine().trim();
+			CommandMain command = CommandMain.fromString(commandInput);
+			if (command.equals(CommandMain.MANAGE_STATION)) {
 				stationController.manageStation();
 			}
-			if (command.equals("2")) {
+			if (command.equals(CommandMain.MANAGE_LINE)) {
 				lineController.manageLine();
 			}
-			if (command.equals("3")) {
+			if (command.equals(CommandMain.MANAGE_SECTION)) {
 				sectionController.manageSection();
 			}
-			if (command.equals("4")) {
+			if (command.equals(CommandMain.PRINT_LINE_MAP)) {
 				lineController.printLine();
 			}
-			if (command.equals("Q")) {
+			if (command.equals(CommandMain.QUIT)) {
 				quit = false;
 			}
 		}

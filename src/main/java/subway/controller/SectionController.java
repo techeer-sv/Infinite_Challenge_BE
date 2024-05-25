@@ -5,6 +5,7 @@ import java.util.Scanner;
 import subway.service.SectionService;
 import subway.view.MainView;
 import subway.view.SectionView;
+import subway.view.command.CommandSection;
 
 public class SectionController {
 	private final SectionView sectionView;
@@ -23,8 +24,9 @@ public class SectionController {
 		while (back) {
 			sectionView.printSectionView();
 			mainView.printSelectView();
-			String command = scanner.nextLine().trim();
-			if (command.equals("1")) {
+			String commandInput = scanner.nextLine().trim();
+			CommandSection command = CommandSection.fromString(commandInput);
+			if (command.equals(CommandSection.ADD_SECTION)) {
 				sectionView.printAddSection();
 				String lineName = scanner.nextLine().trim();
 				sectionView.printAddStationName();
@@ -34,7 +36,7 @@ public class SectionController {
 				sectionService.addSection(lineName, stationName, position);
 				sectionView.printSuccessSectionStation();
 			}
-			if (command.equals("2")) {
+			if (command.equals(CommandSection.DELETE_SECTION)) {
 				sectionView.printDeleteSection();
 				String lineName = scanner.nextLine().trim();
 				sectionView.printDeleteStation();
@@ -42,7 +44,7 @@ public class SectionController {
 				sectionService.deleteSection(lineName, stationName);
 				sectionView.printSuccessDeleteSection();
 			}
-			if (command.equals("B")) {
+			if (command.equals(CommandSection.BACK)) {
 				back = false;
 			}
 		}

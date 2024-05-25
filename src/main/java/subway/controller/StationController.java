@@ -6,6 +6,7 @@ import java.util.Scanner;
 import subway.service.StationService;
 import subway.view.MainView;
 import subway.view.StationView;
+import subway.view.command.CommandStation;
 
 public class StationController {
 	private final StationView stationView;
@@ -25,25 +26,26 @@ public class StationController {
 		while (back) {
 			stationView.printStationView();
 			mainView.printSelectView();
-			String command = scanner.nextLine().trim();
-			if (command.equals("1")) {
+			String commandInput = scanner.nextLine().trim();
+			CommandStation command = CommandStation.fromString(commandInput);
+			if (command.equals(CommandStation.ADD_STATION)) {
 				stationView.printAddStation();
 				String stationName = scanner.nextLine().trim();
 				stationService.addStation(stationName);
 				stationView.printSuccessAddStation();
 			}
-			if (command.equals("2")) {
+			if (command.equals(CommandStation.DELETE_STATION)) {
 				stationView.printDeleteStation();
 				String stationName = scanner.nextLine().trim();
 				stationService.deleteStation(stationName);
 				stationView.printSuccessDeleteStation();
 			}
-			if (command.equals("3")) {
+			if (command.equals(CommandStation.VIEW_STATIONS)) {
 				stationView.printSelectStation();
 				List<String> stations = stationService.getStations();
 				stationView.printStationList(stations);
 			}
-			if (command.equals("B")) {
+			if (command.equals(CommandStation.BACK)) {
 				back = false;
 			}
 		}
