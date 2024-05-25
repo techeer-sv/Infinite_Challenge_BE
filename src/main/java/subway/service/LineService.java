@@ -1,6 +1,7 @@
 package subway.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import subway.domain.Line;
@@ -33,10 +34,8 @@ public class LineService {
 			throw new IllegalArgumentException(LineErrorMessage.ALREADY_EXISTS.getMessage());
 		});
 
-		Station startStation = stationRepository.findStationByName(startStationName)
-			.orElseThrow(() -> new IllegalArgumentException(StationErrorMessage.NOT_EXISTS.getMessage()));
-		Station endStation = stationRepository.findStationByName(endStationName)
-			.orElseThrow(() -> new IllegalArgumentException(StationErrorMessage.NOT_EXISTS.getMessage()));
+		Station startStation = findStation(startStationName);
+		Station endStation = findStation(endStationName);
 
 		Line newLine = new Line(lineName);
 		lineRepository.addLine(newLine);
@@ -47,6 +46,19 @@ public class LineService {
 		sectionRepository.addSection(section);
 	}
 
+	public void deleteLine(String lineName) {
+		if (!lineRepository.deleteLineByName(lineName)) {
+			throw new IllegalArgumentException(LineErrorMessage.NOT_EXISTS.getMessage());
+		}
+	}
+
+	private Station findStation(String stationName) throws IllegalArgumentException {
+		return stationValidator(stationRepository.findStationByName(stationName));
+	}
+
+	private Station stationValidator(Optional<Station> station) {
+		return station.orElseThrow(() -> new IllegalArgumentException(StationErrorMessage.NOT_EXISTS.getMessage()));
+	}
 
 	private void validateLineName(String lineName) {
 		if (lineName.length() < 2) {
@@ -60,18 +72,11 @@ public class LineService {
 		}
 	}
 
-	public void deleteLine(String lineName) {
-		if (!lineRepository.deleteLineByName(lineName)) {
-			throw new IllegalArgumentException(LineErrorMessage.NOT_EXISTS.getMessage());
-		}
-	}
-
 	public List<String> getLines() {
 		return lineRepository.lines().stream()
 			.map(Line::getName)
 			.collect(Collectors.toList());
 	}
-
 
 	public void printAllLinesAndStations() {
 		lineRepository.lines().stream()

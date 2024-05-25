@@ -20,15 +20,11 @@ public class SectionService {
 		this.stationRepository = stationRepository;
 	}
 	public void addSection(String lineName, String stationName, int position) {
-		Line line = lineRepository.findLineByName(lineName)
-			.orElseThrow(() -> new IllegalArgumentException(SectionErrorMessage.NOT_LINE_EXISTS.getMessage()));
-		Station station = stationRepository.findStationByName(stationName)
-			.orElseThrow(() -> new IllegalArgumentException(SectionErrorMessage.NOT_STATION_EXISTS.getMessage()));
+		Line line = validateLine(lineName);
+		Station station = validateStation(stationName);
+		Section section = validateAndCreateSection(line);
 
-		Section section = sectionRepository.findByLine(line)
-			.orElseGet(() -> new Section(line));
-
-		if (section.getStations().size() < 2 && position != 1) {
+		if (section.getStations().size() < 2) {
 			throw new IllegalArgumentException(SectionErrorMessage.INSUFFICIENT_STATIONS.getMessage());
 		}
 
@@ -38,10 +34,8 @@ public class SectionService {
 	}
 
 	public void deleteSection(String lineName, String stationName) {
-		Line line = lineRepository.findLineByName(lineName)
-			.orElseThrow(() -> new IllegalArgumentException(SectionErrorMessage.NOT_LINE_EXISTS.getMessage()));
-		Section section = sectionRepository.findByLine(line)
-			.orElseThrow(() -> new IllegalArgumentException(SectionErrorMessage.NOT_LINE_EXISTS.getMessage()));
+		Line line = validateLine(lineName);
+		Section section = validtaeSection(line);
 
 		if (section.getStations().size() <= 2) {
 			throw new IllegalArgumentException(SectionErrorMessage.INSUFFICIENT_STATIONS.getMessage());
@@ -51,5 +45,25 @@ public class SectionService {
 		if (!delete) {
 			throw new IllegalArgumentException(SectionErrorMessage.UN_REMOVABLE.getMessage());
 		}
+	}
+
+	private Line validateLine(String lineName) {
+		return lineRepository.findLineByName(lineName)
+			.orElseThrow(() -> new IllegalArgumentException(SectionErrorMessage.NOT_LINE_EXISTS.getMessage()));
+	}
+
+	private Station validateStation(String stationName) {
+		return stationRepository.findStationByName(stationName)
+			.orElseThrow(() -> new IllegalArgumentException(SectionErrorMessage.NOT_STATION_EXISTS.getMessage()));
+	}
+
+	private Section validtaeSection(Line line) {
+		return sectionRepository.findByLine(line)
+			.orElseThrow(() -> new IllegalArgumentException(SectionErrorMessage.NOT_LINE_EXISTS.getMessage()));
+	}
+
+	private Section validateAndCreateSection(Line line) {
+		return sectionRepository.findByLine(line)
+			.orElseGet(() -> new Section(line));
 	}
 }
