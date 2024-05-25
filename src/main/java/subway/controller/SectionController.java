@@ -12,13 +12,12 @@ public class SectionController {
 	private final SectionService sectionService;
 	private final Scanner scanner;
 
-	public SectionController(Scanner scanner) {
+	public SectionController(Scanner scanner, SectionView sectionView, SectionService sectionService, MainView mainView) {
 		this.scanner = scanner;
-		this.sectionView = new SectionView();
-		this.mainView = new MainView();
-		this.sectionService = new SectionService();
+		this.sectionView = sectionView;
+		this.mainView = mainView;
+		this.sectionService = sectionService;
 	}
-
 	public void manageSection() {
 		boolean back = true;
 		while (back) {
@@ -40,7 +39,7 @@ public class SectionController {
 				String lineName = scanner.nextLine().trim();
 				sectionView.printDeleteStation();
 				String stationName = scanner.nextLine().trim();
-				sectionService.removeSection(lineName, stationName);
+				sectionService.deleteSection(lineName, stationName);
 				sectionView.printSuccessDeleteSection();
 			}
 			if (command.equals("B")) {

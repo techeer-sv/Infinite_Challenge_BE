@@ -14,12 +14,11 @@ public class SectionService {
 	private final SectionRepository sectionRepository;
 	private final StationRepository stationRepository;
 
-	public SectionService() {
-		this.lineRepository = new LineRepository();
-		this.sectionRepository = new SectionRepository();
-		this.stationRepository = new StationRepository();
+	public SectionService(LineRepository lineRepository, SectionRepository sectionRepository, StationRepository stationRepository) {
+		this.lineRepository = lineRepository;
+		this.sectionRepository = sectionRepository;
+		this.stationRepository = stationRepository;
 	}
-
 	public void addSection(String lineName, String stationName, int position) {
 		Line line = lineRepository.findLineByName(lineName)
 			.orElseThrow(() -> new IllegalArgumentException(SectionErrorMessage.NOT_LINE_EXISTS.getMessage()));
@@ -38,7 +37,7 @@ public class SectionService {
 
 	}
 
-	public void removeSection(String lineName, String stationName) {
+	public void deleteSection(String lineName, String stationName) {
 		Line line = lineRepository.findLineByName(lineName)
 			.orElseThrow(() -> new IllegalArgumentException(SectionErrorMessage.NOT_LINE_EXISTS.getMessage()));
 		Section section = sectionRepository.findByLine(line)

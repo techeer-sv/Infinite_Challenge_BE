@@ -10,6 +10,7 @@ import subway.domain.SectionRepository;
 import subway.domain.Station;
 import subway.domain.StationRepository;
 import subway.view.error.LineErrorMessage;
+import subway.view.error.SectionErrorMessage;
 import subway.view.error.StationErrorMessage;
 
 public class LineService {
@@ -18,10 +19,10 @@ public class LineService {
 	private final SectionRepository sectionRepository;
 	private final StationRepository stationRepository;
 
-	public LineService() {
-		this.lineRepository = new LineRepository();
-		this.sectionRepository = new SectionRepository();
-		this.stationRepository = new StationRepository();
+	public LineService(LineRepository lineRepository, SectionRepository sectionRepository, StationRepository stationRepository) {
+		this.lineRepository = lineRepository;
+		this.sectionRepository = sectionRepository;
+		this.stationRepository = stationRepository;
 	}
 
 	public void addLine(String lineName, String startStationName, String endStationName) {
@@ -78,7 +79,7 @@ public class LineService {
 				System.out.println("[INFO] " + line.getName());
 				System.out.println("[INFO] ---");
 				Section section = sectionRepository.findByLine(line)
-					.orElseThrow(() -> new IllegalStateException("No section found for line: " + line.getName()));
+					.orElseThrow(() -> new IllegalStateException(SectionErrorMessage.NOT_LINE_EXISTS.getMessage()));
 				section.getStations().forEach(station ->
 					System.out.println("[INFO] " + station.getName()));
 				System.out.println();

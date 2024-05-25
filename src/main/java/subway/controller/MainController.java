@@ -2,6 +2,9 @@ package subway.controller;
 
 import java.util.Scanner;
 
+import subway.service.LineService;
+import subway.service.SectionService;
+import subway.service.StationService;
 import subway.service.SubwayService;
 import subway.view.LineView;
 import subway.view.MainView;
@@ -16,13 +19,16 @@ public class MainController {
 	private final Scanner scanner;
 	private final SubwayService subwayService;
 
-	public MainController(Scanner scanner) {
+
+	public MainController(Scanner scanner, StationController stationController, LineController lineController,
+		SectionController sectionController, SubwayService subwayService, MainView mainView
+	) {
 		this.scanner = scanner;
-		this.stationController = new StationController(scanner);
-		this.lineController = new LineController(scanner);
-		this.sectionController = new SectionController(scanner);
-		this.subwayService = new SubwayService();
-		this.mainView = new MainView();
+		this.stationController = stationController;
+		this.lineController = lineController;
+		this.sectionController = sectionController;
+		this.subwayService = subwayService;
+		this.mainView = mainView;
 	}
 
 	public void run() {

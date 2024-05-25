@@ -13,11 +13,11 @@ public class LineController {
 	private final LineService lineService;
 	private final Scanner scanner;
 
-	public LineController(Scanner scanner) {
+	public LineController(Scanner scanner, LineView lineView, LineService lineService, MainView mainView) {
 		this.scanner = scanner;
-		this.lineView = new LineView();
-		this.mainView = new MainView();
-		this.lineService = new LineService();
+		this.lineView = lineView;
+		this.mainView = mainView;
+		this.lineService = lineService;
 	}
 
 	void manageLine() {

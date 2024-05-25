@@ -13,11 +13,11 @@ public class StationController {
 	private final StationService stationService;
 	private final Scanner scanner;
 
-	public StationController(Scanner scanner) {
+	public StationController(Scanner scanner, StationView stationView, StationService stationService, MainView mainView) {
 		this.scanner = scanner;
-		this.stationView = new StationView();
-		this.mainView = new MainView();
-		this.stationService = new StationService();
+		this.stationView = stationView;
+		this.mainView = mainView;
+		this.stationService = stationService;
 	}
 
 	public void manageStation() {
