@@ -15,10 +15,10 @@ public class DataInitializer {
 	private final StationRepository stationRepository;
 	private final SectionRepository sectionRepository;
 
-	public DataInitializer() {
-		this.lineRepository = new LineRepository();
-		this.stationRepository = new StationRepository();
-		this.sectionRepository = new SectionRepository();
+	public DataInitializer(LineRepository lineRepository, StationRepository stationRepository, SectionRepository sectionRepository) {
+		this.lineRepository = lineRepository;
+		this.stationRepository = stationRepository;
+		this.sectionRepository = sectionRepository;
 	}
 
 

@@ -27,7 +27,6 @@ public class AppConfig {
 		StationView stationView = new StationView();
 		LineView lineView = new LineView();
 		SectionView sectionView = new SectionView();
-		DataInitializer dataInitializer = new DataInitializer();
 
 		StationRepository stationRepository = new StationRepository();
 		LineRepository lineRepository = new LineRepository();
@@ -36,6 +35,7 @@ public class AppConfig {
 		StationService stationService = new StationService(stationRepository, sectionRepository);
 		LineService lineService = new LineService(lineRepository, sectionRepository, stationRepository);
 		SectionService sectionCapService = new SectionService(lineRepository, sectionRepository, stationRepository);
+		DataInitializer dataInitializer = new DataInitializer(lineRepository, stationRepository, sectionRepository);
 		SubwayService subwayService = new SubwayService(dataInitializer);
 
 		StationController stationController = new StationController(scanner, stationView, stationService, mainView);
