@@ -1,5 +1,9 @@
 package subway.view;
 
+import java.util.List;
+
+import subway.domain.Station;
+
 public class SectionView {
 
 	private static final String SECTION = "## 구간 관리 화면";
@@ -13,7 +17,6 @@ public class SectionView {
 	private static final String DELETE_STATION_NAME = "## 삭제할 구간의 역을 입력하세요.";
 	private static final String SUCCESS_SECTION_STATION = "[INFO] 구간이 등록되었습니다.";
 	private static final String SUCCESS_DELETE_SECTION = "[INFO] 구간이 삭제되었습니다.";
-	private static final String SELECT_STATION = "## 역 목록";
 
 	public void printSectionView() {
 		System.out.println(SECTION + "\n" +
@@ -48,10 +51,6 @@ public class SectionView {
 
 	public void printSuccessDeleteSection() {
 		System.out.println(SUCCESS_DELETE_SECTION);
-	}
-
-	public void printSelectStation() {
-		System.out.println(SELECT_STATION);
 	}
 
 }
