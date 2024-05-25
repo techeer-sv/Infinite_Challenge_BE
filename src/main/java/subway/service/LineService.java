@@ -71,5 +71,19 @@ public class LineService {
 			.collect(Collectors.toList());
 	}
 
+
+	public void printAllLinesAndStations() {
+		lineRepository.lines().stream()
+			.forEach(line -> {
+				System.out.println("[INFO] " + line.getName());
+				System.out.println("[INFO] ---");
+				Section section = sectionRepository.findByLine(line)
+					.orElseThrow(() -> new IllegalStateException("No section found for line: " + line.getName()));
+				section.getStations().forEach(station ->
+					System.out.println("[INFO] " + station.getName()));
+				System.out.println();
+			});
+	}
+
 }
 

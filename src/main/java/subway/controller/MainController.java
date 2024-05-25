@@ -46,7 +46,7 @@ public class MainController {
 				sectionController.manageSection();
 			}
 			if (command.equals("4")) {
-				sectionController.printLine();
+				lineController.printLine();
 			}
 			if (command.equals("Q")) {
 				quit = false;

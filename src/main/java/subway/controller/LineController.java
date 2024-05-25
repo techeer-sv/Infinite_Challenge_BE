@@ -52,4 +52,10 @@ public class LineController {
 			}
 		}
 	}
+
+	public void printLine() {
+		lineService.printAllLinesAndStations();
+	}
+
+
 }
