@@ -16,7 +16,15 @@ public class Section {
 		stations.add(station);
 	}
 
+	public boolean removeStation(String stationName) {
+		return stations.removeIf(station -> station.getName().equals(stationName));
+	}
+
 	public List<Station> getStations() {
 		return stations;
+	}
+
+	public Line getLine() {
+		return line;
 	}
 }
