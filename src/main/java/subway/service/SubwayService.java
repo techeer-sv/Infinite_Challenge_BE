@@ -23,12 +23,16 @@ public class SubwayService {
     }
 
     public void deleteStation(String name) {
-        if (lineService.getLines().stream()
-                .flatMap(line -> line.getStations().stream())
-                .anyMatch(station -> station.getName().equals(name))) {
+        if (isStationInUse(name)) {
             throw new IllegalArgumentException("[ERROR] 노선에 등록된 역은 삭제할 수 없습니다.");
         }
         stationService.deleteStation(name);
+    }
+
+    private boolean isStationInUse(String name) {
+        return lineService.getLines().stream()
+                .flatMap(line -> line.getStations().stream())
+                .anyMatch(station -> station.getName().equals(name));
     }
 
     public List<Station> getStations() {
