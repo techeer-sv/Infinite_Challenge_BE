@@ -4,10 +4,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import subway.config.SubwayInitializer;
 import subway.domain.Line;
-import subway.domain.LineRepository;
+import subway.domain.repository.LineRepository;
 import subway.domain.Station;
-import subway.domain.StationRepository;
+import subway.domain.repository.StationRepository;
+import subway.service.LineService;
+import subway.service.StationService;
+import subway.service.SubwayService;
 
 import java.util.List;
 
@@ -20,10 +24,16 @@ class SubwayInitializerTest {
     class SubwayService_Init {
         SubwayInitializer subwayInitializer;
         SubwayService subwayService;
+        StationRepository stationRepository;
+        LineRepository lineRepository;
 
         @BeforeEach
         void setUp() {
-            subwayService = new SubwayService();
+            stationRepository = new StationRepository();
+            lineRepository = new LineRepository();
+            StationService stationService = new StationService(stationRepository);
+            LineService lineService = new LineService(lineRepository, stationRepository);
+            subwayService = new SubwayService(stationService, lineService);
             subwayInitializer = new SubwayInitializer(subwayService);
         }
 
@@ -33,10 +43,10 @@ class SubwayInitializerTest {
             subwayInitializer.initialize();
 
             // 지하철 역 초기화
-            assertStationsInitialized(StationRepository.stations());
+            assertStationsInitialized(stationRepository.stations());
 
             // 지하철 노선 초기화
-            assertLinesInitialized(LineRepository.lines());
+            assertLinesInitialized(lineRepository.lines());
         }
         private void assertStationsInitialized(List<Station> stations) {
             assertEquals(7, stations.size());

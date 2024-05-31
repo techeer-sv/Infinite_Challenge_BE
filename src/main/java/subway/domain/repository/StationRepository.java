@@ -1,4 +1,6 @@
-package subway.domain;
+package subway.domain.repository;
+
+import subway.domain.Station;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,26 +10,26 @@ import java.util.Objects;
 public class StationRepository {
     private static final List<Station> stations = new ArrayList<>();
 
-    public static List<Station> stations() {
+    public List<Station> stations() {
         return Collections.unmodifiableList(stations);
     }
 
-    public static void addStation(Station station) {
+    public void addStation(Station station) {
         if(stations.stream().anyMatch(s -> s.getName().equals(station.getName()))){
             throw new IllegalArgumentException("[ERROR] 중복된 역 이름입니다.");
         }
         stations.add(station);
     }
 
-    public static boolean deleteStation(String name) {
+    public boolean deleteStation(String name) {
         return stations.removeIf(station -> Objects.equals(station.getName(), name));
     }
 
-    public static boolean isStationExist(String name) {
+    public boolean isStationExist(String name) {
         return stations.stream().anyMatch(station -> station.getName().equals(name));
     }
 
-    public static void clear() {
+    public void clear() {
         stations.clear();
     }
 }

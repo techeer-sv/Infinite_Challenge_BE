@@ -1,4 +1,6 @@
-package subway;
+package subway.config;
+
+import subway.service.SubwayService;
 
 public class SubwayInitializer {
     private final SubwayService subwayService;
