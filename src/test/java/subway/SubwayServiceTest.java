@@ -19,25 +19,25 @@ public class SubwayServiceTest {
     }
 
     @Nested
-    @DisplayName("역 등록 테스트")
+    @DisplayName("지하철 역 관련 기능")
     class AddStationTest {
 
         @Test
-        @DisplayName("새로운 역을 등록")
+        @DisplayName("지하철 역을 등록하고 삭제할 수 있다.")
         void addStation() {
             subwayService.addStation("잠실역");
             assertTrue(StationRepository.isStationExist("잠실역"));
         }
 
         @Test
-        @DisplayName("중복된 역 검증")
+        @DisplayName("중복된 지하철 역 이름이 등록될 수 없다.")
         void duplicationStation() {
             subwayService.addStation("잠실역");
             assertThrows(IllegalArgumentException.class, () -> subwayService.addStation("잠실역"));
         }
 
         @Test
-        @DisplayName("역 이름은 2글자 이상이어야 한다.")
+        @DisplayName("지하철 역 이름은 2글자 이상이어야 한다.")
         void invalidStationName() {
             assertThrows(IllegalArgumentException.class, () -> subwayService.addStation("짱"));
         }
