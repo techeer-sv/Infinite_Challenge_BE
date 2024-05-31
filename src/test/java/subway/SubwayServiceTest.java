@@ -24,10 +24,19 @@ public class SubwayServiceTest {
     class AddStationTest {
 
         @Test
-        @DisplayName("지하철 역을 등록하고 삭제할 수 있다.")
+        @DisplayName("지하철 역을 등록할 수 있다.")
         void addStation() {
             subwayService.addStation("잠실역");
             assertTrue(StationRepository.isStationExist("잠실역"));
+        }
+
+        @Test
+        @DisplayName("역을 삭제할 수 있다.")
+        void deleteStation() {
+            subwayService.addStation("잠실역");
+            assertTrue(StationRepository.isStationExist("잠실역"));
+            subwayService.deleteStation("잠실역");
+            assertFalse(StationRepository.isStationExist("잠실역"));
         }
 
         @Test

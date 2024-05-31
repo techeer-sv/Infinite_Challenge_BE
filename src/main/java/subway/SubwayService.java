@@ -26,6 +26,17 @@ public class SubwayService {
         LineRepository.addLine(line);
     }
 
+    public void deleteStation(String name) {
+        if (LineRepository.lines().stream()
+                .flatMap(line -> line.getStations().stream())
+                .anyMatch(station -> station.getName().equals(name))) {
+            throw new IllegalArgumentException("[ERROR] 노선에 등록된 역은 삭제할 수 없습니다.");
+        }
+        if (!StationRepository.deleteStation(name)) {
+            throw new IllegalArgumentException("[ERROR] 존재하지 않는 역입니다.");
+        }
+    }
+
     public List<Station> getStations() {
         return StationRepository.stations();
     }
