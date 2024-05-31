@@ -1,7 +1,8 @@
 package subway.config;
 
+import subway.domain.enums.LineEnum;
+import subway.domain.enums.StationEnum;
 import subway.service.SubwayService;
-import subway.util.SubwayUtils;
 
 public class SubwayInitializer {
     private final SubwayService subwayService;
@@ -16,18 +17,15 @@ public class SubwayInitializer {
     }
 
     private void initializeStations() {
-        SubwayUtils.addStations(subwayService,
-                "교대역", "강남역", "역삼역",
-                "남부터미널역", "양재역", "양재시민의숲역", "매봉역"
-        );
+        for (StationEnum station : StationEnum.values()) {
+            subwayService.addStation(station.getName());
+        }
     }
 
     private void initializeLines() {
-        SubwayUtils.addLines(subwayService, new Object[][]{
-                {"2호선", new String[]{"교대역", "강남역", "역삼역"}},
-                {"3호선", new String[]{"교대역", "남부터미널역", "양재역", "매봉역"}},
-                {"신분당선", new String[]{"강남역", "양재역", "양재시민의숲역"}}
-        });
+        for (LineEnum line : LineEnum.values()) {
+            subwayService.addLine(line.getName(), line.getStations());
+        }
     }
 
 }
