@@ -1,5 +1,6 @@
 package subway.service;
 
+import subway.domain.Line;
 import subway.domain.Station;
 
 import java.util.List;
@@ -45,5 +46,9 @@ public class SubwayService {
 
     public List<Station> getStations() {
         return stationService.getStations();
+    }
+
+    public List<Line> getLines() {
+        return lineService.getLines();
     }
 }

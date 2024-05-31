@@ -12,6 +12,8 @@ import subway.service.LineService;
 import subway.service.StationService;
 import subway.service.SubwayService;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SubwayServiceTest {
@@ -105,6 +107,20 @@ public class SubwayServiceTest {
             subwayService.addLine("2호선", "잠실역", "강남역");
             assertThrows(IllegalArgumentException.class, () -> subwayService.addLine("2호선", "구리역", "강남역"));
             assertThrows(IllegalArgumentException.class, () -> subwayService.addLine("2호선", "잠실역", "한국역"));
+        }
+
+        @Test
+        @DisplayName("지하철 노선의 목록을 조회할 수 있다.")
+        void getLines() {
+            subwayService.addStation("교대역");
+            subwayService.addStation("강남역");
+            subwayService.addStation("역삼역");
+            subwayService.addLine("2호선", new String[]{"교대역", "강남역", "역삼역"});
+            subwayService.addLine("3호선", "교대역", "강남역");
+            List<Line> lines = subwayService.getLines();
+            assertEquals(2, lines.size());
+            assertEquals("2호선", lines.get(0).getName());
+            assertEquals("3호선", lines.get(1).getName());
         }
     }
 }
