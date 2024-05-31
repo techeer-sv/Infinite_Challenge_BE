@@ -23,6 +23,7 @@ class SubwayInitializerTest {
 
         @BeforeEach
         void setUp() {
+            subwayService = new SubwayService();
             subwayInitializer = new SubwayInitializer(subwayService);
         }
 
