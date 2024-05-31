@@ -26,4 +26,8 @@ public class StationRepository {
     public static boolean isStationExist(String name) {
         return stations.stream().anyMatch(station -> station.getName().equals(name));
     }
+
+    public static void clear() {
+        stations.clear();
+    }
 }

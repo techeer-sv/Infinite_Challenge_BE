@@ -5,6 +5,8 @@ import subway.domain.LineRepository;
 import subway.domain.Station;
 import subway.domain.StationRepository;
 
+import java.util.List;
+
 public class SubwayService {
 
     public void addStation(String name) {
@@ -22,5 +24,9 @@ public class SubwayService {
             line.addStation(station);
         }
         LineRepository.addLine(line);
+    }
+
+    public List<Station> getStations() {
+        return StationRepository.stations();
     }
 }

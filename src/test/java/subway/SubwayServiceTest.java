@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import subway.domain.LineRepository;
 import subway.domain.StationRepository;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SubwayServiceTest {
     SubwayService subwayService;
@@ -16,6 +15,8 @@ public class SubwayServiceTest {
     @BeforeEach
     void setUp() {
         subwayService = new SubwayService();
+        StationRepository.clear();
+        LineRepository.clear();
     }
 
     @Nested
@@ -40,6 +41,14 @@ public class SubwayServiceTest {
         @DisplayName("지하철 역 이름은 2글자 이상이어야 한다.")
         void invalidStationName() {
             assertThrows(IllegalArgumentException.class, () -> subwayService.addStation("짱"));
+        }
+
+        @Test
+        @DisplayName("지하철 역의 목록을 조회할 수 있다.")
+        void getStations() {
+            subwayService.addStation("잠실역");
+            subwayService.addStation("강남역");
+            assertEquals(2, subwayService.getStations().size());
         }
     }
 }
