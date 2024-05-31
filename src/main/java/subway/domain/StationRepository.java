@@ -13,10 +13,17 @@ public class StationRepository {
     }
 
     public static void addStation(Station station) {
+        if(stations.stream().anyMatch(s -> s.getName().equals(station.getName()))){
+            throw new IllegalArgumentException("[ERROR] 중복된 역 이름입니다.");
+        }
         stations.add(station);
     }
 
     public static boolean deleteStation(String name) {
         return stations.removeIf(station -> Objects.equals(station.getName(), name));
+    }
+
+    public static boolean isStationExist(String name) {
+        return stations.stream().anyMatch(station -> station.getName().equals(name));
     }
 }
