@@ -20,24 +20,15 @@ public class LineService {
     public void addLine(String name, String[] stationNames) {
         Line line = new Line(name);
         for (String stationName : stationNames) {
-            Station station = stationRepository.stations().stream()
-                    .filter(s -> s.getName().equals(stationName))
-                    .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 역입니다."));
+            Station station = findStationByName(stationName, "[ERROR] 존재하지 않는 역입니다.");
             line.addStation(station);
         }
         lineRepository.addLine(line);
     }
 
     public void addLine(String name, String upStationName, String downStationName) {
-        Station upStation = stationRepository.stations().stream()
-                .filter(s -> s.getName().equals(upStationName))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 상행 종점역입니다."));
-        Station downStation = stationRepository.stations().stream()
-                .filter(s -> s.getName().equals(downStationName))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 하행 종점역입니다."));
+        Station upStation = findStationByName(upStationName, "[ERROR] 존재하지 않는 상행 종점역입니다.");
+        Station downStation = findStationByName(downStationName, "[ERROR] 존재하지 않는 하행 종점역입니다.");
         Line line = new Line(name, upStation, downStation);
         lineRepository.addLine(line);
     }
@@ -50,5 +41,12 @@ public class LineService {
 
     public List<Line> getLines() {
         return lineRepository.lines();
+    }
+
+    private Station findStationByName(String name, String errorMessage) {
+        return stationRepository.stations().stream()
+                .filter(s -> s.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(errorMessage));
     }
 }
