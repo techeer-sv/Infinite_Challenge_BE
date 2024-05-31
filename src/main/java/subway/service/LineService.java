@@ -29,6 +29,25 @@ public class LineService {
         lineRepository.addLine(line);
     }
 
+    public void addLine(String name, String upStationName, String downStationName) {
+        Station upStation = stationRepository.stations().stream()
+                .filter(s -> s.getName().equals(upStationName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 상행 종점역입니다."));
+        Station downStation = stationRepository.stations().stream()
+                .filter(s -> s.getName().equals(downStationName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 하행 종점역입니다."));
+        Line line = new Line(name, upStation, downStation);
+        lineRepository.addLine(line);
+    }
+
+    public void deleteLine(String name) {
+        if (!lineRepository.deleteLineByName(name)) {
+            throw new IllegalArgumentException("[ERROR] 존재하지 않는 노선입니다.");
+        }
+    }
+
     public List<Line> getLines() {
         return lineRepository.lines();
     }

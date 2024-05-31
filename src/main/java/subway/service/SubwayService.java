@@ -22,6 +22,14 @@ public class SubwayService {
         lineService.addLine(name, stationNames);
     }
 
+    public void addLine(String name, String upStationName, String downStationName) {
+        lineService.addLine(name, upStationName, downStationName);
+    }
+
+    public void deleteLine(String name) {
+        lineService.deleteLine(name);
+    }
+
     public void deleteStation(String name) {
         if (isStationInUse(name)) {
             throw new IllegalArgumentException("[ERROR] 노선에 등록된 역은 삭제할 수 없습니다.");
