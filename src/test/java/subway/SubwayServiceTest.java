@@ -13,9 +13,9 @@ import subway.service.SubwayService;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SubwayServiceTest {
-    SubwayService subwayService;
-    StationRepository stationRepository;
-    LineRepository lineRepository;
+    private SubwayService subwayService;
+    private StationRepository stationRepository;
+    private LineRepository lineRepository;
 
     @BeforeEach
     void setUp() {

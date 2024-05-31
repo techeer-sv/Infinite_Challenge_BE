@@ -22,10 +22,10 @@ class SubwayInitializerTest {
     @Nested
     @DisplayName("SubwayInitializer")
     class SubwayService_Init {
-        SubwayInitializer subwayInitializer;
-        SubwayService subwayService;
-        StationRepository stationRepository;
-        LineRepository lineRepository;
+        private SubwayInitializer subwayInitializer;
+        private SubwayService subwayService;
+        private StationRepository stationRepository;
+        private LineRepository lineRepository;
 
         @BeforeEach
         void setUp() {
