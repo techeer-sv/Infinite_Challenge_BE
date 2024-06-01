@@ -8,6 +8,7 @@ import subway.domain.Line;
 import subway.domain.Station;
 import subway.domain.repository.LineRepository;
 import subway.domain.repository.StationRepository;
+import subway.global.error.ErrorMessage;
 import subway.service.LineService;
 import subway.service.StationService;
 import subway.service.SubwayService;
@@ -20,7 +21,6 @@ public class SubwayServiceTest {
     private SubwayService subwayService;
     private StationRepository stationRepository;
     private LineRepository lineRepository;
-    private StationService stationService;
 
     @BeforeEach
     void setUp() {
@@ -137,6 +137,69 @@ public class SubwayServiceTest {
             assertEquals("교대역", line.getStations().get(0).getName());
             assertEquals("역삼역", line.getStations().get(1).getName());
             assertEquals("강남역", line.getStations().get(2).getName());
+        }
+
+        @Test
+        @DisplayName("노선에 등록된 역을 삭제할 수 있다")
+        void removeStation() {
+            Station upStation = new Station("상행역");
+            Station downStation = new Station("하행역");
+            Station midStation = new Station("교대역");
+
+            subwayService.addStation(upStation.getName());
+            subwayService.addStation(downStation.getName());
+            subwayService.addStation(midStation.getName());
+
+            Line line = new Line("2호선", upStation, downStation);
+            line.addSection(midStation, upStation, downStation);
+            lineRepository.addLine(line);
+
+            subwayService.removeStation("2호선", "교대역");
+
+            assertEquals(2, line.getStations().size());
+            assertFalse(line.getStations().contains(midStation));
+        }
+
+        @Test
+        @DisplayName("종점을 제거할 경우 다음 역이 종점이 된다")
+        void removeEndStation() {
+            Station upStation = new Station("상행역");
+            Station midStation = new Station("교대역");
+            Station downStation = new Station("하행역");
+
+            subwayService.addStation(upStation.getName());
+            subwayService.addStation(midStation.getName());
+            subwayService.addStation(downStation.getName());
+
+            Line line = new Line("2호선", upStation, downStation);
+            line.addSection(midStation, upStation, downStation);
+            lineRepository.addLine(line);
+
+            subwayService.removeStation("2호선", "하행역");
+
+            assertEquals(2, line.getStations().size());
+            assertFalse(line.getStations().contains(downStation));
+            assertEquals(midStation, line.getStations().get(1));
+            // System.out.println(line.getStations().get(1).getName());
+        }
+
+        @Test
+        @DisplayName("노선에 포함된 역이 두개 이하일 때는 역을 제거할 수 없다")
+        void cannotRemoveStationWhenTwoOrFewerStations() {
+            Station upStation = new Station("상행역");
+            Station downStation = new Station("하행역");
+
+            subwayService.addStation(upStation.getName());
+            subwayService.addStation(downStation.getName());
+
+            Line line = new Line("2호선", upStation, downStation);
+            lineRepository.addLine(line);
+
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+                subwayService.removeStation("2호선", "상행역");
+            });
+
+            assertEquals(ErrorMessage.TOO_FEW_STATIONS, exception.getMessage());
         }
     }
 }

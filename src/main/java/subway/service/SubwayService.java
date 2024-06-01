@@ -43,6 +43,10 @@ public class SubwayService {
         stationService.deleteStation(name);
     }
 
+    public void removeStation(String lineName, String stationName) {
+        lineService.removeStation(lineName, stationName);
+    }
+
     private boolean isStationInUse(String name) {
         return lineService.getLines().stream()
                 .flatMap(line -> line.getStations().stream())

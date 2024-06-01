@@ -45,6 +45,12 @@ public class LineService {
         line.addSection(station, upStation, downStation);
     }
 
+    public void removeStation(String lineName, String stationName) {
+        Line line = findLineByName(lineName, ErrorMessage.LINE_NOT_FOUND);
+        Station station = stationService.findStationByName(stationName, ErrorMessage.STATION_NOT_FOUND);
+        line.removeStation(station);
+    }
+
     public void deleteLine(String name) {
         if (!lineRepository.deleteLineByName(name)) {
             throw new IllegalArgumentException(ErrorMessage.DOWN_STATION_NOT_FOUND);

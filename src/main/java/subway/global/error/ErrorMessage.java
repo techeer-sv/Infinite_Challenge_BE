@@ -11,4 +11,5 @@ public class ErrorMessage {
     public static final String STATION_IN_USE = "[ERROR] 노선에 등록된 역은 삭제할 수 없습니다.";
     public static final String LINE_NOT_FOUND = "[ERROR] 존재하지 않는 노선입니다.";
     public static final String DUPLICATE_STATION = "[ERROR] 중복된 역 이름입니다.";
+    public static final String TOO_FEW_STATIONS = "[ERROR] 노선에 포함된 역이 두개 이하일 때는 역을 제거할 수 없습니다.";
 }

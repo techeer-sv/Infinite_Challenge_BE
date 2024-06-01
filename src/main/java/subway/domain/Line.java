@@ -44,6 +44,23 @@ public class Line {
         stations.add(downStationIndex, station);
     }
 
+    public void removeStation(Station station) {
+        if (stations.size() <= 2) {
+            throw new IllegalArgumentException(ErrorMessage.TOO_FEW_STATIONS);
+        }
+        if (!stations.contains(station)) {
+            throw new IllegalArgumentException(ErrorMessage.STATION_NOT_FOUND);
+        }
+        stations.remove(station);
+
+        if (stations.get(0).equals(station)) {
+            upStation = String.valueOf(stations.get(0));
+        }
+        if (stations.get(stations.size() - 1).equals(station)) {
+            downStation = String.valueOf(stations.get(stations.size() - 1));
+        }
+    }
+
     public List<Station> getStations() {
         return Collections.unmodifiableList(stations);
     }
