@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Line {
-    private String name;
-    private List<Station> stations = new ArrayList<>();
+    private final String name;
+    private final List<Station> stations = new ArrayList<>();
     private String upStation;
     private String downStation;
 
