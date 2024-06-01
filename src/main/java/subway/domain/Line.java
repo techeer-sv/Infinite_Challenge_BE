@@ -64,4 +64,8 @@ public class Line {
     public List<Station> getStations() {
         return Collections.unmodifiableList(stations);
     }
+
+    public List<Station> getAllStations() {
+        return Collections.unmodifiableList(new ArrayList<>(stations));
+    }
 }

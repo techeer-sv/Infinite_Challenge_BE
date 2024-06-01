@@ -201,5 +201,28 @@ public class SubwayServiceTest {
 
             assertEquals(ErrorMessage.TOO_FEW_STATIONS, exception.getMessage());
         }
+
+        @Test
+        @DisplayName("노선의 상행 종점부터 하행 종점까지 연결된 순서대로 역 목록을 조회할 수 있다")
+        void getAllStations() {
+            Station upStation = new Station("상행역");
+            Station midStation = new Station("중간역");
+            Station downStation = new Station("하행역");
+
+            subwayService.addStation(upStation.getName());
+            subwayService.addStation(downStation.getName());
+            subwayService.addStation(midStation.getName());
+
+            Line line = new Line("2호선", upStation, downStation);
+            line.addSection(midStation, upStation, downStation);
+            lineRepository.addLine(line);
+
+            List<Station> allStations = subwayService.getOrderedStations("2호선");
+
+            assertEquals(3, allStations.size());
+            assertEquals("상행역", allStations.get(0).getName());
+            assertEquals("중간역", allStations.get(1).getName());
+            assertEquals("하행역", allStations.get(2).getName());
+        }
     }
 }

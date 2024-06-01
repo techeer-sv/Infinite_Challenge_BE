@@ -60,4 +60,8 @@ public class SubwayService {
     public List<Line> getLines() {
         return lineService.getLines();
     }
+
+    public List<Station> getOrderedStations(String lineName) {
+        return lineService.getAllStation(lineName);
+    }
 }

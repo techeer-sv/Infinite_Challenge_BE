@@ -61,6 +61,11 @@ public class LineService {
         return lineRepository.lines();
     }
 
+    public List<Station> getAllStation(String lineName) {
+        Line line = findLineByName(lineName, ErrorMessage.LINE_NOT_FOUND);
+        return line.getAllStations();
+    }
+
     private Line findLineByName(String name, String errorMessage) {
         return lineRepository.lines().stream()
                 .filter(l -> l.getName().equals(name))
