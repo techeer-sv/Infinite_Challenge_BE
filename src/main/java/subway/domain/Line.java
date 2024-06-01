@@ -1,5 +1,7 @@
 package subway.domain;
 
+import subway.global.error.ErrorMessage;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +18,7 @@ public class Line {
 
     public Line(String name, Station upStation, Station downStation) {
         if (name == null || name.length() < 2) {
-            throw new IllegalArgumentException("[ERROR] 노선 이름은 2글자 이상이어야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.LINE_TOO_SHORT);
         }
         this.name = name;
         this.upStation = String.valueOf(upStation);
@@ -31,6 +33,15 @@ public class Line {
 
     public void addStation(Station station) {
         stations.add(station);
+    }
+
+    public void addSection(Station station, Station upStation, Station downStation) {
+        int upStationIndex = stations.indexOf(upStation);
+        int downStationIndex = stations.indexOf(downStation);
+        if (upStationIndex == -1 || downStationIndex == -1 || downStationIndex - upStationIndex != 1) {
+            throw new IllegalArgumentException(ErrorMessage.SECTION_NOT_FOUND);
+        }
+        stations.add(downStationIndex, station);
     }
 
     public List<Station> getStations() {

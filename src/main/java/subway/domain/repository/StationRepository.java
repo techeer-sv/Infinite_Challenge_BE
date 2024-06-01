@@ -1,6 +1,7 @@
 package subway.domain.repository;
 
 import subway.domain.Station;
+import subway.global.error.ErrorMessage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +17,7 @@ public class StationRepository {
 
     public void addStation(Station station) {
         if(stations.stream().anyMatch(s -> s.getName().equals(station.getName()))){
-            throw new IllegalArgumentException("[ERROR] 중복된 역 이름입니다.");
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_STATION);
         }
         stations.add(station);
     }

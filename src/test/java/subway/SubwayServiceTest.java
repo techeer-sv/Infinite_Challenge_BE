@@ -20,13 +20,14 @@ public class SubwayServiceTest {
     private SubwayService subwayService;
     private StationRepository stationRepository;
     private LineRepository lineRepository;
+    private StationService stationService;
 
     @BeforeEach
     void setUp() {
         stationRepository = new StationRepository();
         lineRepository = new LineRepository();
         StationService stationService = new StationService(stationRepository);
-        LineService lineService = new LineService(lineRepository, stationRepository);
+        LineService lineService = new LineService(lineRepository, stationRepository, stationService);
         subwayService = new SubwayService(stationService, lineService);
         stationRepository.clear();
         lineRepository.clear();
@@ -121,6 +122,21 @@ public class SubwayServiceTest {
             assertEquals(2, lines.size());
             assertEquals("2호선", lines.get(0).getName());
             assertEquals("3호선", lines.get(1).getName());
+        }
+
+        @Test
+        @DisplayName("지하철 노선에 구간을 추가할 수 있다.")
+        void addSection() {
+            subwayService.addStation("교대역");
+            subwayService.addStation("강남역");
+            subwayService.addStation("역삼역");
+            subwayService.addLine("2호선", "교대역", "강남역");
+            subwayService.addSection("2호선", "역삼역", "교대역", "강남역");
+            Line line = subwayService.getLines().get(0);
+            assertEquals(3, line.getStations().size());
+            assertEquals("교대역", line.getStations().get(0).getName());
+            assertEquals("역삼역", line.getStations().get(1).getName());
+            assertEquals("강남역", line.getStations().get(2).getName());
         }
     }
 }

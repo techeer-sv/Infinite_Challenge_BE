@@ -2,6 +2,7 @@ package subway.service;
 
 import subway.domain.Line;
 import subway.domain.Station;
+import subway.global.error.ErrorMessage;
 
 import java.util.List;
 
@@ -27,13 +28,17 @@ public class SubwayService {
         lineService.addLine(name, upStationName, downStationName);
     }
 
+    public void addSection(String lineName, String stationName, String upStationName, String downStationName) {
+        lineService.addSection(lineName, stationName, upStationName, downStationName);
+    }
+
     public void deleteLine(String name) {
         lineService.deleteLine(name);
     }
 
     public void deleteStation(String name) {
         if (isStationInUse(name)) {
-            throw new IllegalArgumentException("[ERROR] 노선에 등록된 역은 삭제할 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.STATION_IN_USE);
         }
         stationService.deleteStation(name);
     }

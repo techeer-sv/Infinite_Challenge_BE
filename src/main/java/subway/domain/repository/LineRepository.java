@@ -1,6 +1,7 @@
 package subway.domain.repository;
 
 import subway.domain.Line;
+import subway.global.error.ErrorMessage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +17,7 @@ public class LineRepository {
 
     public void addLine(Line line) {
         if(lines.stream().anyMatch(l -> l.getName().equals(line.getName()))) {
-            throw new IllegalArgumentException("[ERROR] 중복된 노선 이름입니다.");
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_LINE);
         }
         lines.add(line);
     }

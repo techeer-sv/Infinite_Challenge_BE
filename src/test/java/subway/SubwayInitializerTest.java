@@ -32,7 +32,7 @@ class SubwayInitializerTest {
             stationRepository = new StationRepository();
             lineRepository = new LineRepository();
             StationService stationService = new StationService(stationRepository);
-            LineService lineService = new LineService(lineRepository, stationRepository);
+            LineService lineService = new LineService(lineRepository, stationRepository, stationService);
             subwayService = new SubwayService(stationService, lineService);
             subwayInitializer = new SubwayInitializer(subwayService);
         }
